@@ -33,8 +33,7 @@
 
 <body>
 
-    @yield('header')
-    @yield('sidenav')
+
     @yield('content')
 
 

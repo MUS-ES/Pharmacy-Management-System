@@ -79,7 +79,7 @@ toggleSidebar.addEventListener("click", function () {
         })
     } else {
         iconRight.forEach(item => {
-            item.textContent = item.dataset.text;
+            item.textContent = itemContent = "expand_more";
         })
 
     }
