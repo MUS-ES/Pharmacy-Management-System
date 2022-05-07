@@ -1,0 +1,720 @@
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== Globals ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rose);
+}
+
+:root {
+  --rose: #FF6D55;
+  --blue: #2a2185;
+  --red: #FF0000;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
+body {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  z-index: 1;
+  position: relative;
+  background: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+/* Side Bar */
+#sidebar {
+  position: fixed;
+  max-width: 300px;
+  width: 100%;
+  background: var(--rose);
+  top: 0;
+  left: 2px;
+  height: 100%;
+  border-top-right-radius: 2rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  transition: all 0.3s ease;
+}
+
+#sidebar.hide {
+  max-width: 60px;
+}
+
+#sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+#sidebar .brand {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  font-weight: 700;
+  color: var(--white);
+  transition: all 0.3s ease;
+  padding: 0 6px;
+}
+
+/* #sidebar.hide .brand {
+  justify-content: flex-start;
+} */
+
+#sidebar .icon {
+  min-width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  margin-right: 6px;
+}
+
+#sidebar .side-menu {
+  margin: 36px 0;
+  padding: 0 5px;
+  transition: all 0.3s ease;
+}
+
+#sidebar .side-menu>li>a.active .icon-right {
+  transform: rotateZ(180deg);
+}
+
+#brand-txt {
+  margin-left: 8px;
+}
+
+#sidebar .side-menu a h3 {
+  font-size: 17px;
+  margin-left: 8px;
+}
+
+#sidebar .icon-right {
+  position: absolute;
+  right: 1rem;
+  transition: all 0.3s ease;
+}
+
+#sidebar.hide .side-menu {
+  padding: 0 6px;
+}
+
+#sidebar .side-menu a {
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  padding: 12px 16px 12px 0;
+  transition: all 0.3s ease;
+  border-radius: 40px 10px 10px 40px;
+}
+
+#sidebar .side-menu a:hover {
+  background: var(--white);
+  color: var(--rose);
+}
+
+#sidebar .side-dropdown {
+  padding-left: 50px;
+  max-height: 0;
+  overflow-y: hidden;
+  transition: all 0.15s ease;
+}
+
+#sidebar .side-dropdown.show {
+  max-height: 1000px;
+}
+/* End Of Sidebar */
+
+
+/* Content */
+#content {
+  position: relative;
+  width: calc(100% - 303px);
+  left: 303px;
+  transition: all 0.3s ease;
+}
+
+#sidebar.hide+#content {
+  width: calc(100% - 70px);
+  left: 70px;
+}
+
+nav {
+  background: var(--white);
+  height: 70px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  grid-gap: 28px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+nav .toggle-sidebar {
+  font-size: 30px;
+  color: var(--rose);
+  cursor: pointer;
+}
+
+nav form {
+  max-width: 400px;
+  width: 100%;
+  margin-right: auto;
+}
+
+nav .form-group {
+  position: relative;
+  display: none;
+}
+
+nav .form-group input {
+  font-family: "Ubuntu";
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--rose);
+  width: 100%;
+  background: var(--gray);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 10px 36px 10px 16px;
+  transition: all 0.3s ease;
+}
+
+nav .form-group input:focus {
+  box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+}
+
+nav .form-group .icon {
+  color: var(--rose);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 16px;
+}
+
+nav .nav-link {
+  position: relative;
+}
+
+nav .nav-link .icon {
+  font-size: 24px;
+  color: var(--rose);
+}
+
+nav .nav-link .badge {
+  position: absolute;
+  top: -6px;
+  right: -3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+nav .divider {
+  width: 1px;
+  background: var(--rose);
+  height: 12px;
+  display: block;
+}
+
+nav .profile {
+  position: relative;
+}
+
+nav .profile img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+nav .profile .profile-link {
+  position: absolute;
+  top: calc(100%-10px);
+  right: 10px;
+  background: var(--rose);
+  padding: 10px 0;
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 160px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+nav .profile .profile-link.show {
+  opacity: 1;
+  pointer-events: visible;
+  top: 100%;
+  z-index: 1;
+}
+
+nav .profile .profile-link a {
+  justify-content: left;
+  align-items: center;
+  padding: 10px 16px;
+  display: flex;
+  grid-gap: 6px;
+  font-size: 17px;
+  color: var(--white);
+  transition: all 0.3s ease;
+}
+
+nav .profile .profile-link a:hover {
+  background: var(--white);
+  color: var(--rose);
+  border-radius: 22px 0 38px 22px;
+}
+/* End Of Navbar Content */
+
+
+/* Main */
+main .title {
+  color: var(--blue);
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: 34px;
+  padding-bottom: 1.9rem;
+}
+
+/* Invoice Section */
+
+/* Bill Body */
+.bill {
+  background: #fff;
+  border-radius: 20px;
+  position: absolute;
+  top: 6rem;
+  padding: 40px;
+  box-shadow: 0 8px 10px 5px var(--black2);
+  margin: 2rem;
+}
+
+.bill .bill-header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.bill-labelsandinputs {
+  font-size: 1.1rem;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.bill-labelsandinputs .sub-title {
+  font-size: 1.1rem;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+  padding-bottom: 0.5rem;
+}
+
+.refresh-btn {
+  position: relative;
+  top: 2.5rem;
+  left: 1rem;
+  font-family: "Ubuntu";
+  font-weight: 500;
+  width: 80px;
+  height: 40px;
+  border-radius: 5rem;
+  background: green;
+  color: var(--white);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+  background: #00B800;
+}
+
+.refresh-btn span {
+  margin-top: 0.2rem;
+  font-size: 2rem;
+}
+
+/*Table*/
+.table-data table {
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.table-data table thead {
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: "Ubuntu",sans-serif;
+  color: var(--white);
+  height: 3rem;
+  margin: 6rem;
+  background: var(--rose);
+}
+
+.table-data table thead tr td {
+ border-radius: 0.3rem;
+}
+
+.table-data table tbody {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Ubuntu",sans-serif;
+  color: var(--black2);
+  height: 2rem;
+}
+
+.table-data table tbody tr td{
+  border: 2px solid var(--rose);
+  background-color: #FFE9E2;
+  border-radius: 0.4rem;
+  color: #737373;
+}
+
+.table-data table tbody tr td:nth-child(odd) {
+  background-color: #9FFCFD;
+}
+
+/*End Of Table*/
+
+/* View Deatails Popup Window */
+.container1 {
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  width: 100%;
+  height: 150%;
+  position: absolute;
+  top: 0;
+  z-index: 103;
+  justify-content: center; /*H*/
+  align-items: center; /*V*/
+  display: none;
+}
+
+.popup-window {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  position: absolute;
+  top: 10rem;
+  width: auto;
+  height: auto;
+  background: var(--white);
+  /* border: 1px solid var(--rose); */
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.popup-window .popup-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.bill-rows .table-data .popup-table {
+  margin-top: 0;
+}
+
+.bill-rows .table-data .popup-table thead {
+  font-size: 1.1rem;
+  height: 2.5rem;
+}
+
+.bill-rows .table-data .popup-table thead tr td {
+ padding: 0.5rem;
+}
+
+.bill-rows .table-data .popup-table tbody tr td:nth-child(odd) {
+  background-color: #9FFCFD;
+}
+
+.bill-rows .table-data .popup-table tbody tr td {
+  padding: 0.2rem;
+}
+
+.bill-labelsandinputs .input-field {
+  font-family: "Ubuntu";
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--rose);
+  margin-top: 0.2rem;
+  width: 16rem;
+  height: auto;
+  border-radius: 0.7rem;
+  background: var(--gray);
+  border: none;
+  outline: none;
+  padding : 3px 10px ;
+  margin-bottom: 0.5rem;
+}
+
+.bill-labelsandinputs .input-field1 {
+  font-family: "Ubuntu";
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--rose);
+  margin-top: 0.2rem;
+  width: 16rem;
+  height: 2.2rem;
+  border-radius: 0.7rem;
+  background: var(--gray);
+  border: none;
+  outline: none;
+  padding: 8px 16px 10px 16px;
+  transition: all 0.3s ease;
+}
+
+.bill-labelsandinputs .input-field:focus {
+  box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+}
+
+.bill-labelsandinputs .input-field1:focus {
+  box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+}
+
+.bill-labelsandinputs .input-field1 option:hover {
+  color: var(--rose);
+  background: var(--white);
+}
+
+.upper-hr {
+  padding: 0 30px 0;
+  border-style: none;
+  border-top-style: solid;
+  border-color: var(--rose);
+  border-width: 2px;
+  width: 100%;
+  height: 2px;
+}
+
+.popup-body-header {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  font-size: 1.1rem;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+  text-align: center;
+}
+
+.lower-hr {
+  padding: 0 30px 10px;
+  border-style: none;
+  border-top-style: solid;
+  border-color: var(--rose);
+  border-width: 2px;
+  width: 100%;
+  height: 2px;
+}
+
+.bill-rows .bill-body-values {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 0.2rem;
+  /* margin-top: 1rem; */
+}
+
+.bill-rows .bill-body-values .body-input-field {
+  font-family: "Ubuntu";
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--black2);
+  background: #FFE9E2;
+  border: 1px solid var(--rose);
+  border-radius: 0.6rem;
+  width: 100%;
+  height: 2rem;
+  padding: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.bill-rows .bill-body-values .body-input-field:focus {
+  box-shadow: 0 0 0 2px var(--blue), 0 0 0 3px var(--gray);
+  border: none;
+}
+
+.action-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content:flex-end;
+}
+
+.action-section span {
+ font-size: 2rem;
+ color: var(--rose);
+ cursor: pointer;
+ text-align: center;
+}
+
+.action-section span:hover {
+  font-size: 2.2rem;
+  color: var(--blue);
+}
+
+.horizontal-rule {
+  border-style: none;
+  border-top-style: solid;
+  border-color: var(--gray);
+  border-width: 2px;
+  width: 100%;
+  margin: 5px 0 5px;
+}
+
+/* End Of Bill Body */
+
+/* Final Bill And Sub Bill Results */
+.final-sub-bill-results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.final-bill-results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+
+.btn-decoration {
+  font-size: 1.2rem;
+  font-family: "Ubuntu";
+  font-weight: 700;
+  width: 180px;
+  height: 40px;
+  border-radius: 7px;
+  color: var(--white);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 15px;
+  transition: 0.3s ease;
+}
+
+#close-btn {
+  background: var(--rose);
+  margin-left: 40px;
+}
+
+#close-btn:hover {
+  background: var(--blue);
+}
+/* End Of Final Bill Result */
+
+/* End Of View Deatails Popup Window  */
+
+
+/* Media Queries */
+@media (max-width: 1310px) {
+  .bill .bill-header {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+
+}
+
+@media (max-width: 1000px) {
+  .btn-decoration {
+    margin-top: 30px;
+  }
+
+  .table-data table thead {
+    font-size: 1.1rem;
+  }
+
+  .container {
+    margin-right: 50px;
+  }
+
+  /* table {
+    overflow-x:scroll;
+  } */
+}
+
+@media (max-width: 400px) {
+  .form-group {
+    display: none;
+  }
+
+  #sidebar {
+    max-width: 280px;
+  }
+
+  #sidebar.active+#content {
+    width: calc(100% - 295px);
+    left: 295px;
+  }
+
+  #sidebar.hide+#content {
+    width: calc(100% - 80px);
+    left: 80px;
+  }
+}
+
+@media (max-width: 370px) {
+  #sidebar {
+    max-width: 200px;
+  }
+
+  #sidebar.active+#content {
+    width: calc(100% - 230px);
+    left: 230px;
+  }
+
+  #sidebar.hide+#content {
+    width: calc(100% - 100px);
+    left: 100px;
+  }
+}
+/* End Of Media Queries */

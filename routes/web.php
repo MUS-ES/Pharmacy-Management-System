@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvoicesController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -30,8 +31,11 @@ Route::middleware(['auth'])->group(function ()
     {
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
+    Route::post("/chart", [DashboardController::class, "getChartData"]);
+    Route::get("/manageinvoices", [invoicesController::class, "manageInvoices"])->name("manageInvoices");
+    Route::get("/addinvoice", [invoicesController::class, "addInvoice"])->name("addInvoice");
+    Route::get("/returnedmedicines", [invoicesController::class, "returnedMedicines"])->name("returnedMedicines");
     Route::middleware(['active:outside'])->get('/notactive', [HomeController::class, 'accountDisabled'])->name("notactive");
 });
 
-Route::post("/chart", [DashboardController::class, "getChartData"]);
 require __DIR__ . '/auth.php';

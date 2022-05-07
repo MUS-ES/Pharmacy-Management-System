@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-    @yield("head")
+    @stack('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,17 +27,17 @@
 
     <!-- BoxIcons Link -->
     <link href='{{ asset('https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css') }}' rel='stylesheet'>
-
     <title>@yield("title")</title>
 </head>
 
 <body>
-
+    <x-Sidebar />
 
     @yield('content')
 
-
-
+    @stack('scripts')
+    <!-- Home Script Required For All Sections  -->
+    <script src="{{ asset('js/home.js') }}"></script>
 </body>
 
 </html>

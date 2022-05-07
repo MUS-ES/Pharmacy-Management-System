@@ -3,7 +3,8 @@
 
 @section('content')
     <!-- Sidebar Compoenent -->
-    <x-Sidebar />
+
+
     <!-- Content -->
     <section id="content">
 
@@ -175,6 +176,5 @@
     <!-- Apex Charts -->
     <script src="{{ asset('https://cdn.jsdelivr.net/npm/apexcharts') }}"></script>
 
-    <!-- JavaScript Link -->
-    <script src="{{ asset('js/home.js') }}"></script>
+
 @endsection
