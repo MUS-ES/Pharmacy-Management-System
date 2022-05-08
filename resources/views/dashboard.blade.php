@@ -174,6 +174,9 @@
 
 
     <!-- Apex Charts -->
+    {{-- <script>
+
+    </script> --}}
     <script src="{{ asset('https://cdn.jsdelivr.net/npm/apexcharts') }}"></script>
 
 

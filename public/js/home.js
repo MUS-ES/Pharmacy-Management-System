@@ -117,7 +117,7 @@ let dates = [];
 
 let offest = 30;
 let data = ajax("chart/", { "offest": offest });
-console.log(data);
+
 //ApexChart
 var options = {
     series: [{

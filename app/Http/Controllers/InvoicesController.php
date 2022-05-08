@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use App\Models\Invoice;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoicesController extends Controller
 {
@@ -12,7 +16,8 @@ class InvoicesController extends Controller
     }
     public function addInvoice()
     {
-        return view("invoices/invoice-add");
+        $invoice_number = Invoice::max('id') + 1;
+        return view("invoices/invoice-add", compact("invoice_number"));
     }
     public function returnedMedicines()
     {

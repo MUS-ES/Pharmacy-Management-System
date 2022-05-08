@@ -11,7 +11,7 @@
         <ul class="side-menu">
 
             <li>
-                <a href="file:///D:/Courses/Front-End%20Web%20Dev/Web%20Development/PMS-Dashborad1/dashboard.html">
+                <a href="{{ asset('dashboard') }}">
                     <span class="icon material-icons-outlined">space_dashboard</span>
                     <h3>Dashboard</h3>
                 </a>

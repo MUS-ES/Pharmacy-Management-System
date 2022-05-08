@@ -27,7 +27,7 @@
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Invoice Number:</div>
-                            <div class="input-field">1</div>
+                            <div class="input-field">{{ $invoice_number }}</div>
                         </div>
 
                         <div class="bill-labelsandinputs">
@@ -38,17 +38,6 @@
                         </div>
 
                         <div class="bill-labelsandinputs">
-                            <div class="sub-title">Address:</div>
-                            <div class="input-field">Washington</div>
-                        </div>
-
-                        <div class="bill-labelsandinputs">
-                            <div class="sub-title">Contact:</div>
-                            <div class="input-field">1</div>
-                        </div>
-
-
-                        <div class="bill-labelsandinputs">
                             <div class="sub-title">Date:</div>
                             <input class="input-field" type="date" placeholder="Contact Number" name="" value="">
                         </div>
@@ -57,8 +46,7 @@
                             <div class="sub-title">Paymet Type:</div>
                             <select class="input-field1" name="">
                                 <option value="1">Cash Payment</option>
-                                <option value="2">Card payment</option>
-                                <option value="3">Net Banking</option>
+                                <option value="2">Net Banking</option>
                             </select>
                         </div>
 
@@ -81,230 +69,51 @@
                     <hr class="lower-hr">
 
 
-                    <div class="bill-rows">
-
+                    <div id="bill-rows" class="bill-rows">
                         <div class="bill-body-values">
 
                             <div>
-                                <input class="body-input-field" type="text" placeholder="Select a Medicine" name=""
-                                    value="">
+                                <input onkeypress="getAvQty(this)" class="body-input-field" type="text"
+                                    placeholder="Select a Medicine" name="medicine" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="text" name="" value="">
+                                <input class="body-input-field" type="text" name="unit" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="number" name="" value="">
+                                <input class="body-input-field" type="number" name="qty" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="number" name="" value="">
+                                <input class="body-input-field" type="number" name="unitprice" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="number" name="" value="">
+                                <input id="avQty" class="body-input-field" type="number" name="avqty" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="text" name="" value="">
+                                <input class="body-input-field" type="text" name="exp" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="number" name="" value="">
+                                <input class="body-input-field" type="number" name="discount" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="number" name="" value="">
+                                <input class="body-input-field" type="number" name="total" value="">
                             </div>
 
                             <div class="action-section">
-                                <span id="add-fields" class="material-icons-outlined">add_circle_outline</span>
-                                <span id="remove-fields" class="material-icons-outlined">remove_circle_outline</span>
-                            </div>
-
-                        </div>
-                        <div class="bill-body-values" id="invoice_medicine_list_div">
-                            <script src="JS/invoice-add.js">
-                                addRow();
-                                getInvoiceNumber();
-                            </script>
-                        </div>
-
-
-                        <hr class="horizontal-rule">
-
-
-
-
-                        <div class="bill-body-values">
-
-                            <div>
-                                <input class="body-input-field" type="text" placeholder="Select a Med" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div class="action-section">
-                                <span id="add-fields" class="material-icons-outlined">add_circle_outline</span>
-                                <span id="remove-fields" class="material-icons-outlined">remove_circle_outline</span>
+                                <span onclick="addInvoice();"
+                                    class="material-icons-outlined add-fields">add_circle_outline</span>
+                                <span onclick="removeInvoice(this);"
+                                    class="material-icons-outlined remove-fields">remove_circle_outline</span>
                             </div>
 
                         </div>
 
-                        <hr class="horizontal-rule">
-
-                        <div class="bill-body-values">
-
-                            <div>
-                                <input class="body-input-field" type="text" placeholder="Select a Med" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div class="action-section">
-                                <span id="add-fields" class="material-icons-outlined">add_circle_outline</span>
-                                <span id="remove-fields" class="material-icons-outlined">remove_circle_outline</span>
-                            </div>
-
-                        </div>
-
-                        <hr class="horizontal-rule">
-
-                        <div class="bill-body-values">
-
-                            <div>
-                                <input class="body-input-field" type="text" placeholder="Select a Med" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div class="action-section">
-                                <span id="add-fields" class="material-icons-outlined">add_circle_outline</span>
-                                <span id="remove-fields" class="material-icons-outlined">remove_circle_outline</span>
-                            </div>
-
-                        </div>
-
-                        <hr class="horizontal-rule">
-                        <div class="bill-body-values">
-
-                            <div>
-                                <input class="body-input-field" type="text" placeholder="Select a Med" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="text" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div>
-                                <input class="body-input-field" type="number" name="" value="">
-                            </div>
-
-                            <div class="action-section">
-                                <span id="add-fields" class="material-icons-outlined">add_circle_outline</span>
-                                <span id="remove-fields" class="material-icons-outlined">remove_circle_outline</span>
-                            </div>
-
-                        </div>
 
                         <hr class="horizontal-rule">
 
