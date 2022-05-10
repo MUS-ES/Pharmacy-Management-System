@@ -177,6 +177,11 @@
     {{-- <script>
 
     </script> --}}
+    @push('scripts')
+        <script src="{{ asset('js/apexchart.js') }}">
+
+        </script>
+    @endpush
     <script src="{{ asset('https://cdn.jsdelivr.net/npm/apexcharts') }}"></script>
 
 

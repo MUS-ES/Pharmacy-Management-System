@@ -34,10 +34,10 @@
     <x-Sidebar />
 
     @yield('content')
+    <script src="{{ asset('js/home.js') }}"></script>
 
     @stack('scripts')
     <!-- Home Script Required For All Sections  -->
-    <script src="{{ asset('js/home.js') }}"></script>
 </body>
 
 </html>

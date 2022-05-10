@@ -152,7 +152,7 @@ main .title {
 }
 
 .bill-body-values .body-input-field:focus {
-    box-shadow: 0 0 0 2px var(--blue), 0 0 0 3px var(--gray);
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
     border: none;
 }
 
@@ -479,3 +479,23 @@ input::-webkit-inner-spin-button {
 /* input[type=number] {
   -moz-appearance: textfield;
 } */
+
+#bill-rows ul {
+    list-style: none;
+    background-color: var(--gray);
+}
+
+.list-med {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 0 0 5px 5px;
+}
+
+.list-items {
+    padding: 7px 10px;
+    border-radius: 10px;
+}
+
+.list-items:hover {
+    background-color: var(--rose);
+}

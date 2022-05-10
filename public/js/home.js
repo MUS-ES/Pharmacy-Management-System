@@ -91,7 +91,7 @@ toggleSidebar.addEventListener("click", function () {
  * @param  url of the ajax request
  * @returns  response from server
  */
-function ajax(url, data) {
+function ajaxJson(url, data) {
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     data["_token"] = token;
     let xhttp = new XMLHttpRequest();
@@ -109,47 +109,5 @@ function ajax(url, data) {
     return response;
 }
 
-/* Variable Define For Chart */
 
-let sales = [];
-let purchases = [];
-let dates = [];
-
-let offest = 30;
-let data = ajax("chart/", { "offest": offest });
-
-//ApexChart
-var options = {
-    series: [{
-        name: 'Sales',
-        data: data.invoices
-    }, {
-        name: 'Purchases',
-        data: data.purchases
-    }],
-    chart: {
-        height: 350,
-        type: 'area'
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'smooth'
-    },
-    xaxis: {
-
-        type: 'datetime',
-
-    },
-    tooltip: {
-        x: {
-            format: 'yyyy/MM/d H:m:s',
-
-        },
-    },
-};
-
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
 

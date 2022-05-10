@@ -135,7 +135,7 @@
             </li>
 
             <li>
-                <a href="users/signout">
+                <a href={{ route('signout') }}>
                     <span class="icon material-icons-outlined">logout</span>
                     <h3>Sign Out</h3>
                 </a>

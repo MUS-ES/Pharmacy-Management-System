@@ -325,7 +325,7 @@ main .title {
 
 .cardBox .card {
     position: relative;
-    background: #FFE9E2;
+    background: rgb(255, 255, 255);
     /*#FFE9E2 */
     padding: 50px;
     border-radius: 20px;

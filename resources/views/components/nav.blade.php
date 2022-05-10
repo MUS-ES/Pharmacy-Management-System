@@ -31,7 +31,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('logout') }}">
+                    <a href="{{ route('signout') }}">
                         <span class="icon material-icons-outlined">logout</span>
                         <h5>Logout</h5>
                     </a>

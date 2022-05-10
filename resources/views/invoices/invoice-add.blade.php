@@ -73,8 +73,13 @@
                         <div class="bill-body-values">
 
                             <div>
-                                <input onkeypress="getAvQty(this)" class="body-input-field" type="text"
-                                    placeholder="Select a Medicine" name="medicine" value="">
+                                <input id="medicine-name" onkeyup="getAvQty(this);autoCompleteMed(this);"
+                                    class="body-input-field" type="text" placeholder="Select a Medicine" name="medicine"
+                                    value="">
+                                <ul class="list-med">
+
+
+                                </ul>
                             </div>
 
                             <div>

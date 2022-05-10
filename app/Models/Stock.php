@@ -9,4 +9,6 @@ class Stock extends Model
 {
     protected $table = "medicines_stocks";
     use HasFactory;
+
+    protected $hidden = [];
 }

@@ -32,10 +32,11 @@ Route::middleware(['auth'])->group(function ()
     {
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
-    Route::post("/chart", [DashboardController::class, "getChartData"]);
+    //  Route::post("/chart", [DashboardController::class, "getChartData"]);
     Route::get("/manageinvoices", [invoicesController::class, "manageInvoices"])->name("manageInvoices");
     Route::get("/addinvoice", [invoicesController::class, "addInvoice"])->name("addInvoice");
-    Route::post("/getavqty", [MedicinesController::class, "getAvQty"])->name("getQtymed");
+    //  Route::post("/getavqty", [MedicinesController::class, "getAvQty"])->name("getQtymed");
+    //  Route::post("/autocompletemed", [MedicinesController::class, "getAutoCompleteData"]);
     Route::get("/returnedmedicines", [invoicesController::class, "returnedMedicines"])->name("returnedMedicines");
     Route::middleware(['active:outside'])->get('/notactive', [HomeController::class, 'accountDisabled'])->name("notactive");
 });

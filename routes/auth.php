@@ -57,8 +57,8 @@ Route::middleware('auth')->group(function ()
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::get('logout', [UsersController::class, 'destroy'])
-        ->name('logout');
+    Route::get('signout', [UsersController::class, 'destroy'])
+        ->name('signout');
 });
 
 

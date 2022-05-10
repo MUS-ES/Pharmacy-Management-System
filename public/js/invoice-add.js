@@ -1,21 +1,4 @@
 
-function ajax(url, data) {
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    data["_token"] = token;
-    let xhttp = new XMLHttpRequest();
-    let response;
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState = 4 && xhttp.status == 200) {
-
-            response = JSON.parse(xhttp.responseText);
-        }
-
-    };
-    xhttp.open("POST", url, false);
-    xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhttp.send(JSON.stringify(data));
-    return response;
-}
 
 
 function addInvoice() {
@@ -45,8 +28,9 @@ function removeInvoice(element) {
 }
 function getAvQty(ele) {
 
-    let response = ajax("getavqty/", { "medicine": ele.value });
-    console.log(response);
+    let response = ajaxJson("getavqty/", { "medicine": ele.value });
+
+    let avQtyElement = ele.parentElement.parentElement.querySelector("#avQty");
 
     if (response.success == 1) {
 
@@ -56,4 +40,48 @@ function getAvQty(ele) {
 
         avQtyElement.value = 0;
     }
+}
+
+function autoCompleteMed(ele) {
+    removeElements();
+    if (ele.value == "") {
+        return;
+    }
+    let medicines = ajaxJson("autocompletemed/", { "term": ele.value.toLowerCase() });
+    if (medicines.success == 1) {
+        for (let i of medicines.list) {
+            //convert ele to lowercase and compare with each string
+
+
+            //create li element
+            let listItem = document.createElement("li");
+            //One common class name
+            listItem.classList.add("list-items");
+            listItem.style.cursor = "pointer";
+            listItem.setAttribute("onclick", "displayNames('medicine-name','" + i.name + "')");
+            //Display matched part in bold
+            let word = "<b>" + i.name.substr(0, ele.value.length) + "</b>";
+            word += i.name.substr(ele.value.length);
+            //display the value in array
+            listItem.innerHTML = word;
+            let y = ele.parentElement.querySelector(".list-med").appendChild(listItem);
+
+
+        }
+    }
+
+}
+
+function displayNames(ele, value) {
+    let input = document.getElementById(ele);
+    input.value = value;
+    removeElements();
+}
+
+function removeElements() {
+    //clear all the item
+    let items = document.querySelectorAll(".list-items");
+    items.forEach((item) => {
+        item.remove();
+    });
 }

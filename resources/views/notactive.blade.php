@@ -9,6 +9,6 @@
     <div class="title">
 
         <h3 class="not-active-title">Your Account is Not Activate Please Contact With Admin</h3>
-        <a href="{{ route('logout') }}">Sign out</a>
+        <a href="{{ route('signout') }}">Sign out</a>
     </div>
 @endsection
