@@ -39,7 +39,8 @@
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Date:</div>
-                            <input class="input-field" type="date" placeholder="Contact Number" name="" value="">
+                            <input class="input-field" type="date" placeholder="Contact Number" name=""
+                                value="{{ date('Y-m-d') }}">
                         </div>
 
                         <div class="bill-labelsandinputs">
@@ -72,12 +73,11 @@
                     <div id="bill-rows" class="bill-rows">
                         <div class="bill-body-values">
 
-                            <div>
-                                <input id="medicine-name" onkeyup="getAvQty(this);autoCompleteMed(this);"
-                                    class="body-input-field" type="text" placeholder="Select a Medicine" name="medicine"
-                                    value="">
+                            <div id="med_input">
+                                <input id="medicine-name" onkeyup="autoCompleteMed(this);"
+                                    onblur="checkMedAndFillData(this,0);" class="body-input-field" type="text"
+                                    placeholder="Select a Medicine" name="medicine" value="">
                                 <ul class="list-med">
-
 
                                 </ul>
                             </div>
@@ -95,11 +95,12 @@
                             </div>
 
                             <div>
-                                <input id="avQty" class="body-input-field" type="number" name="avqty" value="">
+                                <input disabled id="avQty" class="body-input-field" type="number" name="avqty" value="0">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="text" name="exp" value="">
+                                <select class="body-input-field" name="exp_date" id="exp_date">
+                                </select>
                             </div>
 
                             <div>

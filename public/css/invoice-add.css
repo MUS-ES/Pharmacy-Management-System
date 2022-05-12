@@ -479,6 +479,9 @@ input::-webkit-inner-spin-button {
 /* input[type=number] {
   -moz-appearance: textfield;
 } */
+#med_input {
+    position: relative;
+}
 
 #bill-rows ul {
     list-style: none;
@@ -486,16 +489,21 @@ input::-webkit-inner-spin-button {
 }
 
 .list-med {
+    position: absolute;
     width: 100%;
     background-color: #ffffff;
     border-radius: 0 0 5px 5px;
 }
 
 .list-items {
+
     padding: 7px 10px;
+    background-color: #FFE9E2;
+    color: var(--black2);
     border-radius: 10px;
 }
 
 .list-items:hover {
     background-color: var(--rose);
+    color: white;
 }

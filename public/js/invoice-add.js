@@ -1,6 +1,5 @@
 
 
-
 function addInvoice() {
     let container = document.getElementById("bill-rows");
     let bill = container.firstElementChild;
@@ -84,4 +83,42 @@ function removeElements() {
     items.forEach((item) => {
         item.remove();
     });
+}
+
+
+function checkMedAndFillData(medicineElement, exist) {
+    if (exist != 1)
+        exist = isMedicineExist(medicineElement.value);
+
+    if (!exist) {
+        return;
+    }
+    let expElement = medicineElement.parentElement.parentElement.querySelector("#exp_date");
+    let avQtyElement = medicineElement.parentElement.parentElement.querySelector("#avQty");
+    fillExpDates(expElement, medicineElement.value);
+    fillAvQty(avQtyElement, exp);
+
+
+
+
+}
+
+function isMedicineExist(name) {
+
+    return exist = ajaxJson("ismedexist/", { medicine: name }).exist;
+}
+
+function fillExpDates(expElement, medicine) {
+
+    expdates = ajaxJson("getmedexpdates/", { medicine: medicine });
+    if (expdates.success != 1) {
+        return;
+    }
+    removeExpDates()
+    expdates.expDates.forEach(date => {
+        let option = document.createElement("option");
+        option.setAttribute("value", date.exp);
+        option.innerText = date.exp;
+        expElement.appendChild(option);
+    })
 }
