@@ -17,9 +17,10 @@ class CreateMedicinesTable extends Migration
         {
             $table->id();
             $table->string("name");
-            $table->bigInteger("packing");
+            $table->tinyInteger("strip_unit");
             $table->string("generic_name");
             $table->decimal("price", 10, 3);
+            $table->decimal("strip_price", 10, 3)->virtualAs("price/strip_unit");
             $table->foreignId("user_id");
             $table->timestamps();
         });

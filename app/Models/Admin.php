@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $gurad = "admin";
+    protected $gurad = "admins";
     /**
      * The attributes that are mass assignable.
      *

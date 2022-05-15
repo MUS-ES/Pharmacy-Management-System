@@ -23,7 +23,7 @@
 
                 <div class="bill">
 
-                    <div class="bill-header">
+                    <div id="bill-header" class="bill-header">
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Invoice Number:</div>
@@ -34,20 +34,21 @@
                             <div class="sub-title">Customer Name:
                                 <button id="customer-btn" type="button" name="button">New Customer</button>
                             </div>
-                            <input class="input-field" type="text" placeholder="Customer Name" name="" value="">
+                            <input id="customer-name" class="input-field" type="text" placeholder="Customer Name" name=""
+                                value="">
                         </div>
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Date:</div>
-                            <input class="input-field" type="date" placeholder="Contact Number" name=""
+                            <input id="invoice-date" class="input-field" type="date" placeholder="Contact Number" name=""
                                 value="{{ date('Y-m-d') }}">
                         </div>
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Paymet Type:</div>
-                            <select class="input-field1" name="">
-                                <option value="1">Cash Payment</option>
-                                <option value="2">Net Banking</option>
+                            <select id="payment-type" class="input-field1" name="">
+                                <option value="Cash">Cash Payment</option>
+                                <option value="Net Banking">Net Banking</option>
                             </select>
                         </div>
 
@@ -57,11 +58,11 @@
 
                     <div class="bill-body-header">
                         <div class="headers">Medicine Name</div>
-                        <div class="headers">Unit</div>
                         <div class="headers">Quantity</div>
-                        <div class="headers">Unit Price</div>
                         <div class="headers">Av.Qty</div>
                         <div class="headers">Expiry</div>
+                        <div class="headers">Unit</div>
+                        <div class="headers">Unit Price</div>
                         <div class="headers">Discount</div>
                         <div class="headers">Total</div>
                         <div class="headers">Action</div>
@@ -70,45 +71,55 @@
                     <hr class="lower-hr">
 
 
-                    <div id="bill-rows" class="bill-rows">
-                        <div class="bill-body-values">
+                    <div id="bill-rows" oninput="fillInvoiceDetails()" class="bill-rows">
+                        <div id="bill-body" class="bill-body-values invoice-items">
 
                             <div id="med_input">
-                                <input id="medicine-name" onkeyup="autoCompleteMed(this);"
-                                    onblur="checkMedAndFillData(this,0);" class="body-input-field" type="text"
-                                    placeholder="Select a Medicine" name="medicine" value="">
-                                <ul class="list-med">
+                                <input id="medicine"
+                                    oninput="fillFields(this.closest('#bill-body'));autoCompleteMed(this.closest('#bill-body'));"
+                                    class="body-input-field" type="text" name="medicine" value="">
+                                <ul id="list-medicine" class="list">
 
                                 </ul>
                             </div>
 
-                            <div>
-                                <input class="body-input-field" type="text" name="unit" value="">
-                            </div>
+
 
                             <div>
-                                <input class="body-input-field" type="number" name="qty" value="">
+                                <input
+                                    oninput="checkQuantity(this.closest('#bill-body'));calcPrice(this.closest('#bill-body'))"
+                                    id="qty" class="body-input-field" type="number" name="qty" value="">
                             </div>
 
-                            <div>
-                                <input class="body-input-field" type="number" name="unitprice" value="">
-                            </div>
+
 
                             <div>
                                 <input disabled id="avQty" class="body-input-field" type="number" name="avqty" value="0">
                             </div>
 
                             <div>
-                                <select class="body-input-field" name="exp_date" id="exp_date">
+                                <select oninput="fillAvQty(this.closest('#bill-body'))" class="body-input-field"
+                                    name="exp_date" id="exp_date">
+
                                 </select>
                             </div>
-
                             <div>
-                                <input class="body-input-field" type="number" name="discount" value="">
+                                <select oninput="fillUnitPrice(this.closest('#bill-body'));" id="type"
+                                    class="body-input-field" type="text" name="type">
+                                    <option value="pack">Package</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input id="unitPrice" class="body-input-field" type="number" name="unitprice" value="">
                             </div>
 
                             <div>
-                                <input class="body-input-field" type="number" name="total" value="">
+                                <input oninput="calcPrice(this.closest('#bill-body'))" id="discount"
+                                    class="body-input-field" type="number" name="discount" value="0">
+                            </div>
+
+                            <div>
+                                <input disabled id="total" class="body-input-field" type="number" name="total" value="0">
                             </div>
 
                             <div class="action-section">
@@ -119,53 +130,45 @@
                             </div>
 
                         </div>
-
-
                         <hr class="horizontal-rule">
-
-
                     </div>
 
-                    <div class="final-sub-bill-results">
+                    <div oninput="fillInvoiceDetails()" id="final-bill" class="final-sub-bill-results">
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Total Price:</div>
-                            <div class="input-field">1</div>
+                            <input disabled id="finalprice" class="input-field" value="0">
                         </div>
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Total Discount:</div>
-                            <div class="input-field">1</div>
+                            <input disabled id="finaldiscount" class="input-field" value="0">
                         </div>
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Total Net:</div>
-                            <div class="input-field">1</div>
+                            <input disabled id="finalnet" class="input-field" value="0">
                         </div>
 
-                    </div>
-                    <!-- End Of Final Sub-Results -->
-                    <hr class="horizontal-rule">
-
-                    <div class="final-bill-results">
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Paid Amount:</div>
-                            <div class="input-field">1</div>
+                            <input id="paid" class="input-field" value="0">
                         </div>
 
                         <div class="bill-labelsandinputs">
                             <div class="sub-title">Rest:</div>
-                            <div class="input-field">0</div>
+                            <input disabled id="paid-rest" class="input-field" value="0">
                         </div>
 
                         <div class="btn-adjustment">
-                            <button class="btn-decoration" id="save-btn" type="button" name="button">Save</button>
+                            <button onclick="validateAndCreate()" class="btn-decoration" id="save-btn" type="button"
+                                name="button">Save</button>
                             <button class="btn-decoration" id="discard-btn" type="button" name="button">Discard</button>
                         </div>
 
                     </div>
-                    <!-- End Of Final Bill Results -->
+                    <!-- End Of Final Results -->
 
                 </div>
                 <!-- End Of Bill -->
@@ -188,30 +191,30 @@
                     <span class="cancel-btn material-icons-outlined">highlight_off</span>
                 </div>
                 <!-- End Of Popup Header -->
-                <div class="popup-body">
+                <div class="popup-body new-customer">
                     <div class="popup-labelsandinputs">
                         <div class="sub-title">
                             Customer Name:
                         </div>
-                        <input class="popup-input-field" type="text" placeholder="Name" name="" value="">
+                        <input id="customer-name" class="popup-input-field" type="text" placeholder="Name" name="" value="">
                     </div>
 
                     <div class="popup-labelsandinputs">
                         <div class="sub-title">
                             Contact Number:
                         </div>
-                        <input class="popup-input-field" type="number" name="" value="">
+                        <input id="contact-number" class="popup-input-field" type="number" name="" value="">
                     </div>
 
                     <div class="popup-labelsandinputs">
                         <div class="sub-title">
                             Address:
                         </div>
-                        <textarea name="address" rows="4" cols="50" placeholder="Address"></textarea>
+                        <textarea id="customer-address" name="address" rows="4" cols="50" placeholder="Address"></textarea>
                     </div>
 
                     <div class="popup-btn">
-                        <button id="popup-button" type="button" name="button"><span
+                        <button onclick="addCustomer(this)" id="popup-button-add-customer" type="button" name="button"><span
                                 class="material-icons-outlined">person_add</span></button>
                     </div>
 
@@ -221,6 +224,9 @@
             <!-- End Of Popup Window -->
         </div>
         <!-- End Of Container1 -->
+
+
+        <x-Feedback />
     </section>
     <script>
         //Adding  New Customer

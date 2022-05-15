@@ -290,7 +290,6 @@ main .title {
 }
 
 .action-section span:hover {
-    font-size: 2.2rem;
     color: var(--blue);
 }
 

@@ -6,15 +6,6 @@ allDropdown.forEach(item => {
     const a = item.parentElement.querySelector("a:first-child");
     a.addEventListener("click", function (e) {
         e.preventDefault();
-
-        // if(!this.classList.contains("active")) {
-        //   allDropdown.forEach(i=> {
-        //     const aLink = i.parentElement.querySelector("a:first-child");
-        //     aLink.classList.remove("active");
-        //     i.classList.remove("show");
-        //   });
-        // }
-
         item.classList.toggle("show");
     });
 });
@@ -91,22 +82,31 @@ toggleSidebar.addEventListener("click", function () {
  * @param  url of the ajax request
  * @returns  response from server
  */
-function ajaxJson(url, data) {
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    data["_token"] = token;
-    let xhttp = new XMLHttpRequest();
-    let response;
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState = 4 && xhttp.status == 200) {
+function promiseJax(url, data, method = "GET", async = true, parseJson = true) {
+    return new Promise(function (resolve, reject) {
+        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        data["_token"] = token;
+        let xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            if (parseJson == true) {
 
-            response = JSON.parse(xhttp.responseText);
+                resolve(JSON.parse(xhttp.responseText));
+            }
+            else {
+
+                resolve(xhttp.responseText);
+            }
+
+        };
+        xhttp.onerror = function () {
+
+            reject("error");
+
         }
-
-    };
-    xhttp.open("POST", url, false);
-    xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhttp.send(JSON.stringify(data));
-    return response;
+        xhttp.open(method, url, async);
+        xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhttp.send(JSON.stringify(data));
+    });
 }
 
 

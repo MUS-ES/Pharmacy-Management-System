@@ -9,6 +9,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\MedicinesController;
+use App\Http\Controllers\CustomersController;
+use App\Models\Customer;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -33,12 +35,17 @@ Route::middleware(['auth'])->group(function ()
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
     Route::post("/chart", [DashboardController::class, "getChartData"]);
-    Route::get("/manageinvoices", [invoicesController::class, "manageInvoices"])->name("manageInvoices");
+    Route::get("/manageinvoices/{to?}/{from?}", [invoicesController::class, "manageInvoices"])->name("manageInvoices");
     Route::get("/addinvoice", [invoicesController::class, "addInvoice"])->name("addInvoice");
     Route::post("/getavqty", [MedicinesController::class, "getAvQty"])->name("getQtymed");
     Route::post("/ismedexist", [MedicinesController::class, "isMedExist"]);
     Route::post("/getmedexpdates", [MedicinesController::class, "getMedExpDates"]);
+    Route::post("/getmedprice", [MedicinesController::class, "getMedPrice"]);
     Route::post("/autocompletemed", [MedicinesController::class, "getAutoCompleteData"]);
+    Route::post("/storeinvoice", [InvoicesController::class, "store"]);
+    Route::post("/newcustomer", [CustomersController::class, "store"]);
+    Route::get("/deleteinvoice/{id}", [InvoicesController::class, "destroy"]);
+    Route::get("/getinvoiceitems/{id}", [InvoicesController::class, "getInvoiceItems"]);
     Route::get("/returnedmedicines", [invoicesController::class, "returnedMedicines"])->name("returnedMedicines");
     Route::middleware(['active:outside'])->get('/notactive', [HomeController::class, 'accountDisabled'])->name("notactive");
 });

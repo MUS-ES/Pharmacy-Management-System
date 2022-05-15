@@ -27,4 +27,3 @@ sign_btn.forEach((btn) => { /*for each sign_btn we will take that btn and give i
     });
 });
 
-

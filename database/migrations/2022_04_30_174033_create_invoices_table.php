@@ -16,8 +16,12 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table)
         {
             $table->id();
-            $table->decimal('total', 10, 3);
-            $table->foreignId('customer_id');
+            $table->decimal('total', 10, 3)->default(0);
+            $table->decimal('total_discount', 10, 3)->default(0);
+            $table->decimal('total_net', 10, 3)->default(0);
+            $table->decimal('paid', 10, 3)->default(0);
+            $table->decimal('rest', 10, 3)->default(0)->virtualAs("total-(total_discount+paid)");
+            $table->foreignId('customer_id')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('payment_id');
             $table->timestamps();
