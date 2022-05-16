@@ -90,8 +90,18 @@ class InvoicesController extends Controller
                     "discount" => $item['discount'],
                     "invoice_id" => $invoice->id,
                 ]);
-                Stock::where("user_id", Auth::user()->id)->find($medicine->id)->decrement('qty', $item['qty']);
+
                 $invoiceItem->save();
+                $handle = Stock::where("user_id", Auth::user()->id)->find($medicine->id);
+                //  $handle = Stock::where("user_id", Auth::user()->id)->find($medicine->id)->decrement('qty', $item['qty']);;
+                /* if ($handle->qty == $item['qty'])
+                {
+                    $handle->delete();
+                }
+                else
+                {
+                    $handle->decrement('qty', $item['qty']);
+                } */
                 $total += ($medicine->price * $invoiceItem->qty);
             }
 

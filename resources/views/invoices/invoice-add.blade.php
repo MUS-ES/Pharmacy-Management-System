@@ -75,7 +75,7 @@
                         <div id="bill-body" class="bill-body-values invoice-items">
 
                             <div id="med_input">
-                                <input id="medicine"
+                                <input autocomplete="off" id="medicine" onblur="closeList(this)"
                                     oninput="fillFields(this.closest('#bill-body'));autoCompleteMed(this.closest('#bill-body'));"
                                     class="body-input-field" type="text" name="medicine" value="">
                                 <ul id="list-medicine" class="list">
@@ -214,7 +214,7 @@
                     </div>
 
                     <div class="popup-btn">
-                        <button onclick="addCustomer(this)" id="popup-button-add-customer" type="button" name="button"><span
+                        <button onclick="addCustomer(this)" id="popup-button" type="button" name="button"><span
                                 class="material-icons-outlined">person_add</span></button>
                     </div>
 

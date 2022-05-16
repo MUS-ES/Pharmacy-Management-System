@@ -50,7 +50,6 @@
                         </div>
 
                     </div>
-
                     <div class="table-data">
                         <table>
                             <thead>
@@ -75,7 +74,7 @@
                                         <td>{{ $invoice->total_net }}</td>
                                         <td>{{ $invoice->invoice_date }}</td>
                                         <td class="action-section">
-                                            <a href='deleteinvoice/{{ $invoice->number }} ' class="icon-section">
+                                            <a href='/deleteinvoice/{{ $invoice->number }} ' class="icon-section">
                                                 <span class="material-icons-outlined">delete</span>
                                             </a>
                                             <button onclick="showInvoiceItems(this)"
@@ -93,6 +92,8 @@
 
 
                     </div>
+
+
 
                 </div>
 

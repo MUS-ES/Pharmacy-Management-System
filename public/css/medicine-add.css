@@ -1,0 +1,86 @@
+main .container {
+    padding: 30px;
+    box-shadow: 0 8px 10px 5px var(--black2);
+    margin: 20px;
+    border-radius: 20px;
+    color: var(--blue);
+    font-weight: bolder;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+    column-gap: 40px;
+}
+
+main input {
+    font-family: "Ubuntu";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--black2);
+    background: #FFE9E2;
+    border: 1px solid var(--rose);
+    border-radius: 0.6rem;
+    height: 2rem;
+    padding: 3px 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+main input:focus {
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+    border: none;
+}
+
+main .input-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    padding: 20px;
+
+
+}
+
+
+main .input-container.medicine {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+main .input-container.generic-name {
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+main .input-container.packing {}
+
+#save-btn {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: var(--rose);
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 9px 46px;
+    width: max-content;
+    font-size: 1.1rem;
+    font-family: "Ubuntu";
+    font-weight: 700;
+
+    border-radius: 7px;
+    background: green;
+    color: var(--white);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 15px;
+    transition: 0.3s ease;
+}
+
+#save-btn:hover {
+    background: #00B800;
+}
+
+.input-container .invalid-feedback {
+    margin-top: -10px;
+    margin-left: 5px;
+    color: rgb(227, 34, 34);
+    font-size: 13px;
+}

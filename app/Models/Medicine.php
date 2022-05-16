@@ -14,4 +14,8 @@ class Medicine extends Model
     {
         return  $this->belongsTo(User::class);
     }
+    public function stock()
+    {
+        return   $this->hasMany(Stock::class, "medicine_id", "id");
+    }
 }

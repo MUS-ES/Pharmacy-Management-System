@@ -11,4 +11,8 @@ class Stock extends Model
     use HasFactory;
 
     protected $hidden = [];
+    public function medicine()
+    {
+        return    $this->belongsTo(Medicine::class);
+    }
 }

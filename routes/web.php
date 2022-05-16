@@ -35,8 +35,10 @@ Route::middleware(['auth'])->group(function ()
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
     Route::post("/chart", [DashboardController::class, "getChartData"]);
+    Route::get("/addinvoice", [InvoicesController::class, "addInvoice"])->name("addInvoice");
     Route::get("/manageinvoices/{to?}/{from?}", [invoicesController::class, "manageInvoices"])->name("manageInvoices");
-    Route::get("/addinvoice", [invoicesController::class, "addInvoice"])->name("addInvoice");
+    Route::get("/addmedicine", [MedicinesController::class, "addMedicine"])->name("addMedicine");
+    Route::post("/addmedicine", [MedicinesController::class, "storeMedicine"]);
     Route::post("/getavqty", [MedicinesController::class, "getAvQty"])->name("getQtymed");
     Route::post("/ismedexist", [MedicinesController::class, "isMedExist"]);
     Route::post("/getmedexpdates", [MedicinesController::class, "getMedExpDates"]);

@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function ()
 
 
 /* Admin Routes */
-Route::prefix("admin")->name("admin.")->group(function ()
+Route::name("admin.")->group(function ()
 {
     /* Not Authenticated */
     Route::middleware("guest:admin")->group(function ()

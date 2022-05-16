@@ -9,17 +9,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
+use App\Http\Requests\Medicine\StoreMedicineRequest;
 
 class MedicinesController extends Controller
 {
+
+
+    public function addMedicine()
+    {
+        return view("medicines.medicine_add");
+    }
+
+    public function storeMedicine(StoreMedicineRequest $request)
+    {
+        $valid = $request->validated();
+        return response()->json(["success" => 1, "msg" => $valid]);
+    }
     public function getAutoCompleteData(Request $request)
     {
         $success = 0;
         $medicines = array();
         if ($request->has("term"))
         {
-            $medicines = Medicine::where("user_id", "=", Auth::user()->id)->where('name', 'like', '%' . $request->term . "%")->get("name");
-            if ($medicines !== null)
+            $medicines = Medicine::where("user_id", "=", Auth::user()->id)->where('name', 'like', '%' . $request->term . "%")->take(10)->get("name");
+            if (count($medicines) !== 0)
             {
                 $success = 1;
             }

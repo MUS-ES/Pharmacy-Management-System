@@ -100,7 +100,7 @@ function promiseJax(url, data, method = "GET", async = true, parseJson = true) {
         };
         xhttp.onerror = function () {
 
-            reject("error");
+            reject(xhttp.responseText);
 
         }
         xhttp.open(method, url, async);

@@ -1,5 +1,4 @@
 
-
 class InvoiceItem {
     constructor(medicine, expDate, qty, discount) {
         this.medicine = medicine;
@@ -36,6 +35,8 @@ function addInvoice() {
     newbill.classList.add("canremove");
     inputs = newbill.querySelectorAll("input");
     select = newbill.querySelector("select");
+    let list = newbill.querySelector("#list-medicine");
+    list.classList.remove('active');
     inputs.forEach(e => {
         e.value = "";
     });
@@ -58,12 +59,10 @@ function removeInvoice(element) {
 function autoCompleteMed(billElement) {
     let medicineELement = billElement.querySelector("#medicine");
     let list = medicineELement.nextElementSibling;
-    if (medicineELement.value == "") {
-        return;
-    }
-    promiseJax("autocompletemed/", { term: medicineELement.value.toLowerCase() }, "POST", true).then(medicines => {
 
+    promiseJax("autocompletemed/", { term: medicineELement.value.toLowerCase() }, "POST", true).then(medicines => {
         removeChilderns(list);
+        console.log(medicines);
         if (medicines.success == 1) {
             for (let i of medicines.list) {
                 let listItem = document.createElement("li");
@@ -76,6 +75,10 @@ function autoCompleteMed(billElement) {
                 medicineELement.parentElement.querySelector("#list-medicine").appendChild(listItem);
             }
             list.classList.add("active");
+        }
+        else {
+            list.classList.remove("active");
+
         }
     });
 }
@@ -253,15 +256,7 @@ function fillInvoiceDetails() {
     paidRestElement.value = paidRest;
 
 }
-/* let lists = document.querySelectorAll("#medicine");
-medicines.forEach(ele => {
-    let list = ele.nextElementSibling;
-    ele.onblur = function () {
-        list.classList.remove("active");
 
-    }
-});
- */
 
 
 
@@ -287,6 +282,7 @@ function getInvoiceDetails() {
     let invoiceHeader = document.querySelector("#bill-header");
     let customer = invoiceHeader.querySelector("#customer-name");
     let invoiceDate = invoiceHeader.querySelector("#invoice-date");
+    console.log(invoiceDate.value);
     let paymentType = invoiceHeader.querySelector("#payment-type");
     let paidAmount = document.getElementById("paid");
     let paidRestElement = document.querySelector("#paid-rest");
@@ -350,6 +346,14 @@ function validate() {
         paidAmount.focus();
         valid = 0;
     }
+
+}
+
+function closeList(currentEle) {
+    let list = currentEle.nextElementSibling;
+    setTimeout(() => { list.classList.remove("active"); }, 100);
+
+
 
 }
 
