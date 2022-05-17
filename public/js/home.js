@@ -111,3 +111,16 @@ function promiseJax(url, data, method = "GET", async = true, parseJson = true) {
 
 
 
+function closeWindow(...arg) {
+    arg.forEach(ele => {
+        document.querySelector(ele).classList.remove('active');
+
+    })
+}
+function openWindow(...arg) {
+    arg.forEach(ele => {
+        document.querySelector(ele).classList.add('active');
+
+    })
+
+}

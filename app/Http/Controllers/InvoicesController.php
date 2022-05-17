@@ -16,31 +16,33 @@ use Illuminate\Support\Facades\Auth;
 
 class InvoicesController extends Controller
 {
-    public function manageInvoices($to = "", $from = "")
+
+    public function searchInvoices(Request $request)
     {
-        $invoices = [];
-        if ($to == "" && $from == "")
+        $query = Invoice::where("user_id", Auth::user()->id)->with("customer", "payment");
+        if ($request->filled("id"))
         {
-
-            $invoices = Invoice::select("invoices.id as number", "total", "total_discount", "total_net", "paid", "customers.name as customer", "invoices.created_at  as invoice_date")->where("invoices.user_id", Auth::user()->id)->leftjoin("customers", "customer_id", "=", "customers.id")->orderBy('invoice_date', 'DESC')->get();
+            $query = $query->where("id", $request->id);
         }
-        else if ($from == "" && $to != "")
+        if ($request->filled("from"))
         {
-
-            $invoices = Invoice::select("invoices.id as number", "total", "total_discount", "total_net", "paid", "customers.name as customer", "invoices.created_at  as invoice_date")->where("invoices.user_id", Auth::user()->id)->leftjoin("customers", "customer_id", "=", "customers.id")->where("invoices.created_at", "<=", $to)->orderBy('invoice_date', 'DESC')->get();
+            $query = $query->where("created_at", ">=", $request->from);
         }
-        else if ($from != "" && $to == "")
+        if ($request->filled("to"))
         {
-
-            $invoices = Invoice::select("invoices.id as number", "total", "total_discount", "total_net", "paid", "customers.name as customer", "invoices.created_at  as invoice_date")->where("invoices.user_id", Auth::user()->id)->leftjoin("customers", "customer_id", "=", "customers.id")->where("invoices.created_at", ">=", $from)->orderBy('invoice_date', 'DESC')->get();
+            $query = $query->where("created_at", "<=", $request->to);
         }
-        else if ($from != "" && $to != "")
+        if ($request->filled("customer"))
         {
-
-            $invoices = Invoice::select("invoices.id as number", "total", "total_discount", "total_net", "paid", "customers.name as customer", "invoices.created_at  as invoice_date")->where("invoices.user_id", Auth::user()->id)->leftjoin("customers", "customer_id", "=", "customers.id")->where("invoices.created_at", ">=", $from)->where("invoices.created_at", "<=", $to)->orderBy('invoice_date', 'DESC')->get();
+            $query = $query->whereRelation("customer", "like", "%" . $request->customer . "%");
         }
+        $invoices = $query->get();
+        return view("sub.invoice_table", compact("invoices"))->render();
+    }
+    public function manageInvoices()
+    {
 
-        return view("invoices/invoices-manage", compact("invoices", "to", "from"));
+        return view("invoices/invoices-manage");
     }
     public function addInvoice()
     {
@@ -114,10 +116,14 @@ class InvoicesController extends Controller
         }
         return response()->json(["success" => 1, "invoice" => $invoice]);
     }
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Invoice::find($id)->delete();
-        return  $this->manageInvoices();
+        if ($request->filled("id"))
+        {
+
+            Invoice::find($request->id)->delete();
+        }
+        return response()->json(["success" => 1]);
     }
 
     public function getInvoiceItems($id)

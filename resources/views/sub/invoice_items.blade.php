@@ -13,19 +13,19 @@
                 <div class="sub-title">Customer Name:
                 </div>
                 <input disabled type="text" class="input-field"
-                    value="@if ($customer !== null) {{ $customer->name }} @endif">
+                    value="@if ($customer !== null) {{ $customer->name }}@else no name @endif">
             </div>
 
             <div class="bill-labelsandinputs">
                 <div class="sub-title">Address:</div>
                 <input disabled type="text" class="input-field"
-                    value="@if ($customer !== null) {{ $customer->address }} @endif">
+                    value="@if ($customer !== null) {{ $customer->address }}@else no address @endif">
             </div>
 
             <div class="bill-labelsandinputs">
                 <div class="sub-title">Contact:</div>
                 <input disabled type="text" class="input-field"
-                    value="@if ($customer !== null) {{ $customer->contact }} @endif">
+                    value="@if ($customer !== null) {{ $customer->contact }}@else no number @endif">
             </div>
 
 
@@ -54,11 +54,11 @@
                 <table class="popup-table">
                     <thead>
                         <tr>
-                            <td>Med-Name</td>
-                            <td>Quantity</td>
-                            <td>Unit Price</td>
-                            <td>Discount</td>
-                            <td>Price</td>
+                            <th>Med-Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Discount</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,7 +121,8 @@
             </div>
 
             <div class="btn-adjustment">
-                <button class="btn-decoration" id="close-btn" type="button" name="button">Close</button>
+                <button onclick="closeWindow('#popup','.container1')" class="btn-decoration" id="close-btn"
+                    type="button" name="button">Close</button>
             </div>
 
         </div>

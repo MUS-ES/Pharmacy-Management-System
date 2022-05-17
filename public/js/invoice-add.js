@@ -165,7 +165,6 @@ function fillExpDates(billElement) {
     let medicineELement = billElement.querySelector("#medicine");
 
     return promiseJax("getmedexpdates/", { medicine: medicineELement.value }, "POST").then(response => {
-
         if (response.success == 1) {
 
             removeChilderns(expElement);
@@ -269,6 +268,7 @@ function validateAndCreate() {
         if (response.success == 1) {
 
             let feedbackEle = document.querySelector("#popup .feedback");
+            document.getElementById("popup").classList.add("active");
             feedbackEle.classList.add("active");
         }
     });

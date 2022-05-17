@@ -7,15 +7,9 @@
                 </span>
                 <h3>Success</h3>
             </div>
-            <button id="feedback-btn-done" style="left:0;font-size:15px; font-weight:bolder" id="popup-button"
-                type="button" name="button">DONE</button>
+            <button onclick="closeWindow('#popup','.feedback')" id="feedback-btn-done"
+                style="left:0;font-size:15px; font-weight:bolder" id="popup-button" type="button"
+                name="button">DONE</button>
         </div>
     </div>
 </div>
-<script>
-    let feedback_btn = document.getElementById("feedback-btn-done");
-    feedback_btn.onclick = function() {
-        let feedbackEle = document.querySelector(".feedback.active");
-        feedbackEle.classList.remove("active");
-    };
-</script>

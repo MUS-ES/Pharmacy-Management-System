@@ -20,6 +20,7 @@ class CreateMedicinesStocksTable extends Migration
             $table->date("mfd");
             $table->date("exp");
             $table->bigInteger("qty");
+            $table->foreignId("supplier_id");
             $table->foreignId("user_id");
             $table->timestamps();
         });

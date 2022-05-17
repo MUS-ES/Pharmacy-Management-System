@@ -10,10 +10,79 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 use App\Http\Requests\Medicine\StoreMedicineRequest;
+use App\Models\Stock;
+use App\Models\Supplier;
+use Carbon\Carbon;
+use GuzzleHttp\Promise\Create;
 
 class MedicinesController extends Controller
 {
 
+    public function storeStock(Request $request)
+    {
+
+        $medicine = Medicine::where("name", $request->medicine)->where('user_id', Auth::user()->id)->get()->first();
+        $stock = Stock::create(['user_id' => Auth::user()->id, 'medicine_id' => $medicine->id, "mfd" => $request->mfd, "exp" => $request->exp, 'qty' => $request->qty]);
+        if ($request->filled("supplier"))
+        {
+            $supplier = Supplier::where("name", $request->supplier)->where('user_id', Auth::user()->id);
+            $stock->supplier_id = $supplier->id;
+        }
+        //$stock->save;
+        return response()->json(["success" => true, "stock" => $stock]);
+    }
+    public function manageStock()
+    {
+        return view("medicines.stock");
+    }
+    public function searchStock(Request $request)
+    {
+        $query =  Stock::where("user_id", Auth::user()->id)->with("medicine", "supplier");
+        if ($request->filled("expire") && $request->expire == true)
+        {
+            $query = $query->where("exp", "<=", Carbon::now());
+        }
+        if ($request->filled("outOfStock") && $request->outOfStock == 1)
+        {
+            $query = $query->where("qty", "=", 0);
+        }
+        if ($request->filled("name"))
+        {
+            $query = $query->whereRelation("medicine", "name", "like", $request->name . "%");
+        }
+        if ($request->filled("generic"))
+        {
+            $query = $query->whereRelation("medicine", "generic_name", "like", $request->generic . "%");
+        }
+        if ($request->filled("supplier"))
+        {
+            $query = $query->whereRelation("supplier", "name", "like", $request->supplier . "%");
+        }
+
+        $stocks = $query->get();
+        return view("sub.stock_table", compact("stocks"))->render();
+    }
+    public function manageMedicine()
+    {
+        return view("medicines.medicine_manage");
+    }
+    public function searchMedicines(Request $request)
+    {
+
+        $query = Medicine::where("user_id", Auth::user()->id);
+        if ($request->filled("name"))
+        {
+
+            $query = $query->where("name", "like", $request->name . "%");
+        }
+        if ($request->filled("generic"))
+        {
+            $query = $query->where("generic_name", "like", $request->generic . "%");
+        }
+        $medicines = $query->get();
+        //return response()->json(["meid" => $medicines]);
+        return view("sub.medicine_table", compact("medicines"))->render();
+    }
 
     public function addMedicine()
     {

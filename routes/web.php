@@ -36,9 +36,15 @@ Route::middleware(['auth'])->group(function ()
     });
     Route::post("/chart", [DashboardController::class, "getChartData"]);
     Route::get("/addinvoice", [InvoicesController::class, "addInvoice"])->name("addInvoice");
-    Route::get("/manageinvoices/{to?}/{from?}", [invoicesController::class, "manageInvoices"])->name("manageInvoices");
+    Route::get("/manageinvoices", [invoicesController::class, "manageInvoices"])->name("manageInvoices");
+    Route::post("/searchinvoices", [invoicesController::class, "searchInvoices"]);
     Route::get("/addmedicine", [MedicinesController::class, "addMedicine"])->name("addMedicine");
     Route::post("/addmedicine", [MedicinesController::class, "storeMedicine"]);
+    Route::get("/managemedicine", [MedicinesController::class, "manageMedicine"]);
+    Route::POST("/searchMedicines", [MedicinesController::class, "searchMedicines"]);
+    Route::get("/stock", [MedicinesController::class, "manageStock"]);
+    Route::Post("/addstockentry", [MedicinesController::class, "storeStock"]);
+    Route::Post("/searchstock", [MedicinesController::class, "searchStock"]);
     Route::post("/getavqty", [MedicinesController::class, "getAvQty"])->name("getQtymed");
     Route::post("/ismedexist", [MedicinesController::class, "isMedExist"]);
     Route::post("/getmedexpdates", [MedicinesController::class, "getMedExpDates"]);
@@ -46,7 +52,7 @@ Route::middleware(['auth'])->group(function ()
     Route::post("/autocompletemed", [MedicinesController::class, "getAutoCompleteData"]);
     Route::post("/storeinvoice", [InvoicesController::class, "store"]);
     Route::post("/newcustomer", [CustomersController::class, "store"]);
-    Route::get("/deleteinvoice/{id}", [InvoicesController::class, "destroy"]);
+    Route::delete("/deleteinvoice", [InvoicesController::class, "destroy"])->name("deleteinvoice");
     Route::get("/getinvoiceitems/{id}", [InvoicesController::class, "getInvoiceItems"]);
     Route::get("/returnedmedicines", [invoicesController::class, "returnedMedicines"])->name("returnedMedicines");
     Route::middleware(['active:outside'])->get('/notactive', [HomeController::class, 'accountDisabled'])->name("notactive");

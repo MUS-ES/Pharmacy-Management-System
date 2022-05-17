@@ -33,11 +33,18 @@
 <body>
     <x-Sidebar />
 
-    @yield('content')
-    <script src="{{ asset('js/home.js') }}"></script>
+    <section id="content">
+        <x-Nav />
+        <script src="{{ asset('js/home.js') }}"></script>
+        @yield('main')
+    </section>
 
+
+    <section id="popup" class="">
+
+        @yield('popup')
+    </section>
     @stack('scripts')
-    <!-- Home Script Required For All Sections  -->
 </body>
 
 </html>

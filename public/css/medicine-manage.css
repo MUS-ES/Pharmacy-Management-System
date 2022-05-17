@@ -1,0 +1,107 @@
+main .container {
+    padding: 30px;
+    box-shadow: 0 8px 10px 5px var(--black2);
+    margin: 20px;
+    border-radius: 20px;
+    color: var(--blue);
+    font-weight: bolder;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.search-area {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: baseline;
+
+}
+
+
+main input {
+    font-family: "Ubuntu";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--black2);
+    background: #fff7f5;
+    border: 1px solid var(--rose);
+    border-radius: 0.6rem;
+    height: 2rem;
+    padding: 3px 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+main input:focus {
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+    border: none;
+}
+
+hr {
+    margin: 30px 0 30px 0;
+    width: 90%;
+    height: 2px;
+    background-color: #ff6d55c2;
+    border: none;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+
+th,
+td {
+    padding: 15px;
+
+}
+
+table th {
+    background-color: var(--rose);
+    color: white;
+}
+
+table th:first-child {
+
+    border-top-left-radius: 10px;
+
+}
+
+table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+    color: #737373;
+}
+
+tbody tr:hover {
+    font-weight: bold;
+    color: var(--rose);
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid var(--rose);
+}
+
+table td span {
+    font-size: 30px !important;
+    cursor: pointer;
+}
+
+table td span:hover {
+    color: var(--blue);
+}
+
+table td #edit-medicine-btn {
+    margin-right: 15px;
+}

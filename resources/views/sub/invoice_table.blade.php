@@ -1,41 +1,43 @@
-<div class="table-data">
-    <table>
-        <thead>
+<table>
+    <thead>
+        <tr>
+            <th>Inv-Num</th>
+            <th>Customer Name</th>
+            <th>Total Price</th>
+            <th>Total Discount</th>
+            <th>Total Net</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($invoices as $invoice)
             <tr>
-                <td>Inv-Num</td>
-                <td>Customer Name</td>
-                <td>Total Price</td>
-                <td>Total Discount</td>
-                <td>Total Net</td>
-                <td>Date</td>
-                <td>Actions</td>
+                <td>{{ $invoice->id }}
+                </td>
+                <td>
+                    @if ($invoice->customer)
+                        {{ $invoice->customer->name }}
+                    @else
+                        No Customer
+                    @endif
+                </td>
+                <td>{{ $invoice->total }}</td>
+                <td>{{ $invoice->total_discount }}</td>
+                <td>{{ $invoice->total_net }}</td>
+                <td>{{ $invoice->created_at }}</td>
+                <td class="action-section">
+                    <a onclick="deleteInvoice(this)" data-id="{{ $invoice->id }}"
+                        style="color:#737373;margin-right:5px">
+                        <span class="material-icons-outlined">delete</span>
+                    </a>
+                    <a onclick="showInvoiceItems(this)" id="show-items" data-id="{{ $invoice->id }}">
+                        <span class="material-icons-outlined">visibility</span>
+                    </a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach ($invoices as $invoice)
-                <tr>
-                    <td>{{ $invoice->number }}
-                    </td>
-                    <td>{{ $invoice->customer }}</td>
-                    <td>{{ $invoice->total }}</td>
-                    <td>{{ $invoice->total_discount }}</td>
-                    <td>{{ $invoice->total_net }}</td>
-                    <td>{{ $invoice->invoice_date }}</td>
-                    <td class="action-section">
-                        <a href='deleteinvoice/{{ $invoice->number }} ' class="icon-section">
-                            <span class="material-icons-outlined">delete</span>
-                        </a>
-                        <button onclick="showInvoiceItems(this)" style="background-color: transparent ; border:none"
-                            id="show-items" data-id="{{ $invoice->number }}" class="icon-section">
-                            <span class="material-icons-outlined">visibility</span>
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
+        @endforeach
+    </tbody>
 
 
-    </table>
-
-
-</div>
+</table>

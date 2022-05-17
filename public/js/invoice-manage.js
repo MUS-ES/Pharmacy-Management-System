@@ -2,7 +2,9 @@ function showInvoiceItems(currentElement) {
 
     promiseJax("getinvoiceitems/" + currentElement.dataset.id, "", "GET", true, 0).then(response => {
         console.log(response);
-        document.getElementById("popup").innerHTML = response;
+        let popup = document.getElementById("popup");
+        popup.classList.add("active");
+        popup.innerHTML = response;
         document.querySelector(".container1").style.display = "flex";
         document.getElementById("close-btn").addEventListener("click",
             function () {
@@ -13,15 +15,20 @@ function showInvoiceItems(currentElement) {
 }
 
 
+function search() {
+    let invoiceNumber = document.getElementById("sea-invoice-number").value.trim();
+    let customerName = document.getElementById("sea-customer-name").value.trim();
+    let fromDate = document.getElementById("sea-from-date").value.trim();
+    let toDate = document.getElementById("sea-to-date").value.trim();
+    promiseJax('searchinvoices', { id: invoiceNumber, customer: customerName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
+        document.getElementById("table-area").innerHTML = response;
+    })
+}
 
 
-document.getElementById("refresh-btn").addEventListener("click", function () {
-    let from = document.getElementById("from-date");
-    let to = document.getElementById("to-date");
-    if (from.value.trim() != "" && to.value.trim() != "") {
-        window.location.href = "/manageinvoices/" + to.value + "/" + from.value;
-    } else if (to.value.trim() != "") {
+function deleteInvoice(currentElement) {
+    promiseJax("deleteinvoice", { id: currentElement.dataset.id }, "DELETE").then(response => {
+        search();
+    })
+}
 
-        window.location.href = "/manageinvoices/" + to.value;
-    }
-});

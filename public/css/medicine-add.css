@@ -15,7 +15,7 @@ main input {
     font-size: 1.1rem;
     font-weight: 400;
     color: var(--black2);
-    background: #FFE9E2;
+    background: #fff7f5;
     border: 1px solid var(--rose);
     border-radius: 0.6rem;
     height: 2rem;
@@ -83,4 +83,24 @@ main .input-container.packing {}
     margin-left: 5px;
     color: rgb(227, 34, 34);
     font-size: 13px;
+}
+
+textarea {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    font-family: "Ubuntu";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--black2);
+    background: #fff7f5;
+    border: 1px solid var(--rose);
+    border-radius: 0.6rem;
+    padding: 3px 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+    border: none;
 }
