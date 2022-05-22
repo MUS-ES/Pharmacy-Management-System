@@ -69,5 +69,5 @@
 @endsection
 
 @push('scripts')
-    <script src="js/medicine-add.js"></script>
+    <script src="{{ asset('js/medicine-add.js') }}"></script>
 @endpush

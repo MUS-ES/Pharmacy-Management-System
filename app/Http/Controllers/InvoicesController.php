@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Invoice\StoreInvoiceItemRequest;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use App\Models\Invoice;
-use App\Models\InvoicesItems;
+use App\Models\InvoiceItems;
 use App\Models\Medicine;
+use App\Http\Requests\Invoice\StoreInvoiceRequest;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Requests\Payment\StorePaymentRequest;
 use Exception;
 use App\Models\Payment;
 use App\Models\Stock;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class InvoicesController extends Controller
@@ -53,68 +56,54 @@ class InvoicesController extends Controller
     {
         return view("invoices/returned-medicines");
     }
-    public function store(Request $request)
+    public function store(StoreInvoiceRequest $request)
     {
-        $total = 0;
+
         $customerId = null;
-        $medicine = "";
-        try
+        if ($request->filled("customer"))
+            $customerId = Customer::where("user_id", Auth::user()->id)->where("name", $request->customer)->first()->id;
+
+        DB::beginTransaction();
+        $payment = Payment::create([
+            'provider' => $request->provider,
+            'status' => $request->status,
+            'created_at' => $request->date,
+        ]);
+
+        $invoice = Invoice::create([
+            'user_id' => Auth::user()->id,
+            'payment_id' => $payment->id,
+            'customer_id' => $customerId,
+            'created_at' => $request->date,
+            'total_discount' => $request->total_discount,
+            'total_net' => $request->total_net,
+            'total' => $request->total,
+            'paid' => $request->paid,
+        ]);
+
+        foreach ($request->items as $item)
         {
 
-            DB::beginTransaction();
-            if ($request->filled("customer"))
-                $customerId = Customer::where("user_id", Auth::user()->id)->where("name", $request->customer)->first()->id;
-
-            $payment = new Payment([
-                'provider' => $request->paymentType,
-                'status' => $request->status,
-                'created_at' => $request->invoiceDate,
+            $medicine = Medicine::where("user_id", Auth::user()->id)->where("name", $item['medicine'])->first();
+            $invoiceItem = InvoiceItems::create([
+                "medicine_id" => $medicine->id,
+                "qty" => $item['qty'],
+                "discount" => $item['discount'],
+                "invoice_id" => $invoice->id,
+                "exp" => $item['exp'],
             ]);
-            $payment->save();
-            $invoice = new Invoice([
-                'user_id' => Auth::user()->id,
-                'payment_id' => $payment->id,
-                'customer_id' => $customerId,
-                'created_at' => $request->invoiceDate,
-                'total_discount' => $request->totalDiscount,
-                'total_net' => $request->net,
-                'paid' => $request->paidAmount,
-            ]);
-            $invoice->save();
-
-            foreach ($request->items as $item)
+            $query = Stock::where("user_id", Auth::user()->id)->where("medicine_id", $medicine->id)->where("exp", $item['exp'])->first();
+            if ($query->qty == $item['qty'])
             {
-
-                $medicine = Medicine::where("user_id", Auth::user()->id)->where("name", $item['medicine'])->first();
-                $invoiceItem = new InvoicesItems([
-                    "medicine_id" => $medicine->id,
-                    "qty" => $item['qty'],
-                    "discount" => $item['discount'],
-                    "invoice_id" => $invoice->id,
-                ]);
-
-                $invoiceItem->save();
-                $handle = Stock::where("user_id", Auth::user()->id)->find($medicine->id);
-                //  $handle = Stock::where("user_id", Auth::user()->id)->find($medicine->id)->decrement('qty', $item['qty']);;
-                /* if ($handle->qty == $item['qty'])
-                {
-                    $handle->delete();
-                }
-                else
-                {
-                    $handle->decrement('qty', $item['qty']);
-                } */
-                $total += ($medicine->price * $invoiceItem->qty);
+                $query->delete();
             }
-
-            $invoice->update(['total' => $total]);
-            DB::commit();
+            else
+            {
+                $query->decrement('qty', $item['qty']);
+            }
         }
-        catch (Exception $e)
-        {
-            return response()->json(["Error" => $e->getMessage()]);
-        }
-        return response()->json(["success" => 1, "invoice" => $invoice]);
+        DB::commit();
+        return response()->json(["success" => 1, "invoice" => $invoice, "payment" => $payment]);
     }
     public function destroy(Request $request)
     {

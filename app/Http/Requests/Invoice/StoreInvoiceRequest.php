@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Invoice;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\Rules\checkMedicineQuantity;
 
 class StoreInvoiceRequest extends FormRequest
 {
@@ -23,6 +26,20 @@ class StoreInvoiceRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            "total_discount" => "numeric",
+            "total_net" => "required|numeric",
+            "total" => "required|numeric",
+            "paid" => "required|numeric",
+            "rest" => "required|numeric",
+            "customer" => ["nullable", Rule::exists("customers", "name")->where("user_id", Auth::user()->id)],
+            "items.*.medicine" => ['required', Rule::exists("medicines", "name")->where("user_id", Auth::user()->id)],
+            "items.*.qty" => ["required", "numeric", "min:1",],
+            "items.*.discount" => "required|numeric|min:0",
+            "items" => ["required", "array", new checkMedicineQuantity()],
+            "provider" => Rule::in(["Cash", "Net Banking"]),
+            "status" => Rule::in(["Paid", "Partially Paid"]),
+
+        ];
     }
 }

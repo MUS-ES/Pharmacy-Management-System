@@ -13,11 +13,11 @@ class CreatePaymentDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_details', function (Blueprint $table)
+        Schema::create('payments', function (Blueprint $table)
         {
             $table->id();
-            $table->string("provider");
-            $table->string("status");
+            $table->enum("provider", ["Cash", "Net Banking"]);
+            $table->enum("status", ["Paid", "Partially Paid"]);
             $table->timestamps();
         });
     }

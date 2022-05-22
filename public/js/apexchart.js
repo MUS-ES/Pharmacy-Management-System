@@ -6,7 +6,7 @@ let dates = [];
 
 let offest = 30;
 
-promiseJax("chart/", { "offest": offest }, "POST").then(response => {
+promiseJax("/ajax/chart/", { "offest": offest }, "POST").then(response => {
     let data = response;
     var options = {
         series: [{

@@ -1,0 +1,291 @@
+/* Start General Popup  Styles*/
+.popup-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.478);
+    z-index: 99;
+
+}
+
+
+.popup-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    z-index: 100;
+}
+
+
+.popup-container .header {
+    width: 100%;
+    background-color: var(--rose);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    padding: 10px 15px;
+    justify-content: space-between;
+    color: white;
+}
+
+.popup-container .header h3 {
+    letter-spacing: 1px;
+}
+
+
+.popup-container .body {
+    padding: 20px;
+    background-color: white;
+    color: var(--blue);
+    font-weight: bolder;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.popup-container .input-container .invalid-feedback {
+    margin-top: -5px;
+    margin-left: 5px;
+    color: rgb(227, 34, 34);
+    font-size: 13px;
+}
+
+.popup-container .input-container {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Start Input Styling */
+#popup input {
+    font-family: "Ubuntu";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--black2);
+    background: var(--gray);
+    border: 1px solid var(--rose);
+    border-radius: 0.6rem;
+    height: 2rem;
+    padding: 3px 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#popup input:focus {
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+    border: none;
+}
+
+#popup textarea {
+    font-family: "Ubuntu";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--black2);
+    background: var(--gray);
+    border: 1px solid var(--rose);
+    border-radius: 0.6rem;
+    padding: 8px 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#popup textarea:focus {
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+    border: none;
+}
+
+/* End Input Styling */
+
+/*  Buttons */
+
+#popup button {
+    padding: 7px 20px;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-weight: bolder;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: var(--rose);
+}
+
+.cancel-btn {
+    cursor: pointer;
+}
+
+
+
+/* Start AutoComplete Style */
+
+#popup ul {
+    list-style: none;
+    background-color: var(--gray);
+}
+
+.list {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+    margin-top: 5px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.list.active {
+    display: list-item;
+
+}
+
+.list-items {
+
+    padding: 7px 10px;
+    background-color: #FFE9E2;
+    color: var(--black2);
+
+}
+
+.list-items:first-child {
+    border-radius: 10px 10px 0px 0px;
+
+}
+
+.list-items:last-child {
+    border-radius: 0px 0px 10px 10px;
+
+}
+
+.list-items:only-child {
+    border-radius: 10px 10px 10px 10px;
+
+}
+
+
+.list-items:hover {
+    background-color: var(--rose);
+    color: white;
+}
+
+/* End AutoComplete Style */
+
+/* Start Input Aligning */
+.popup-container .input-container.merge.three {
+
+    width: 30%;
+}
+
+.popup-container .input-container.merge.two {
+
+    width: 40%;
+}
+
+/* End Input Aligning */
+
+/* End General Popup Style */
+
+
+
+
+
+
+
+/* Start Feedback */
+
+
+
+#popup .feedback-container {
+    z-index: 100;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-color: white;
+    width: 300px;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+}
+
+#popup .feedback-container .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+#popup .feedback-container .body h3 {
+    text-align: center;
+}
+
+#popup .feedback-container .body #feedback-btn-done {
+    padding: 12px 27px;
+    border: 0;
+    background-color: var(--rose);
+    color: white;
+    border-radius: 10px;
+}
+
+#popup .feedback-container .body #feedback-btn-done:hover {
+    background-color: green;
+}
+
+/* End Feedback */
+
+
+
+/* Start New Customer Style */
+#popup-new-customer-btn {
+    border: none;
+    padding: 7px 20px;
+    border-radius: 10px;
+    background-color: var(--rose);
+    color: white;
+}
+
+/* End New Customer Style */
+
+
+
+
+
+
+
+/* Start Stock New Entry */
+
+#add-entry-btn {
+    background-color: rgb(38, 165, 38);
+}
+
+
+
+.popup-container .input-header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-container .input-header-container span {
+    color: green;
+    font-size: 13px;
+    cursor: pointer;
+
+}
+
+
+
+
+
+
+/* End Stock New Entry */

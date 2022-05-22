@@ -2,20 +2,20 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
 use App\Models\Medicine;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
-class MedicineExistInStock implements Rule
+class checkMedicineQuantity implements Rule
 {
     /**
      * Create a new rule instance.
      *
      * @return void
      */
+
     public function __construct()
     {
-        //
     }
 
     /**
@@ -27,8 +27,15 @@ class MedicineExistInStock implements Rule
      */
     public function passes($attribute, $value)
     {
-        $exist = Medicine::join("medicines_stocks", "medicines.id", "=", "medicines_stocks.medicine_id")->where("medicines.name", $value)->where("medicines_stocks.user_id", Auth::user()->id)->count();
-        return ($exist != 0) ? true : false;
+        foreach ($value as $item)
+        {
+            $qty = Medicine::where("name", $item['medicine'])->where("user_id", Auth::user()->id)->with("stock")->whereRelation("stock", "qty", ">=", $item["qty"])->count();
+            if ($qty == 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -38,6 +45,6 @@ class MedicineExistInStock implements Rule
      */
     public function message()
     {
-        return 'This Medicine not Exist In Your Inventory.';
+        return 'This quantity not available in stock.';
     }
 }

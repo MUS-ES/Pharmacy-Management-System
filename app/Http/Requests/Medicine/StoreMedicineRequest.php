@@ -3,6 +3,10 @@
 namespace App\Http\Requests\Medicine;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class StoreMedicineRequest extends FormRequest
 {
@@ -24,10 +28,11 @@ class StoreMedicineRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
-            'generic-name' => ['required', 'string'],
-            'strip-unit' => ['required'],
-            'price' => ['required'],
+            'name' => ['required', Rule::unique("medicines", "name")->where("user_id", Auth::user()->id)],
+            'generic' => 'required|string',
+            'strip' => 'required|numeric|min:1|max:255',
+            'price' => 'required|numeric',
+            'description' => 'nullable|string',
         ];
     }
 }

@@ -1,6 +1,6 @@
 function showInvoiceItems(currentElement) {
 
-    promiseJax("getinvoiceitems/" + currentElement.dataset.id, "", "GET", true, 0).then(response => {
+    promiseJax("/invoice/items/" + currentElement.dataset.id, null, "GET", true, 0).then(response => {
         console.log(response);
         let popup = document.getElementById("popup");
         popup.classList.add("active");
@@ -20,14 +20,14 @@ function search() {
     let customerName = document.getElementById("sea-customer-name").value.trim();
     let fromDate = document.getElementById("sea-from-date").value.trim();
     let toDate = document.getElementById("sea-to-date").value.trim();
-    promiseJax('searchinvoices', { id: invoiceNumber, customer: customerName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
+    promiseJax('/invoice/search', { id: invoiceNumber, customer: customerName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
         document.getElementById("table-area").innerHTML = response;
     })
 }
 
 
 function deleteInvoice(currentElement) {
-    promiseJax("deleteinvoice", { id: currentElement.dataset.id }, "DELETE").then(response => {
+    promiseJax("/invoice/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
         search();
     })
 }

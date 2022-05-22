@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="{{ asset('css/invoice-add.css') }}">
 @endpush
 
+@push('scripts')
+    <script src="{{ asset('js/popup.js') }}"></script>
+    <script src="{{ asset('js/invoice-add.js') }}"></script>
+@endpush
+
 @section('main')
 
 
@@ -27,7 +32,9 @@
 
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Customer Name:
-                            <button id="customer-btn" type="button" name="button">New Customer</button>
+                            <button id="customer-btn" onclick="openPopup('/ajax/popup/customer/add')" type="button"
+                                name="button">New
+                                Customer</button>
                         </div>
                         <input id="customer-name" class="input-field" type="text" placeholder="Customer Name" name=""
                             value="">
@@ -175,71 +182,7 @@
 @endsection
 
 @section('popup')
-    <div class="container1">
-        <div class="popup-window">
-            <div class="popup-header">
-                <div>
-                    <h3>Add New Customer</h3>
-                </div>
-                <span class="cancel-btn material-icons-outlined">highlight_off</span>
-            </div>
-            <!-- End Of Popup Header -->
-            <div class="popup-body new-customer">
-                <div class="popup-labelsandinputs">
-                    <div class="sub-title">
-                        Customer Name:
-                    </div>
-                    <input id="customer-name" class="popup-input-field" type="text" placeholder="Name" name="" value="">
-                </div>
-
-                <div class="popup-labelsandinputs">
-                    <div class="sub-title">
-                        Contact Number:
-                    </div>
-                    <input id="contact-number" class="popup-input-field" type="number" name="" value="">
-                </div>
-
-                <div class="popup-labelsandinputs">
-                    <div class="sub-title">
-                        Address:
-                    </div>
-                    <textarea id="customer-address" name="address" rows="4" cols="50" placeholder="Address"></textarea>
-                </div>
 
 
-                <div class="popup-btn">
-                    <button onclick="addCustomer(this)" id="popup-button" type="button" name="button"><span
-                            class="material-icons-outlined">person_add</span></button>
-                </div>
-
-            </div>
-            <!-- End Of Popup Body -->
-        </div>
-        <!-- End Of Popup Window -->
-    </div>
-    <!-- End Of Container1 -->
-
-
-    <x-Feedback />
 
 @endsection
-@push('scripts')
-    <script>
-        //Adding New Customer
-        document.getElementById("customer-btn").addEventListener("click",
-            function() {
-                document.querySelector(".container1").style.display = "flex";
-            });
-
-
-        document.querySelector(".cancel-btn").addEventListener("click",
-            function() {
-                document.querySelector(".container1").style.display = "none";
-            });
-    </script>
-@endpush
-
-
-@push('scripts')
-    <script src="js/invoice-add.js"></script>
-@endpush

@@ -2,47 +2,46 @@ let medicineName = document.getElementById("medicine-name");
 let genericName = document.getElementById("gereric-name");
 let strip = document.getElementById("strip");
 let price = document.getElementById("price");
-let valid = true;
-function validate() {
+let description = document.getElementById("description");
+let feedbacksElements = document.getElementsByClassName("invalid-feedback");
+function validate(errors) {
 
-    if (medicineName.value.trim() == "") {
+    Array.from(feedbacksElements).forEach(element => {
+        element.innerText = "";
+    });
+
+
+    if (errors.hasOwnProperty('name')) {
         medicineName.focus();
         let error = medicineName.nextElementSibling;
-        error.innerText = "Please enter medicine name";
-        valid = false;
+        error.innerText = errors.name;
+
     }
-    if (genericName.value.trim() == "") {
+    if (errors.hasOwnProperty('generic')) {
         genericName.focus();
         let error = genericName.nextElementSibling;
-        error.innerText = "Please enter generic name";
-        valid = false;
+        error.innerText = errors.generic;
+
     }
-    if (strip.value.trim() == "") {
+    if (errors.hasOwnProperty('strip')) {
         strip.focus();
         let error = strip.nextElementSibling;
-        error.innerText = "Please enter strip number";
-        valid = false;
+        error.innerText = errors.strip;
+
     }
-    if (price.value.trim() == "") {
+    if (errors.hasOwnProperty('price')) {
         price.focus();
         let error = price.nextElementSibling;
-        error.innerText = "Please enter price ";
-        valid = false;
+        error.innerText = errors.price;
+
     }
-    return valid;
 }
 
 function save() {
-    if (validate()) {
-        promiseJax("/addmedicine", { medicine: medicineName.value, generic: genericName.value, strip: strip.value, price: price.value }, "POST", 1, 0).then(response => {
-            console.log(response);
-            if (response.success) {
-                let feedbackEle = document.querySelector("#popup .feedback");
-                feedbackEle.classList.add("active");
-
-            }
-        }).catch(response => {
-            console.log(response);
-        })
-    }
+    promiseJax("/medicine/add", { name: medicineName.value, generic: genericName.value, strip: strip.value, price: price.value, description: description.value }, "POST", 1, 1).then(response => {
+        if (response.status == 422) {
+            validate(response.errors);
+        }
+    });
 }
+

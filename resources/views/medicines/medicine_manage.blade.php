@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/medicine-manage.css') }}">
 @endpush
 @push('scripts')
-    <script src="js/medicine-manage.js"></script>
+    <script src="{{ asset('js/medicine-manage.js') }}"></script>
 @endpush
 
 @section('main')

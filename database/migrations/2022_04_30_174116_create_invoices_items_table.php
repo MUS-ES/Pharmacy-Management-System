@@ -18,6 +18,7 @@ class CreateInvoicesItemsTable extends Migration
             $table->id();
             $table->foreignId("medicine_id");
             $table->bigInteger("qty");
+            $table->date("exp");
             $table->decimal("discount", 8, 3);
             $table->foreignId("invoice_id");
             $table->timestamps();

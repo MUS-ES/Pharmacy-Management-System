@@ -84,13 +84,16 @@ toggleSidebar.addEventListener("click", function () {
  */
 function promiseJax(url, data, method = "GET", async = true, parseJson = true) {
     return new Promise(function (resolve, reject) {
+        (data == null) ? data = {} : 1;
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         data["_token"] = token;
         let xhttp = new XMLHttpRequest();
         xhttp.onload = function () {
             if (parseJson == true) {
-
-                resolve(JSON.parse(xhttp.responseText));
+                let response = new Object();
+                response = JSON.parse(xhttp.responseText);
+                response.status = xhttp.status;
+                resolve(response);
             }
             else {
 
@@ -100,27 +103,14 @@ function promiseJax(url, data, method = "GET", async = true, parseJson = true) {
         };
         xhttp.onerror = function () {
 
-            reject(xhttp.responseText);
+            reject("Ajax Method Not Work!");
 
         }
         xhttp.open(method, url, async);
-        xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhttp.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
+        xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhttp.send(JSON.stringify(data));
     });
 }
 
 
-
-function closeWindow(...arg) {
-    arg.forEach(ele => {
-        document.querySelector(ele).classList.remove('active');
-
-    })
-}
-function openWindow(...arg) {
-    arg.forEach(ele => {
-        document.querySelector(ele).classList.add('active');
-
-    })
-
-}

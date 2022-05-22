@@ -5,46 +5,11 @@ function search() {
     let outOfStockBtn = document.getElementById("out-of-stock-btn").classList.contains("active");
     let expireBtn = document.getElementById("expire-btn").classList.contains("active");
     let data = { name: medicineName, generic: genericName, supplier: supplierName, outOfStock: outOfStockBtn, expire: expireBtn };
-    promiseJax('searchstock', data, "POST", 1, 0).then(Response => {
+    promiseJax('/stock/search', data, "POST", 1, 0).then(Response => {
         document.getElementById("table-area").innerHTML = Response;
     });
 }
 
-function autoCompleteMed(currentElement) {
-
-    let list = document.getElementById("list-medicine");
-    promiseJax("autocompletemed/", { term: currentElement.value.toLowerCase() }, "POST", true).then(medicines => {
-        removeChilderns(list);
-        if (medicines.success == 1) {
-            for (let i of medicines.list) {
-                let listItem = document.createElement("li");
-                listItem.classList.add("list-items");
-                listItem.style.cursor = "pointer";
-                listItem.addEventListener("click", e => { displayNames(currentElement, list, i.name); });
-                let word = "<b>" + i.name.substr(0, currentElement.value.length) + "</b>";
-                word += i.name.substr(currentElement.value.length);
-                listItem.innerHTML = word;
-                currentElement.parentElement.querySelector("#list-medicine").appendChild(listItem);
-            }
-            list.classList.add("active");
-        }
-        else {
-            list.classList.remove("active");
-
-        }
-    });
-}
-function removeChilderns(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.lastChild);
-    }
-}
-
-function displayNames(medicineELement, list, value) {
-    medicineELement.value = value;
-    removeChilderns(list);
-    list.classList.remove("active");
-}
 
 function addRule(currentEle) {
     currentEle.onclick = function () {
@@ -59,7 +24,7 @@ function addRule(currentEle) {
 function saveStock() {
     let validated = validateStock();
     if (validated) {
-        promiseJax("/addstockentry", validated.data, "post", 1, 0).then(response => {
+        promiseJax("stock/add", validated.data, "post", 1, 0).then(response => {
             console.log(response);
         })
     }

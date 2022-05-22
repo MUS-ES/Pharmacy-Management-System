@@ -22,24 +22,6 @@ main .container {
 }
 
 
-input {
-    font-family: "Ubuntu";
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--black2);
-    background: #fff7f5;
-    border: 1px solid var(--rose);
-    border-radius: 0.6rem;
-    height: 2rem;
-    padding: 3px 10px;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-input:focus {
-    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
-    border: none;
-}
 
 button {
     padding: 13px 20px;
@@ -51,9 +33,7 @@ button {
     cursor: pointer;
 }
 
-.cancel-btn.material-icons-outlined {
-    cursor: pointer;
-}
+
 
 .search-area #out-of-stock-btn {
     background-color: #dc3545;
@@ -149,142 +129,4 @@ table td span:hover {
 
 table td #edit-medicine-btn {
     margin-right: 15px;
-}
-
-#add-entry-btn {
-    background-color: rgb(38, 165, 38);
-}
-
-
-.new-entry {
-    display: none;
-}
-
-.new-entry.active {
-    display: block;
-}
-
-.popup-container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    height: 30%;
-}
-
-
-.popup-container .header {
-    width: 100%;
-    background-color: var(--rose);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    display: flex;
-    padding: 10px 15px;
-    justify-content: space-between;
-    color: white;
-}
-
-.popup-container .header h3 {
-    letter-spacing: 1px;
-}
-
-
-.popup-container .body {
-    padding: 20px;
-    background-color: white;
-    color: var(--blue);
-    font-weight: bolder;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.popup-container .input-container {
-    position: relative;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-}
-
-.popup-container .input-container.merge {
-
-    width: 30%;
-}
-
-.popup-container .input-header-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.popup-container .input-header-container span {
-    color: green;
-    font-size: 13px;
-    cursor: pointer;
-
-}
-
-.popup-container .body .invlaid-feedback {
-    color: #bd2130;
-    font-size: 13px;
-    margin-left: 10px;
-    margin-top: -5px;
-}
-
-
-#popup ul {
-    list-style: none;
-    background-color: var(--gray);
-}
-
-.list {
-    display: none;
-    position: absolute;
-    z-index: 3;
-    top: 100%;
-    left: 0;
-    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
-    margin-top: 5px;
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 10px;
-}
-
-.list.active {
-    display: list-item;
-
-}
-
-.list-items {
-
-    padding: 7px 10px;
-    background-color: #FFE9E2;
-    color: var(--black2);
-
-}
-
-.list-items:first-child {
-    border-radius: 10px 10px 0px 0px;
-
-}
-
-.list-items:last-child {
-    border-radius: 0px 0px 10px 10px;
-
-}
-
-.list-items:only-child {
-    border-radius: 10px 10px 10px 10px;
-
-}
-
-
-.list-items:hover {
-    background-color: var(--rose);
-    color: white;
 }

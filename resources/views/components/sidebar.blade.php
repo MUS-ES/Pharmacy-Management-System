@@ -24,10 +24,11 @@
                     <span class="icon-right material-icons-outlined">expand_more</span>
                 </a>
                 <ul class="side-dropdown">
-                    <li><a href="{{ route('addInvoice') }}"><span class="material-icons-outlined">add</span>New
+                    <li><a href="{{ asset('/invoice/add') }}"><span class="material-icons-outlined">add</span>New
                             Invoice</a>
                     </li>
-                    <li><a href="{{ route('manageInvoices') }}"><span class="material-icons-outlined">edit</span>Manage
+                    <li><a href="{{ asset('/invoice/manage') }}"><span
+                                class="material-icons-outlined">edit</span>Manage
                             Invoice</a></li>
                     <li><a href="{{ route('returnedMedicines') }}"><span
                                 class="material-icons-outlined">assignment_return</span>Returned Medicines</a>
@@ -54,12 +55,13 @@
                     <span class="icon-right material-icons-outlined">expand_more</span>
                 </a>
                 <ul class="side-dropdown">
-                    <li><a href="{{ asset('addmedicine') }}"><span class="material-icons-outlined">add</span>Add
+                    <li><a href="{{ asset('medicine/add') }}"><span class="material-icons-outlined">add</span>Add
                             Medicine</a></li>
-                    <li><a href="{{ asset('/managemedicine') }}"><span
+                    <li><a href="{{ asset('medicine/manage') }}"><span
                                 class="material-icons-outlined">edit</span>Manage
                             Medicine</a></li>
-                    <li><a href="{{ asset('/stock') }}"><span class="material-icons-outlined">inventory_2</span>Manage
+                    <li><a href="{{ asset('/stock/manage') }}"><span
+                                class="material-icons-outlined">inventory_2</span>Manage
                             Medicine Stock</a>
                     </li>
                 </ul>

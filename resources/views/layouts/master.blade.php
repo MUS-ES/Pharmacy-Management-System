@@ -19,6 +19,7 @@
 
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/popup.css') }}">
     <!-- Google Icons Link -->
     <link href="{{ asset('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined') }}" rel="stylesheet">
     <!-- ION-Icons Link -->

@@ -18,50 +18,7 @@ use GuzzleHttp\Promise\Create;
 class MedicinesController extends Controller
 {
 
-    public function storeStock(Request $request)
-    {
 
-        $medicine = Medicine::where("name", $request->medicine)->where('user_id', Auth::user()->id)->get()->first();
-        $stock = Stock::create(['user_id' => Auth::user()->id, 'medicine_id' => $medicine->id, "mfd" => $request->mfd, "exp" => $request->exp, 'qty' => $request->qty]);
-        if ($request->filled("supplier"))
-        {
-            $supplier = Supplier::where("name", $request->supplier)->where('user_id', Auth::user()->id);
-            $stock->supplier_id = $supplier->id;
-        }
-        //$stock->save;
-        return response()->json(["success" => true, "stock" => $stock]);
-    }
-    public function manageStock()
-    {
-        return view("medicines.stock");
-    }
-    public function searchStock(Request $request)
-    {
-        $query =  Stock::where("user_id", Auth::user()->id)->with("medicine", "supplier");
-        if ($request->filled("expire") && $request->expire == true)
-        {
-            $query = $query->where("exp", "<=", Carbon::now());
-        }
-        if ($request->filled("outOfStock") && $request->outOfStock == 1)
-        {
-            $query = $query->where("qty", "=", 0);
-        }
-        if ($request->filled("name"))
-        {
-            $query = $query->whereRelation("medicine", "name", "like", $request->name . "%");
-        }
-        if ($request->filled("generic"))
-        {
-            $query = $query->whereRelation("medicine", "generic_name", "like", $request->generic . "%");
-        }
-        if ($request->filled("supplier"))
-        {
-            $query = $query->whereRelation("supplier", "name", "like", $request->supplier . "%");
-        }
-
-        $stocks = $query->get();
-        return view("sub.stock_table", compact("stocks"))->render();
-    }
     public function manageMedicine()
     {
         return view("medicines.medicine_manage");
@@ -91,25 +48,20 @@ class MedicinesController extends Controller
 
     public function storeMedicine(StoreMedicineRequest $request)
     {
-        $valid = $request->validated();
-        return response()->json(["success" => 1, "msg" => $valid]);
-    }
-    public function getAutoCompleteData(Request $request)
-    {
-        $success = 0;
-        $medicines = array();
-        if ($request->has("term"))
-        {
-            $medicines = Medicine::where("user_id", "=", Auth::user()->id)->where('name', 'like', '%' . $request->term . "%")->take(10)->get("name");
-            if (count($medicines) !== 0)
-            {
-                $success = 1;
-            }
-        }
-        return response()->json(["success" => $success, "list" => $medicines]);
+        $validated = $request->validated();
+        $medicine = Medicine::create([
+            "name" => $validated['name'],
+            "generic_name" => $validated['generic'],
+            "strip_unit" => $validated['strip'],
+            "description" => $validated['description'],
+            "price" => $validated['price'],
+            "user_id" => Auth::user()->id,
+        ]);
+        return response()->json(["success" => 1, "instance" => $medicine]);
     }
 
-    public function getAvQty(Request $request)
+
+    public function getAvailableQuantity(Request $request)
     {
 
         $success = 0;
@@ -122,7 +74,7 @@ class MedicinesController extends Controller
         return response()->json(["success" => $success, "qty" => $qty]);
     }
 
-    public function isMedExist(Request $request)
+    public function isExist(Request $request)
     {
         $exist = 0;
 
@@ -139,7 +91,7 @@ class MedicinesController extends Controller
     }
 
 
-    public function getMedExpDates(Request $request)
+    public function getMedicineExpiryDates(Request $request)
     {
 
         $success = 0;
@@ -154,7 +106,7 @@ class MedicinesController extends Controller
         }
         return response()->json(["success" => $success, "expDates" => $exp_dates]);
     }
-    public function getMedPrice(Request $request)
+    public function getMedicinePrice(Request $request)
     {
         $success = 0;
         $price = 0;

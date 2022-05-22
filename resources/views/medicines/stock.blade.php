@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="{{ asset('css/stock.css') }}">
 @endpush
 @push('scripts')
-    <script src="js/stock_manage.js"></script>
+    <script src="{{ asset('js/stock_manage.js') }}"></script>
+    <script src="{{ asset('js/popup.js') }}"></script>
 @endpush
 @section('main')
 
@@ -31,7 +32,7 @@
             </div>
             <hr>
 
-            <button onclick="openWindow('#popup','.new-entry')" id="add-entry-btn">Add New Entry</button>
+            <button onclick="openPopup('/ajax/popup/stock/add')" id="add-entry-btn">Add New Entry</button>
 
         </div>
         <!-- End Of Container -->
@@ -42,51 +43,5 @@
 @endsection
 
 @section('popup')
-    <div class="new-entry">
-        <div class="popup-container">
-            <div class="header">
-                <h3>New Entry</h3>
-                <span onclick="closeWindow('#popup','.new-entry')"
-                    class="cancel-btn material-icons-outlined">highlight_off</span>
-            </div>
-            <div class="body">
-                <div class="input-container">
-                    <div class="input-header-container">
-                        <label for="">Medicine Name</label>
-                        <span>+add new</span>
-                    </div>
-                    <input id="stock-medicine-name" oninput="autoCompleteMed(this);" type="text">
-                    <span class="invlaid-feedback"></span>
-                    <ul id="list-medicine" class="list">
 
-                    </ul>
-                    <span class="invlaid-feedback"></span>
-                </div>
-                <div class="input-container merge">
-                    <label for="">Mfd</label>
-                    <input id="stock-mfd" type="date">
-                    <span class="invlaid-feedback"></span>
-                </div>
-                <div class="input-container merge">
-                    <label for="">Exp</label>
-                    <input id="stock-exp" type="date">
-                    <span class="invlaid-feedback"></span>
-                </div>
-                <div class="input-container merge">
-                    <label for="">Qty</label>
-                    <input id="stock-qty" type="number">
-                    <span class="invlaid-feedback"></span>
-                </div>
-                <div class="input-container">
-                    <div class="input-header-container">
-                        <label for="">Supplier Name</label>
-                        <span>+add new</span>
-                    </div>
-                    <input id="stock-supplier" type="text">
-                    <span class="invlaid-feedback"></span>
-                </div>
-                <button onclick="saveStock()" id="add-entry-btn">Submit</button>
-            </div>
-        </div>
-    </div>
 @endsection

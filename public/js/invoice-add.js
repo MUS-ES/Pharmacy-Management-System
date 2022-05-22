@@ -1,8 +1,8 @@
 
 class InvoiceItem {
-    constructor(medicine, expDate, qty, discount) {
+    constructor(medicine, exp, qty, discount) {
         this.medicine = medicine;
-        this.expDate = expDate;
+        this.exp = exp;
         this.qty = qty;
         this.discount = discount;
 
@@ -14,7 +14,7 @@ function addCustomer(currentElement) {
     let address = newCustomer.querySelector("#customer-address");
     let contact = newCustomer.querySelector("#contact-number");
     let name = newCustomer.querySelector("#customer-name");
-    promiseJax("newcustomer/", { name: name.value, contact: contact.value, address: address.value }, "POST", true).then(response => {
+    promiseJax("/customer/add", { name: name.value, contact: contact.value, address: address.value }, "POST", true).then(response => {
         console.log(response);
         if (response.success == 1) {
 
@@ -60,7 +60,7 @@ function autoCompleteMed(billElement) {
     let medicineELement = billElement.querySelector("#medicine");
     let list = medicineELement.nextElementSibling;
 
-    promiseJax("autocompletemed/", { term: medicineELement.value.toLowerCase() }, "POST", true).then(medicines => {
+    promiseJax("/ajax/medicineautocomplete", { term: medicineELement.value.toLowerCase() }, "POST", true).then(medicines => {
         removeChilderns(list);
         console.log(medicines);
         if (medicines.success == 1) {
@@ -156,7 +156,7 @@ function fillFields(billElement) {
 
 function isMedicineExist(name) {
 
-    return promiseJax("ismedexist/", { "medicine": name }, "POST");
+    return promiseJax("/medicine/exist", { "medicine": name }, "POST");
 }
 
 function fillExpDates(billElement) {
@@ -164,7 +164,7 @@ function fillExpDates(billElement) {
     let expElement = billElement.querySelector("#exp_date");
     let medicineELement = billElement.querySelector("#medicine");
 
-    return promiseJax("getmedexpdates/", { medicine: medicineELement.value }, "POST").then(response => {
+    return promiseJax("/medicine/exp", { medicine: medicineELement.value }, "POST").then(response => {
         if (response.success == 1) {
 
             removeChilderns(expElement);
@@ -182,7 +182,7 @@ function fillAvQty(billElement) {
     let avQtyElement = billElement.querySelector("#avQty");
     let expElement = billElement.querySelector("#exp_date");
     let medicineELement = billElement.querySelector("#medicine");
-    return promiseJax("getavqty/", { medicine: medicineELement.value, "exp": expElement.value }, "POST", true).then(response => {
+    return promiseJax("/medicine/qty", { medicine: medicineELement.value, "exp": expElement.value }, "POST", true).then(response => {
         if (response.success == 1) {
 
 
@@ -200,7 +200,7 @@ function fillUnitPrice(billElement) {
     let medicineELement = billElement.querySelector("#medicine");
     let unitPriceElement = billElement.querySelector("#unitPrice");
     let typeElement = billElement.querySelector("#type");
-    return promiseJax("getmedprice/", { medicine: medicineELement.value }, "POST", true).then(response => {
+    return promiseJax("/medicine/price", { medicine: medicineELement.value }, "POST", true).then(response => {
 
         if (response.success == 1) {
             if (typeElement.value == "strip") {
@@ -263,13 +263,11 @@ function validateAndCreate() {
     validate();
     invoice = getInvoiceDetails();
     console.log(invoice);
-    promiseJax("storeinvoice", invoice, "POST", false).then(response => {
+    promiseJax("/invoice/add", invoice, "POST", false).then(response => {
         console.log(response);
         if (response.success == 1) {
 
-            let feedbackEle = document.querySelector("#popup .feedback");
-            document.getElementById("popup").classList.add("active");
-            feedbackEle.classList.add("active");
+            openPopup('/ajax/popup/feedback', { msg: "success" });
         }
     });
 
@@ -282,7 +280,8 @@ function getInvoiceDetails() {
     let invoiceHeader = document.querySelector("#bill-header");
     let customer = invoiceHeader.querySelector("#customer-name");
     let invoiceDate = invoiceHeader.querySelector("#invoice-date");
-    console.log(invoiceDate.value);
+    let total = document.querySelector("#finalprice");
+
     let paymentType = invoiceHeader.querySelector("#payment-type");
     let paidAmount = document.getElementById("paid");
     let paidRestElement = document.querySelector("#paid-rest");
@@ -296,7 +295,7 @@ function getInvoiceDetails() {
         let invoiceItemObject = new InvoiceItem(medicine.value, expDate.value, qty.value, discount.value);
         invoiceItemsArray.push(invoiceItemObject);
     });
-    return { status: ((paidRestElement.value == 0) ? "Paid" : "Partially Paid"), totalDiscount: finalDiscountElement.value, net: finalNetElement.value, invoiceDate: invoiceDate.value, paymentType: paymentType.value, customer: customer.value, paidAmount: paidAmount.value, items: invoiceItemsArray };
+    return { status: ((paidRestElement.value == 0) ? "Paid" : "Partially Paid"), total: total.value, rest: paidRestElement.value, total_discount: finalDiscountElement.value, total_net: finalNetElement.value, date: invoiceDate.value, provider: paymentType.value, customer: customer.value, paid: paidAmount.value, items: invoiceItemsArray };
 }
 
 function validate() {
@@ -356,4 +355,3 @@ function closeList(currentEle) {
 
 
 }
-

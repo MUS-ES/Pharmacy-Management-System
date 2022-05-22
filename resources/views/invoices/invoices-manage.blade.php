@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/invoice-manage.css') }}">
 @endpush
 @push('scripts')
-    <script src="js/invoice-manage.js"></script>
+    <script src="{{ asset('js/invoice-manage.js') }}"></script>
 @endpush
 @section('main')
 

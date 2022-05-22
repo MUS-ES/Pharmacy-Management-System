@@ -29,12 +29,4 @@ class DashboardController extends Controller
         $RecentOrders = DB::table("invoices")->where("invoices.user_id", "=", $user->id)->join("invoices_items", "invoices.id", "=", "invoices_items.invoice_id")->join("payment_details", "payment_id", "=", "payment_details.id")->join("medicines", "medicine_id", "=", "medicines.id")->get()->take(10);
         return view("dashboard", compact("card", "RecentOrders"));
     }
-    public function getChartData(Request $request)
-    {
-        $user = Auth::user();
-        $offest = $request->offest;
-        $invoices = DB::table('invoices')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
-        $purchases  = DB::table('purchases')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
-        return response()->json(["invoices" => $invoices, "purchases" => $purchases]);
-    }
 }
