@@ -19,7 +19,8 @@
                 <td><span data-id="{{ $medicine->id }}" id="edit-medicine-btn" class="material-icons-outlined">
                         edit
                     </span>
-                    <span data-id="{{ $medicine->id }}" id="delete-medicine-btn" class="material-icons-outlined">
+                    <span onclick="deleteMedicine(this)" data-id="{{ $medicine->id }}" id="delete-medicine-btn"
+                        class="material-icons-outlined">
                         delete
                     </span>
                 </td>

@@ -57,6 +57,7 @@
                             <th>Med-Name</th>
                             <th>Quantity</th>
                             <th>Unit Price</th>
+                            <th>Exp</th>
                             <th>Discount</th>
                             <th>Price</th>
                         </tr>
@@ -67,6 +68,7 @@
                                 <td>{{ $item->medicine->name }}</td>
                                 <td>{{ $item->qty }}</td>
                                 <td>{{ $item->medicine->price }}</td>
+                                <td>{{ $item->exp }}</td>
                                 <td>{{ $item->discount }}</td>
                                 <td>{{ $item->medicine->price - $item->discount }}</td>
                             </tr>

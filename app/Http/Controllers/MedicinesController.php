@@ -123,4 +123,13 @@ class MedicinesController extends Controller
 
         return response()->json(["success" => $success, "price" => $price]);
     }
+    public function destroy(Request $request)
+    {
+        if ($request->filled("id"))
+        {
+
+            Medicine::find($request->id)->delete();
+        }
+        return response()->json(["success" => 1]);
+    }
 }

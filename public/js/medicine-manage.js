@@ -7,3 +7,8 @@ function search() {
         document.getElementById("table-area").innerHTML = Response;
     })
 }
+function deleteMedicine(currentElement) {
+    promiseJax("/medicine/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
+        search();
+    })
+}

@@ -57,17 +57,11 @@
     <!-- End Of Main -->
 
 
-
-    <section id="popup">
-
-
-    </section>
-
-
-
+@endsection
+@section('popup')
 
 @endsection
-
 @push('scripts')
     <script src="{{ asset('js/medicine-add.js') }}"></script>
+    <script src="{{ asset('js/popup.js') }}"></script>
 @endpush

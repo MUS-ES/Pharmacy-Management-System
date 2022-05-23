@@ -22,6 +22,7 @@ class InvoiceItems extends Model
         'discount',
         'invoice_id',
         'created_at',
+        'exp',
     ];
     public function invoice()
     {

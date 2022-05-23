@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function ()
         Route::post("/qty", [MedicinesController::class, "getAvailableQuantity"]);
         Route::post("/exp", [MedicinesController::class, "getMedicineExpiryDates"]);
         Route::post("/price", [MedicinesController::class, "getMedicinePrice"]);
+        Route::delete("/delete", [MedicinesController::class, "destroy"]);
     });
     Route::prefix("/stock")->group(
         function ()

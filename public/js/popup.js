@@ -51,8 +51,10 @@ function displayNames(medicineELement, list, value) {
     removeChilderns(list);
     list.classList.remove("active");
 }
+//not finished
+function deleteRecord(currentElement, url) {
 
-
+}
 
 function saveCustomer() {
     let name = document.getElementById("popup-new-customer-name").value;
@@ -130,7 +132,7 @@ function saveStock() {
             openPopup('/ajax/popup/feedback', {
                 msg: "New entry  has been added"
             });
-        };
+        }
     });
 }
 
