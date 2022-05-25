@@ -6,6 +6,7 @@
 @push('scripts')
     <script src="{{ asset('js/stock_manage.js') }}"></script>
     <script src="{{ asset('js/popup.js') }}"></script>
+    <script src="{{ asset('js/suggestion.js') }}"></script>
 @endpush
 @section('main')
 

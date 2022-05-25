@@ -86,8 +86,10 @@
                     <span class="icon-right material-icons-outlined">expand_more</span>
                 </a>
                 <ul class="side-dropdown">
-                    <li><a href="#"><span class="material-icons-outlined">add</span>Add Purchase</a></li>
-                    <li><a href="#"><span class="material-icons-outlined">edit</span>Manage Purchase</a></li>
+                    <li><a href="{{ asset('/purchase/add') }}"><span class="material-icons-outlined">add</span>Add
+                            Purchase</a></li>
+                    <li><a href="{{ asset('/purchase/manage') }}"><span
+                                class="material-icons-outlined">edit</span>Manage Purchase</a></li>
                     <li><a href="#"><span class="material-icons-outlined">assignment_returned</span>Returned
                             Purchases</a>
                     </li>

@@ -123,6 +123,15 @@ class MedicinesController extends Controller
 
         return response()->json(["success" => $success, "price" => $price]);
     }
+    public function getDetails(Request $request)
+    {
+        $medicine = null;
+        if ($request->filled("medicine"))
+        {
+            $medicine = Medicine::where("user_id", Auth::user()->id)->where("name", "=", $request->medicine)->first();
+        }
+        return response()->json(["success" => 1, "medicine" => $medicine]);
+    }
     public function destroy(Request $request)
     {
         if ($request->filled("id"))

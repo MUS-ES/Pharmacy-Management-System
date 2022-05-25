@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\View\Components\popup\SupplierNewEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Supplier;
 
 class AjaxController extends Controller
 {
@@ -45,19 +46,15 @@ class AjaxController extends Controller
         $SupplierNewEntry = new SupplierNewEntry();
         return $SupplierNewEntry->render()->with($SupplierNewEntry->data());
     }
-    public function getAutoCompleteMedicine(Request $request)
+    public function showMedicinesSuggestions(Request $request)
     {
-        $success = 0;
-        $medicines = array();
-        if ($request->has("term"))
+        $suggestions = [];
+        if ($request->filled("term"))
         {
-            $medicines = Medicine::where("user_id", "=", Auth::user()->id)->where('name', 'like', '%' . $request->term . "%")->take(10)->get("name");
-            if (count($medicines) !== 0)
-            {
-                $success = 1;
-            }
+
+            $suggestions = Medicine::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
         }
-        return response()->json(["success" => $success, "list" => $medicines]);
+        return response()->json(["success" => true, "suggestions" => $suggestions]);
     }
     public function getChartData(Request $request)
     {
@@ -66,5 +63,15 @@ class AjaxController extends Controller
         $invoices = DB::table('invoices')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
         $purchases  = DB::table('purchases')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
         return response()->json(["invoices" => $invoices, "purchases" => $purchases]);
+    }
+    public function showSuppliersSuggestions(Request $request)
+    {
+        $suggestions = [];
+        if ($request->filled("term"))
+        {
+
+            $suggestions = Supplier::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
+        }
+        return response()->json(["success" => true, "suggestions" => $suggestions]);
     }
 }

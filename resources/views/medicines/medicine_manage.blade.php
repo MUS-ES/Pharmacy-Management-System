@@ -1,7 +1,7 @@
 @extends("layouts.master")
 @section('title', 'PMS')
 @push('head')
-    <link rel="stylesheet" href="{{ asset('css/medicine-manage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/medicine_manage.css') }}">
 @endpush
 @push('scripts')
     <script src="{{ asset('js/medicine-manage.js') }}"></script>

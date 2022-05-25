@@ -1,7 +1,7 @@
 @extends("layouts.master")
 @section('title', 'PMS')
 @push('head')
-    <link rel="stylesheet" href="{{ asset('css/invoice-manage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/invoice_manage.css') }}">
 @endpush
 @push('scripts')
     <script src="{{ asset('js/invoice-manage.js') }}"></script>

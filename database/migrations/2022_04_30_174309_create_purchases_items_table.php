@@ -18,6 +18,7 @@ class CreatePurchasesItemsTable extends Migration
             $table->id();
             $table->foreignId("medicine_id");
             $table->bigInteger("qty");
+            $table->decimal("unit_price", 10, 3);
             $table->foreignId("purchase_id");
             $table->timestamps();
         });

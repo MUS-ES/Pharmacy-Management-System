@@ -12,11 +12,8 @@
                     <label for="">Medicine Name</label>
                     <span onclick="openPopup('/ajax/popup/medicine/add')">+add new</span>
                 </div>
-                <input id="popup-stock-medicine-name" oninput="autoCompleteMed(this);" type="text">
-                <span class="invalid-feedback"></span>
-                <ul id="list-medicine" class="list">
-
-                </ul>
+                <input id="popup-stock-medicine-name" oninput="showSuggestions(this,'/ajax/medicinesuggestions')"
+                    type="text">
                 <span class="invalid-feedback"></span>
             </div>
             <div class="input-container merge three">
@@ -39,7 +36,8 @@
                     <label for="">Supplier Name</label>
                     <span onclick="openPopup('/ajax/popup/supplier/add')">+add new</span>
                 </div>
-                <input id="popup-stock-supplier" type="text">
+                <input oninput="showSuggestions(this,'/ajax/suppliersuggestions')" id="popup-stock-supplier"
+                    type="text">
                 <span class="invalid-feedback"></span>
             </div>
             <button onclick="saveStock()" id="popup-stock-btn"><span style="font-size:30px"

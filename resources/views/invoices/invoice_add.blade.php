@@ -1,12 +1,13 @@
 @extends("layouts.master")
 @section('title', 'PMS')
 @push('head')
-    <link rel="stylesheet" href="{{ asset('css/invoice-add.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/invoice_add.css') }}">
 @endpush
 
 @push('scripts')
     <script src="{{ asset('js/popup.js') }}"></script>
     <script src="{{ asset('js/invoice-add.js') }}"></script>
+    <script src="{{ asset('js/suggestion.js') }}"></script>
 @endpush
 
 @section('main')
@@ -77,12 +78,9 @@
                     <div id="bill-body" class="bill-body-values invoice-items">
 
                         <div id="med_input">
-                            <input autocomplete="off" id="medicine" onblur="closeList(this)"
-                                oninput="fillFields(this.closest('#bill-body'));autoCompleteMed(this.closest('#bill-body'));"
+                            <input autocomplete="off" id="medicine"
+                                oninput="showSuggestions(this,'/ajax/medicinesuggestions',fillFields,this.closest('#bill-body'));fillFields(this.closest('#bill-body'))"
                                 class="body-input-field" type="text" name="medicine" value="">
-                            <ul id="list-medicine" class="list">
-
-                            </ul>
                         </div>
 
 

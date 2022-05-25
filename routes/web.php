@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\MedicinesController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\PurchasesController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuppliersController;
 use App\Models\Customer;
@@ -63,6 +64,7 @@ Route::middleware(['auth'])->group(function ()
         Route::post("/qty", [MedicinesController::class, "getAvailableQuantity"]);
         Route::post("/exp", [MedicinesController::class, "getMedicineExpiryDates"]);
         Route::post("/price", [MedicinesController::class, "getMedicinePrice"]);
+        Route::post("/details", [MedicinesController::class, "getDetails"]);
         Route::delete("/delete", [MedicinesController::class, "destroy"]);
     });
     Route::prefix("/stock")->group(
@@ -85,7 +87,9 @@ Route::middleware(['auth'])->group(function ()
             Route::POST("/stock/add", [AjaxController::class, "getStockNewEntryComponent"]);
             Route::POST("/supplier/add", [AjaxController::class, "getSupplierNewEntryComponent"]);
         });
-        Route::post("/medicineautocomplete", [AjaxController::class, "getAutoCompleteMedicine"]);
+        Route::post("/medicinesuggestions", [AjaxController::class, "showMedicinesSuggestions"]);
+
+        Route::post("/suppliersuggestions", [AjaxController::class, "showSuppliersSuggestions"]);
     });
     Route::prefix("/customer")->group(function ()
     {
@@ -97,12 +101,15 @@ Route::middleware(['auth'])->group(function ()
 
         Route::POST("/add", [SuppliersController::class, "store"]);
     });
+    Route::prefix("/purchase")->group(function ()
+    {
+
+        Route::POST("/add", [PurchasesController::class, "store"]);
+        Route::GET("/add", [PurchasesController::class, "add"]);
+        Route::GET("/manage", [PurchasesController::class, "manage"]);
+    });
 
 
-
-
-
-    //here
 
     Route::get("/returnedmedicines", [invoicesController::class, "returnedMedicines"])->name("returnedMedicines");
     Route::middleware(['active:outside'])->get('/notactive', [HomeController::class, 'accountDisabled'])->name("notactive");

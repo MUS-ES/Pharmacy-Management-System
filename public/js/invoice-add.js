@@ -34,13 +34,13 @@ function addInvoice() {
     hr.classList.add("horizontal-rule");
     newbill.classList.add("canremove");
     inputs = newbill.querySelectorAll("input");
-    select = newbill.querySelector("select");
-    let list = newbill.querySelector("#list-medicine");
-    list.classList.remove('active');
+    let list = newbill.querySelector(".list");
+    if (list != null) {
+        list.remove();
+    }
     inputs.forEach(e => {
         e.value = "";
     });
-    removeChilderns(select);
     container.appendChild(newbill);
     container.appendChild(hr);
 }
@@ -56,42 +56,6 @@ function removeInvoice(element) {
 
 }
 
-function autoCompleteMed(billElement) {
-    let medicineELement = billElement.querySelector("#medicine");
-    let list = medicineELement.nextElementSibling;
-
-    promiseJax("/ajax/medicineautocomplete", { term: medicineELement.value.toLowerCase() }, "POST", true).then(medicines => {
-        removeChilderns(list);
-        console.log(medicines);
-        if (medicines.success == 1) {
-            for (let i of medicines.list) {
-                let listItem = document.createElement("li");
-                listItem.classList.add("list-items");
-                listItem.style.cursor = "pointer";
-                listItem.addEventListener("click", e => { displayNames(billElement, i.name); });
-                let word = "<b>" + i.name.substr(0, medicineELement.value.length) + "</b>";
-                word += i.name.substr(medicineELement.value.length);
-                listItem.innerHTML = word;
-                medicineELement.parentElement.querySelector("#list-medicine").appendChild(listItem);
-            }
-            list.classList.add("active");
-        }
-        else {
-            list.classList.remove("active");
-
-        }
-    });
-}
-
-
-function displayNames(billElement, value) {
-    let list = billElement.querySelector("#list-medicine");
-    let medicineELement = billElement.querySelector("#medicine");
-    medicineELement.value = value;
-    removeChilderns(list);
-    list.classList.remove("active");
-    fillFields(billElement);
-}
 
 function removeChilderns(parent) {
     while (parent.firstChild) {
@@ -348,10 +312,3 @@ function validate() {
 
 }
 
-function closeList(currentEle) {
-    let list = currentEle.nextElementSibling;
-    setTimeout(() => { list.classList.remove("active"); }, 100);
-
-
-
-}

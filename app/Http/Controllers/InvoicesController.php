@@ -45,16 +45,16 @@ class InvoicesController extends Controller
     public function manageInvoices()
     {
 
-        return view("invoices/invoices-manage");
+        return view("invoices/invoices_manage");
     }
     public function addInvoice()
     {
         $invoice_number = Invoice::max('id') + 1;
-        return view("invoices/invoice-add", compact("invoice_number"));
+        return view("invoices/invoice_add", compact("invoice_number"));
     }
     public function returnedMedicines()
     {
-        return view("invoices/returned-medicines");
+        return view("invoices/returned_medicines");
     }
     public function store(StoreInvoiceRequest $request)
     {

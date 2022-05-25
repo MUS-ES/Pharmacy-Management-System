@@ -1,7 +1,7 @@
 @extends("layouts.master")
 @section('title', 'PMS')
 @push('head')
-    <link rel="stylesheet" href="{{ asset('css/medicine-add.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/medicine_add.css') }}">
 @endpush
 
 @section('main')
