@@ -6,7 +6,6 @@ function showSuggestions(currentElement, url, callback = null, ...callbackArgs) 
         ulELement.remove();
     }
     promiseJax(url, { term: currentElement.value.trim().toLowerCase() }, "POST", true, true).then((response) => {
-        console.log(response);
         let suggestions = response.suggestions;
         if (suggestions.length != 0) {
 

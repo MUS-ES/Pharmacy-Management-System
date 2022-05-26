@@ -20,6 +20,8 @@ class CreatePurchasesItemsTable extends Migration
             $table->bigInteger("qty");
             $table->decimal("unit_price", 10, 3);
             $table->foreignId("purchase_id");
+            $table->date("mfd");
+            $table->date("exp");
             $table->timestamps();
         });
     }

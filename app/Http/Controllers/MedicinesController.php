@@ -18,12 +18,16 @@ use GuzzleHttp\Promise\Create;
 class MedicinesController extends Controller
 {
 
+    public function create()
+    {
+        return view("medicines.medicine_add");
+    }
 
-    public function manageMedicine()
+    public function manage()
     {
         return view("medicines.medicine_manage");
     }
-    public function searchMedicines(Request $request)
+    public function search(Request $request)
     {
 
         $query = Medicine::where("user_id", Auth::user()->id);
@@ -41,12 +45,12 @@ class MedicinesController extends Controller
         return view("sub.medicine_table", compact("medicines"))->render();
     }
 
-    public function addMedicine()
+    public function all()
     {
-        return view("medicines.medicine_add");
+        $medicines = Medicine::all();
+        return response()->json(["success" => true, "data" => $medicines]);
     }
-
-    public function storeMedicine(StoreMedicineRequest $request)
+    public function store(StoreMedicineRequest $request)
     {
         $validated = $request->validated();
         $medicine = Medicine::create([
@@ -61,18 +65,7 @@ class MedicinesController extends Controller
     }
 
 
-    public function getAvailableQuantity(Request $request)
-    {
 
-        $success = 0;
-        $qty = Medicine::join("medicines_stocks", "medicines.id", "=", "medicines_stocks.medicine_id")->where("medicines_stocks.user_id", "=", Auth::User()->id)->where("name", "=", $request->medicine)->where("exp", "=", $request->exp)->first();
-        if ($qty !== null)
-        {
-            $success = 1;
-            $qty = $qty->qty;
-        }
-        return response()->json(["success" => $success, "qty" => $qty]);
-    }
 
     public function isExist(Request $request)
     {
@@ -87,50 +80,24 @@ class MedicinesController extends Controller
                 $exist = 1;
             }
         }
-        return response()->json(["exist" => $exist]);
+        return response()->json(['success' => true, "exist" => $exist]);
     }
 
 
-    public function getMedicineExpiryDates(Request $request)
-    {
-
-        $success = 0;
-        if ($request->has("medicine"))
-        {
-
-            $exp_dates = Medicine::join("medicines_stocks", "medicines.id", "=", "medicines_stocks.medicine_id")->where("medicines_stocks.user_id", "=", Auth::User()->id)->where("name", "=", $request->medicine)->get("exp")->unique("exp");
-            if ($exp_dates != null)
-            {
-                $success = 1;
-            }
-        }
-        return response()->json(["success" => $success, "expDates" => $exp_dates]);
-    }
-    public function getMedicinePrice(Request $request)
-    {
-        $success = 0;
-        $price = 0;
 
 
-
-
-        $price = Medicine::where("user_id", "=", Auth::User()->id)->where("name", "=", $request->medicine)->select("price", "strip_price")->get()->first();
-
-        if ($price !== null)
-        {
-            $success = 1;
-        }
-
-        return response()->json(["success" => $success, "price" => $price]);
-    }
-    public function getDetails(Request $request)
+    public function show(Request $request)
     {
         $medicine = null;
+        if ($request->filled("id"))
+        {
+            $medicine = Medicine::where("user_id", Auth::user()->id)->where("id", $request->id)->first();
+        }
         if ($request->filled("medicine"))
         {
             $medicine = Medicine::where("user_id", Auth::user()->id)->where("name", "=", $request->medicine)->first();
         }
-        return response()->json(["success" => 1, "medicine" => $medicine]);
+        return response()->json(["success" => 1, "instance" => $medicine]);
     }
     public function destroy(Request $request)
     {

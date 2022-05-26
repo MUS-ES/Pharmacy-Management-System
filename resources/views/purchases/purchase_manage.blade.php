@@ -21,10 +21,10 @@
 
             <div class="search-area">
                 <span>Search</span>
-                <input oninput="search()" placeholder="by invoice number" id="sea-invoice-number" class="input-field"
+                <input oninput="search()" placeholder="by purchase number" id="sea-purchase-number" class="input-field"
                     type="number" name="" value="">
-                <input oninput="search()" id="sea-customer-name" class="input-field" type="text"
-                    placeholder="by customer name" name="" value="">
+                <input oninput="search()" id="sea-supplier-name" class="input-field" type="text"
+                    placeholder="by supplier name" name="" value="">
                 <span>From</span>
                 <input oninput="search()" id="sea-from-date" class="input-field" type="date" name="" value="">
                 <span>To</span>

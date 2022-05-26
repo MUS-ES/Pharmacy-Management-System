@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Auth\UserLoginRequest;
+use App\Http\Requests\Auth\UserStoreRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -59,18 +60,9 @@ class UsersController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function storeRegister(Request $request)
+    public function storeRegister(UserStoreRequest $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed'],
-        ]);
-        if ($validator->fails())
-        {
-            return redirect('signup')
-                ->withErrors($validator);
-        }
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),

@@ -48,12 +48,11 @@ function fillFields(billElement) {
     packingElement.value = 0;
     salepriceElement.value = 0;
 
-    promiseJax("/medicine/details", { medicine: medicineElement.value }, "POST", true, true).then((response) => {
-        console.log(response);
-        if (response.medicine != null) {
+    promiseJax("/medicine/show", { medicine: medicineElement.value }, "POST", true, true).then((response) => {
+        if (response.instance != null) {
 
-            packingElement.value = response.medicine.strip_unit;
-            salepriceElement.value = response.medicine.price;
+            packingElement.value = response.instance.strip_unit;
+            salepriceElement.value = response.instance.price;
         }
     });
 
@@ -101,16 +100,18 @@ function getPurchaseDetails() {
 function savePurchase() {
     let purchase = getPurchaseDetails();
     promiseJax("/purchase/add", purchase, "POST", true, true).then(response => {
-        console.log(response);
+        let errorList = document.getElementById("invalid-feedback-list");
+
         if (response.success == 1) {
 
+            while (child = errorList.firstElementChild) {
+                child.remove();
+            }
             openPopup('/ajax/popup/feedback', { msg: "success" });
         }
         else if (response.status = 422) {
-            let errorList = document.getElementById("invalid-feedback-list");
 
             for (let item of Object.values(response.errors)) {
-                console.log(item);
                 let li = document.createElement("li");
                 li.innerText = item;
                 errorList.appendChild(li);

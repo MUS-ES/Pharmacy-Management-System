@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $user = User::create([
             'email' => "m@m",
             'password' => bcrypt("mmmmmmmm"),
             'fullname' => "majd soubh",
@@ -23,5 +23,6 @@ class UserSeeder extends Seeder
             'active' => "1",
 
         ]);
+        $user->createToken('dev_access');
     }
 }

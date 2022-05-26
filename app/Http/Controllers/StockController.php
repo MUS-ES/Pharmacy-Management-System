@@ -54,4 +54,29 @@ class StockController extends Controller
         $stocks = $query->get();
         return view("sub.stock_table", compact("stocks"))->render();
     }
+    public function destroy(Request $request)
+    {
+        if ($request->filled("id"))
+        {
+
+            Stock::find($request->id)->destroy();
+        }
+        return response()->json(["success" => 1]);
+    }
+
+    public function show(Request $request)
+    {
+        $query = Stock::where("user_id", Auth::user()->id)->with("medicine");
+        if ($request->filled("medicine"))
+        {
+
+            $query = $query->whereRelation("medicine", "name", $request->medicine);
+        }
+        if ($request->filled('exp'))
+        {
+            $query = $query->where("exp", $request->exp);
+        }
+        $stock = $query->get();
+        return response()->json(["success" => true, "instance" => $stock]);
+    }
 }

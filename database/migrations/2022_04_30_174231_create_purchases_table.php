@@ -18,6 +18,7 @@ class CreatePurchasesTable extends Migration
             $table->id();
             $table->decimal("total", 11, 3);
             $table->foreignId("supplier_id");
+            $table->foreignId("payment_id");
             $table->foreignId("user_id");
             $table->timestamps();
         });

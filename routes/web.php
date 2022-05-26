@@ -15,6 +15,7 @@ use App\Http\Controllers\PurchasesController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuppliersController;
 use App\Models\Customer;
+use App\Models\Purchase;
 use App\View\Components\Feedback;
 use App\View\Components\Nav;
 use Illuminate\Http\Request;
@@ -56,23 +57,22 @@ Route::middleware(['auth'])->group(function ()
     );
     Route::prefix("/medicine")->group(function ()
     {
-        Route::get("/add", [MedicinesController::class, "addMedicine"]);
-        Route::post("/add", [MedicinesController::class, "storeMedicine"]);
-        Route::get("/manage", [MedicinesController::class, "manageMedicine"]);
-        Route::POST("/search", [MedicinesController::class, "searchMedicines"]);
-        Route::post("/exist", [MedicinesController::class, "isExist"]);
-        Route::post("/qty", [MedicinesController::class, "getAvailableQuantity"]);
-        Route::post("/exp", [MedicinesController::class, "getMedicineExpiryDates"]);
-        Route::post("/price", [MedicinesController::class, "getMedicinePrice"]);
-        Route::post("/details", [MedicinesController::class, "getDetails"]);
+        Route::get("/add", [MedicinesController::class, "create"]);
+        Route::get("/manage", [MedicinesController::class, "manage"]);
+        Route::post("/add", [MedicinesController::class, "store"]);
+        Route::post("/show", [MedicinesController::class, "show"]);
         Route::delete("/delete", [MedicinesController::class, "destroy"]);
+        Route::POST("/search", [MedicinesController::class, "search"]);
+        Route::post("/exist", [MedicinesController::class, "isExist"]);
     });
     Route::prefix("/stock")->group(
         function ()
         {
             Route::get("/manage", [StockController::class, "manage"]);
+            Route::post("/show", [StockController::class, "show"]);
             Route::Post("/search", [StockController::class, "search"]);
             Route::Post("/add", [StockController::class, "store"]);
+            Route::delete("/delete", [StockController::class, "destroy"]);
         }
     );
     Route::prefix("/ajax")->group(function ()
@@ -107,6 +107,8 @@ Route::middleware(['auth'])->group(function ()
         Route::POST("/add", [PurchasesController::class, "store"]);
         Route::GET("/add", [PurchasesController::class, "add"]);
         Route::GET("/manage", [PurchasesController::class, "manage"]);
+        Route::get("/items/{id}", [PurchasesController::class, "getPurchaseItems"]);
+        Route::post("/search", [PurchasesController::class, "search"]);
     });
 
 

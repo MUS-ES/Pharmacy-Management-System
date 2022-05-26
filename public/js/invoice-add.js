@@ -128,11 +128,12 @@ function fillExpDates(billElement) {
     let expElement = billElement.querySelector("#exp_date");
     let medicineELement = billElement.querySelector("#medicine");
 
-    return promiseJax("/medicine/exp", { medicine: medicineELement.value }, "POST").then(response => {
+    return promiseJax("/stock/show", { medicine: medicineELement.value }, "POST").then(response => {
+        console.log(response);
         if (response.success == 1) {
 
             removeChilderns(expElement);
-            response.expDates.forEach(date => {
+            response.instance.forEach(date => {
                 let option = document.createElement("option");
                 option.setAttribute("value", date.exp);
                 option.innerText = date.exp;
@@ -146,11 +147,12 @@ function fillAvQty(billElement) {
     let avQtyElement = billElement.querySelector("#avQty");
     let expElement = billElement.querySelector("#exp_date");
     let medicineELement = billElement.querySelector("#medicine");
-    return promiseJax("/medicine/qty", { medicine: medicineELement.value, "exp": expElement.value }, "POST", true).then(response => {
+    return promiseJax("/stock/show", { medicine: medicineELement.value, "exp": expElement.value }, "POST", true).then(response => {
+        console.log(response);
         if (response.success == 1) {
 
 
-            avQtyElement.value = response.qty;
+            avQtyElement.value = response.instance[0].qty;
 
         }
         else {
@@ -164,16 +166,16 @@ function fillUnitPrice(billElement) {
     let medicineELement = billElement.querySelector("#medicine");
     let unitPriceElement = billElement.querySelector("#unitPrice");
     let typeElement = billElement.querySelector("#type");
-    return promiseJax("/medicine/price", { medicine: medicineELement.value }, "POST", true).then(response => {
+    return promiseJax("/medicine/show", { medicine: medicineELement.value }, "POST", true).then(response => {
 
         if (response.success == 1) {
             if (typeElement.value == "strip") {
 
-                unitPriceElement.value = response.price.strip_price;
+                unitPriceElement.value = response.instance.strip_price;
             }
             else if (typeElement.value == "pack") {
 
-                unitPriceElement.value = response.price.price;
+                unitPriceElement.value = response.instance.price;
             }
         }
         else {
