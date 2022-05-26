@@ -7,7 +7,6 @@ use App\Http\Requests\Purchase\StorePurchaseRequest;
 use App\Models\Medicine;
 use App\Models\Payment;
 use App\Models\Stock;
-use Illuminate\Support\Facades\DB;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;

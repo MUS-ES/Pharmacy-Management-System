@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Http\Requests\Supplier\StoreSupplierRequest;
 
