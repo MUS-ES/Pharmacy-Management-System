@@ -4,16 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Medicine;
-use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\FuncCall;
 use App\Http\Requests\Medicine\StoreMedicineRequest;
-use App\Models\Stock;
-use App\Models\Supplier;
-use Carbon\Carbon;
-use GuzzleHttp\Promise\Create;
 
 class MedicinesController extends Controller
 {

@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Invoice\StoreInvoiceItemRequest;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use App\Models\Invoice;
 use App\Models\InvoiceItems;
 use App\Models\Medicine;
 use App\Http\Requests\Invoice\StoreInvoiceRequest;
-use App\Http\Controllers\PaymentsController;
-use App\Http\Requests\Payment\StorePaymentRequest;
-use Exception;
 use App\Models\Payment;
 use App\Models\Stock;
 use Illuminate\Http\Request;
