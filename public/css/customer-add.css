@@ -1,0 +1,104 @@
+:root {
+    --rose: #FF6D55;
+    --subRose: #FFE9E2;
+    --blue: #2a2185;
+    --red: #FF0000;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+    --gray: #fff7f5f9;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    background-color: var(--white);
+    position: relative;
+    left: 1rem;
+    align-content: center;
+    padding: 2rem;
+    width: 90%;
+    height: 100%;
+    border-radius: 1rem;
+    box-shadow: 2px 12px 15px 4px rgba(0, 0, 0, 0.4);
+    margin-top: 30px;
+}
+
+
+.input-container {
+    margin: 0 0 2rem;
+}
+
+.input-container .input-header-container label {
+    display: flex;
+    text-decoration: none;
+    font-family: "Ubunto", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0.6rem 0;
+    color: var(--blue);
+}
+
+.input-container input {
+    font-size: 1.2rem;
+    color: var(--rose);
+    width: 100%;
+    height: 40px;
+}
+
+.input-container .invalid-feedback {
+    margin-top: -10px;
+    margin-left: 5px;
+    color: rgb(227, 34, 34);
+    font-size: 13px;
+}
+
+.add-btn {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-btn button {
+    padding: 20px;
+    border: none;
+    color: var(--white);
+    border-radius: 6px;
+    font-weight: bolder;
+    font-size: 10px;
+    cursor: pointer;
+    background-color: var(--rose);
+}
+
+.add-btn button:hover {
+    padding: 20px;
+    border: none;
+    color: var(--white);
+    border-radius: 6px;
+    font-weight: bolder;
+    font-size: 10px;
+    cursor: pointer;
+    background-color: var(--blue);
+}
+
+.card {
+    display: flex;
+    position: relative;
+    left: 2rem;
+    width: 90%;
+    height: 90%;
+    background-color: var(--subRose);
+    border-radius: 1rem;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.card span {
+    position: absolute;
+    font-size: 8rem;
+    color: var(--rose);
+}

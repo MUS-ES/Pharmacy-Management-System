@@ -43,8 +43,10 @@
                     <span class="icon-right material-icons-outlined">expand_more</span>
                 </a>
                 <ul class="side-dropdown">
-                    <li><a href="#"><span class="material-icons-outlined">add</span>Add Customer</a></li>
-                    <li><a href="#"><span class="material-icons-outlined">edit</span>Manage Customer</a></li>
+                    <li><a href="{{ asset('/customer/add') }}"><span class="material-icons-outlined">add</span>Add
+                            Customer</a></li>
+                    <li><a href="{{ asset('/customer/manage') }}"><span
+                                class="material-icons-outlined">edit</span>Manage Customer</a></li>
                 </ul>
             </li>
 

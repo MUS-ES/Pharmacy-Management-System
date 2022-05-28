@@ -91,11 +91,16 @@ Route::middleware(['auth'])->group(function ()
 
         Route::post("/suppliersuggestions", [AjaxController::class, "showSuppliersSuggestions"]);
     });
-    Route::prefix("/customer")->group(function ()
-    {
-
-        Route::POST("/add", [CustomersController::class, "store"]);
-    });
+    Route::prefix("/customer")->group(
+        function ()
+        {
+            Route::get("/add", [CustomersController::class, "add"]);
+            Route::post("/add", [CustomersController::class, "store"]);
+            Route::get("/manage", [CustomersController::class, "manage"]);
+            Route::post("/search", [CustomersController::class, "search"]);
+            Route::delete("/delete", [CustomersController::class, "destroy"])->name("deleteCustomers");
+        }
+    );
     Route::prefix("/supplier")->group(function ()
     {
 
