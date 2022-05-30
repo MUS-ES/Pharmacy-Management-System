@@ -8,14 +8,14 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticatedSessionController extends Controller
+class AdminsController extends Controller
 {
     /**
      * Display the login view.
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function index()
     {
         return view('admin/auth/login');
     }
@@ -26,7 +26,7 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(AdminLoginRequest $request)
+    public function signin(AdminLoginRequest $request)
     {
 
 
@@ -43,7 +43,7 @@ class AuthenticatedSessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
 

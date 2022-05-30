@@ -59,7 +59,7 @@ class StockController extends Controller
         if ($request->filled("id"))
         {
 
-            Stock::find($request->id)->destroy();
+            Stock::destroy($request->id);
         }
         return response()->json(["success" => 1]);
     }

@@ -106,7 +106,7 @@ class InvoicesController extends Controller
         if ($request->filled("id"))
         {
 
-            Invoice::find($request->id)->delete();
+            Invoice::destroy($request->id);
         }
         return response()->json(["success" => 1]);
     }

@@ -7,6 +7,7 @@ use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Medicine\StoreMedicineRequest;
+use Faker\Provider\Medical;
 
 class MedicinesController extends Controller
 {
@@ -97,7 +98,7 @@ class MedicinesController extends Controller
         if ($request->filled("id"))
         {
 
-            Medicine::find($request->id)->delete();
+            Medicine::destroy($request->id);
         }
         return response()->json(["success" => 1]);
     }

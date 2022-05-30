@@ -9,9 +9,8 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\UsersController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\Auth\AdminsController;
 use App\Http\Controllers\PanelController;
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminSessionController;
 
 
 Route::middleware('guest')->group(function ()
@@ -57,7 +56,7 @@ Route::middleware('auth')->group(function ()
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::get('signout', [UsersController::class, 'destroy'])
+    Route::get('signout', [UsersController::class, 'logout'])
         ->name('signout');
 });
 
@@ -68,8 +67,8 @@ Route::name("admin.")->group(function ()
     /* Not Authenticated */
     Route::middleware("guest:admin")->group(function ()
     {
-        Route::get('login', [AdminSessionController::class, 'create'])->name("login");
-        Route::post('login', [AdminSessionController::class, 'store'])->name("login");
+        Route::get('login', [AdminsController::class, 'index'])->name("login");
+        Route::post('login', [AdminsController::class, 'signin'])->name("login");
         //change
     });
     /* Require Admin Authentication */
@@ -80,7 +79,7 @@ Route::name("admin.")->group(function ()
         Route::get('/panel/activeUser/{id}', [PanelController::class, "activeUser"])->name('panel.activeUser');
         Route::get('/panel/deActiveUser/{id}', [PanelController::class, "deActiveUser"])->name('panel.deActiveUser');
         Route::get('/panel/deleteUser/{id}', [PanelController::class, "deleteUser"])->name('panel.deleteUser');
-        Route::get("/logout", [AdminSessionController::class, 'destroy'])->name("logout");
+        Route::get("/logout", [AdminsController::class, 'destroy'])->name("logout");
     });
 });
 Route::post('/checkemail', [UsersController::class, "isEmailExist"]);

@@ -90,4 +90,13 @@ class PurchasesController extends Controller
     {
         return view("purchases.purchase_manage");
     }
+    public function destroy(Request $request)
+    {
+        if ($request->filled("id"))
+        {
+
+            Purchase::destroy($request->id);
+        }
+        return response()->json(["success" => 1]);
+    }
 }

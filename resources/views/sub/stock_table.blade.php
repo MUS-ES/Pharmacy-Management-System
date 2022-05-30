@@ -31,7 +31,8 @@
                 <td><span data-id="{{ $stock->id }}" id="edit-medicine-btn" class="material-icons-outlined">
                         edit
                     </span>
-                    <span data-id="{{ $stock->id }}" id="delete-medicine-btn" class="material-icons-outlined">
+                    <span onclick="deleteStock(this)" data-id="{{ $stock->id }}" id="delete-medicine-btn"
+                        class="material-icons-outlined">
                         delete
                     </span>
                 </td>

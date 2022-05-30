@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoice;
-use DateTime;
-use Illuminate\Http\Request;
+
+
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller

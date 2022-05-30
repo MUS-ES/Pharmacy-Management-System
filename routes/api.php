@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\MedicinesController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,16 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::POST("/search", [MedicinesController::class, "search"]);
         Route::post("/exist", [MedicinesController::class, "isExist"]);
     });
+    Route::prefix("/stock")->group(
+        function ()
+        {
+            Route::get("/manage", [StockController::class, "manage"]);
+            Route::post("/show", [StockController::class, "show"]);
+            Route::Post("/search", [StockController::class, "search"]);
+            Route::Post("/add", [StockController::class, "store"]);
+            Route::delete("/delete", [StockController::class, "destroy"]);
+        }
+    );
 });
 
 

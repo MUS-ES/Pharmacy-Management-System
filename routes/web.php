@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PanelController;
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminSessionController;
+
 use App\Http\Controllers\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UsersController;
@@ -14,12 +12,6 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\PurchasesController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuppliersController;
-use App\Models\Customer;
-use App\Models\Purchase;
-use App\View\Components\Feedback;
-use App\View\Components\Nav;
-use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +97,7 @@ Route::middleware(['auth'])->group(function ()
     {
 
         Route::POST("/add", [SuppliersController::class, "store"]);
+        Route::POST("/delete", [SuppliersController::class, "store"]);
     });
     Route::prefix("/purchase")->group(function ()
     {
@@ -114,6 +107,7 @@ Route::middleware(['auth'])->group(function ()
         Route::GET("/manage", [PurchasesController::class, "manage"]);
         Route::get("/items/{id}", [PurchasesController::class, "getPurchaseItems"]);
         Route::post("/search", [PurchasesController::class, "search"]);
+        Route::delete("/delete", [PurchasesController::class, "destroy"]);
     });
 
 

@@ -51,7 +51,7 @@ class CustomersController extends Controller
         if ($request->filled("id"))
         {
 
-            Customer::find($request->id)->delete();
+            Customer::destroy($request->id);
         }
         return response()->json(["success" => 1]);
     }
