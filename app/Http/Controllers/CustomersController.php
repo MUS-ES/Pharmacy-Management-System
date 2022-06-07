@@ -44,7 +44,27 @@ class CustomersController extends Controller
         return view("customers.customer-manage");
     }
 
-
+    public function modify(Request $request)
+    {
+        $customer = null;
+        if ($request->filled("id"))
+        {
+            $customer = customer::where("user_id", Auth::user()->id)->find($request->id);
+            if ($request->filled("name"))
+            {
+                $customer->name = $request['name'];
+            }
+            if ($request->filled("address"))
+            {
+                $customer->address = $request['address'];
+            }
+            if ($request->filled("contact"))
+            {
+                $customer->contact = $request['contact'];
+            }
+        }
+        return response()->json(["success" => 1, "instance" => $customer]);
+    }
 
     public function destroy(Request $request)
     {

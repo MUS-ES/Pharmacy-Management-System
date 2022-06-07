@@ -77,7 +77,35 @@ class MedicinesController extends Controller
         return response()->json(['success' => true, "exist" => $exist]);
     }
 
-
+    public function modify(Request $request)
+    {
+        $medicine = null;
+        if ($request->filled("id"))
+        {
+            $medicine = Medicine::where("user_id", Auth::user()->id)->find($request->id);
+            if ($request->filled("name"))
+            {
+                $medicine->name = $request['name'];
+            }
+            if ($request->filled("generic"))
+            {
+                $medicine->generic_name = $request['generic'];
+            }
+            if ($request->filled("price"))
+            {
+                $medicine->price = $request['price'];
+            }
+            if ($request->filled("strip"))
+            {
+                $medicine->strip = $request['strip'];
+            }
+            if ($request->filled("description"))
+            {
+                $medicine->description = $request['description'];
+            }
+        }
+        return response()->json(["success" => 1, "instance" => $medicine]);
+    }
 
 
     public function show(Request $request)
