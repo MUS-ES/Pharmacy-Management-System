@@ -21,6 +21,32 @@ class SuppliersController extends Controller
         ]);
         return response()->json(["success" => 1, "instance" => $supplier]);
     }
+
+    public function add()
+    {
+        return view("/suppliers.supplier-add");
+    }
+
+    public function search(Request $request)
+    {
+
+        $query = Supplier::where("user_id", Auth::user()->id);
+        if ($request->filled("name"))
+        {
+
+            $query = $query->where("name", "like", $request->name . "%");
+        }
+        $suppliers = $query->get();
+
+        return view("sub.supplier_table", compact("suppliers"))->render();
+    }
+
+    public function manage()
+    {
+        return view("suppliers.supplier-manage");
+    }
+
+
     public function modify(Request $request)
     {
         $supplier = null;

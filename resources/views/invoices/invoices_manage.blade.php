@@ -17,24 +17,38 @@
         <!-- End Of Main Head -->
         <div class="container">
 
+          <div class= "bill">
+            <div class="bill-header search-area">
 
+                <div class="bill-labelsandinputs">
+                  <div class="sub-title">Search By Invoice Number:</div>
+                  <input oninput="search()" id="sea-invoice-number" class="input-field" type="number" placeholder="Invoice Number" name="" value="">
+                </div>
+    
+                <div class="bill-labelsandinputs">
+                  <div class="sub-title">Search By Customer Name:</div>
+                  <input oninput="search()" id="sea-customer-name" class="input-field" type="text" placeholder="Customer Name" name="" value="">
+                </div>
+    
+                <div class="bill-labelsandinputs">
+                  <div class="sub-title">Search By Date:</div>
+                  From:
+                  <input oninput="search()" id="sea-from-date" class="input-field" type="date" name="" value="">
+                </div>
+    
+                <div class="bill-labelsandinputs">
+                  <div class="sub-title">Search By Date:</div>
+                  To:
+                  <input oninput="search()" id="sea-to-date" class="input-field" type="date" name="" value="">
+                </div>
+    
+                <div class="refresh-btn">
+                  <span id="refresh-btn" onclick="search()" class="material-icons-outlined">autorenew</span>
+                </div>
+    
+              </div>
 
-            <div class="search-area">
-                <span>Search</span>
-                <input oninput="search()" placeholder="by invoice number" id="sea-invoice-number" class="input-field"
-                    type="number" name="" value="">
-                <input oninput="search()" id="sea-customer-name" class="input-field" type="text"
-                    placeholder="by customer name" name="" value="">
-                <span>From</span>
-                <input oninput="search()" id="sea-from-date" class="input-field" type="date" name="" value="">
-                <span>To</span>
-                <input oninput="search()" id="sea-to-date" class="input-field" type="date" name="" value="">
-                <span onclick="search()" id="refresh-btn" class="material-icons-outlined">autorenew</span>
-            </div>
-
-
-            <hr>
-            <div id="table-area">
+            <div id="table-area" class="table-data">
                 @push('scripts')
                     <script>
                         search();
@@ -45,7 +59,7 @@
             </div>
 
 
-
+         </div>
         </div>
         <!-- End Of Container -->
 

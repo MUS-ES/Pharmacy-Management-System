@@ -76,8 +76,8 @@
                     <span class="icon-right material-icons-outlined">expand_more</span>
                 </a>
                 <ul class="side-dropdown">
-                    <li><a href="#"><span class="material-icons-outlined">add</span>Add Supplier</a></li>
-                    <li><a href="#"><span class="material-icons-outlined">edit</span>Manage Supplier</a></li>
+                    <li><a href="{{ asset('/supplier/add') }}"><span class="material-icons-outlined">add</span>Add Supplier</a></li>
+                    <li><a href="{{ asset('/supplier/manage') }}"><span class="material-icons-outlined">edit</span>Manage Supplier</a></li>
                 </ul>
             </li>
 
@@ -101,12 +101,14 @@
             <li>
                 <a href="#">
                     <span class="icon material-icons-outlined">receipt_long</span>
-                    <h3>Vouchars</h3>
+                    <h3>Vouchers</h3>
                     <span class="icon-right material-icons-outlined">expand_more</span>
                 </a>
                 <ul class="side-dropdown">
-                    <li><a href="#"><span class="material-icons-outlined">attach_money</span>Payment Voucher</a></li>
-                    <li><a href="#"><span class="material-icons-outlined">money_off_csred</span>Receipt Voucher</a></li>
+                    <li><a href="{{ asset('/voucher/payment/add') }}"><span class="material-icons-outlined">attach_money</span>Payment Voucher</a></li>
+                    <li><a href="{{ asset('/voucher/payment/manage') }}"><span class="material-icons-outlined">attach_money</span>Manage Payment Voucher</a></li>
+                    <li><a href="{{ asset('/voucher/receipt/add') }}"><span class="material-icons-outlined">money_off_csred</span>Receipt Voucher</a></li>
+                    <li><a href="{{ asset('/voucher/receipt/manage') }}"><span class="material-icons-outlined">money_off_csred</span>Manage Receipt Voucher</a></li>
                 </ul>
             </li>
 

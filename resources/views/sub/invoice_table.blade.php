@@ -27,13 +27,8 @@
                 <td>{{ $invoice->total_net }}</td>
                 <td>{{ $invoice->created_at }}</td>
                 <td class="action-section">
-                    <a onclick="deleteInvoice(this)" data-id="{{ $invoice->id }}"
-                        style="color:#737373;margin-right:5px">
-                        <span class="material-icons-outlined">delete</span>
-                    </a>
-                    <a onclick="showInvoiceItems(this)" id="show-items" data-id="{{ $invoice->id }}">
-                        <span class="material-icons-outlined">visibility</span>
-                    </a>
+                        <span onclick="deleteInvoice(this)" data-id="{{ $invoice->id }}" class="material-icons-outlined">delete</span>
+                        <span onclick="showInvoiceItems(this)" id="show-items" data-id="{{ $invoice->id }}" class="material-icons-outlined">visibility</span>
                 </td>
             </tr>
         @endforeach

@@ -3,8 +3,8 @@ hr {
     height: 2px;
     background-color: #ff6d55c2;
     border: none;
-    margin-top: 1.5rem;
     margin-bottom: 1rem;
+    margin-top: 1.5rem;
 }
 
 /* Bill Body */
@@ -20,8 +20,8 @@ hr {
 
 .bill .bill-header {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 60px;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 20px;
     justify-content: center;
     margin-bottom: 1rem;
     align-items: end;
@@ -77,22 +77,8 @@ hr {
     color: var(--rose);
 }
 
-  .table-data table tbody tr td:nth-child(odd) {
-    background-color: #C7CAFF;
-  }
-
-
-  #edit-medicine-btn,
-  #delete-medicine-btn {
-      font-size: 2rem;
-      color: var(--rose);
-      cursor: pointer;
-      text-align: center;
-  }
-  
-  #edit-medicine-btn:hover,
-  #delete-medicine-btn:hover {
-      color: var(--blue);
+  .table-data table tbody tr td:nth-child(even) {
+    background-color: #F9FF98;
   }
 
 /* Main */
@@ -121,10 +107,49 @@ main .title {
     padding-bottom: 0.5rem;
 }
 
+.refresh-btn {
+    font-family: "Ubuntu";
+    font-weight: 500;
+    width: 80px;
+    height: 40px;
+    border-radius: 0.5rem;
+    background: green;
+    color: var(--white);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background: #00B800;
+}
+
+.refresh-btn span {
+    margin-top: 0.2rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+
+#edit-customer-btn,
+#delete-customer-btn {
+    font-size: 2rem;
+    color: var(--rose);
+    cursor: pointer;
+    text-align: center;
+}
+
+#edit-customer-btn:hover,
+#delete-customer-btn:hover {
+    color: var(--blue);
+}
+
 /* Media Queries */
 @media (max-width: 1310px) {
     .bill .bill-header {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-gap: 20px;
     }
 
@@ -185,3 +210,128 @@ main .title {
 }
 
 /* End Of Media Queries */
+
+
+
+
+
+
+
+
+
+/* main .container {
+    padding: 30px;
+    box-shadow: 0 8px 10px 5px var(--black2);
+    margin: 20px;
+    border-radius: 20px;
+    color: var(--blue);
+    font-weight: bolder;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.search-area {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: baseline;
+
+}
+
+
+main input {
+    font-family: "Ubuntu";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--black2);
+    background: #fff7f5;
+    border: 1px solid var(--rose);
+    border-radius: 0.6rem;
+    height: 2rem;
+    padding: 3px 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+main input:focus {
+    box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px var(--gray);
+    border: none;
+}
+
+hr {
+    margin: 30px 0 30px 0;
+    width: 90%;
+    height: 2px;
+    background-color: #ff6d55c2;
+    border: none;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+
+th,
+td {
+    padding: 15px;
+
+}
+
+table th {
+    background-color: var(--rose);
+    color: white;
+}
+
+table th:first-child {
+
+    border-top-left-radius: 10px;
+
+}
+
+table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+    color: #737373;
+}
+
+tbody tr:hover {
+    font-weight: bold;
+    color: var(--rose);
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid var(--rose);
+}
+
+table td span {
+    font-size: 30px !important;
+    cursor: pointer;
+}
+
+table td span:hover {
+    color: var(--blue);
+}
+
+table td #edit-medicine-btn {
+    margin-right: 15px;
+}
+
+#refresh-btn {
+    color: white;
+    font-size: 37px;
+    background-color: green;
+    border-radius: 50%;
+    padding: 3px;
+    margin-left: 15px;
+} */

@@ -12,6 +12,8 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\PurchasesController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\PaymentVouchersController;
+use App\Http\Controllers\ReceiptVouchersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,12 +95,38 @@ Route::middleware(['auth'])->group(function ()
             Route::delete("/delete", [CustomersController::class, "destroy"])->name("deleteCustomers");
         }
     );
-    Route::prefix("/supplier")->group(function ()
-    {
+    Route::prefix("/supplier")->group(
+        function ()
+        {
+            Route::get("/add", [SuppliersController::class, "add"]);
+            Route::POST("/add", [SuppliersController::class, "store"]);
+            Route::get("/manage", [SuppliersController::class, "manage"]);
+            Route::post("/search", [SuppliersController::class, "search"]);
+            Route::delete("/delete", [SuppliersController::class, "destroy"])->name("deleteSuppliers");
+        }
+    );
 
-        Route::POST("/add", [SuppliersController::class, "store"]);
-        Route::POST("/delete", [SuppliersController::class, "store"]);
+
+    Route::prefix("/voucher")->group(function ()
+    {
+        Route::prefix("/payment")->group(function ()
+        {
+            Route::GET("/add", [PaymentVouchersController::class, "addPaymentVoucher"]);
+            // Route::POST("/add", [PaymentVouchersController::class, "store"]);
+            Route::GET("/manage", [PaymentVouchersController::class, "managePaymentVoucher"]);
+            Route::post("/search", [PaymentVouchersController::class, "search"]);
+            Route::delete("/delete", [PaymentVouchersController::class, "destroy"]);
+        });
+        Route::prefix("/receipt")->group(function ()
+        {
+            Route::GET("/add", [ReceiptVouchersController::class, "addReceiptVoucher"]);
+            // Route::POST("/add", [ReceiptVouchersController::class, "store"]);
+            Route::GET("/manage", [ReceiptVouchersController::class, "manageReceiptVoucher"]);
+            Route::post("/search", [ReceiptVouchersController::class, "search"]);
+            Route::delete("/delete", [ReceiptVouchersController::class, "destroy"]);
+        });
     });
+
     Route::prefix("/purchase")->group(function ()
     {
 

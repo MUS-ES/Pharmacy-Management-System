@@ -22,13 +22,13 @@ function search() {
     let toDate = document.getElementById("sea-to-date").value.trim();
     promiseJax('/invoice/search', { id: invoiceNumber, customer: customerName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
         document.getElementById("table-area").innerHTML = response;
-    })
+    });
 }
 
 
 function deleteInvoice(currentElement) {
     promiseJax("/invoice/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
         search();
-    })
+    });
 }
 

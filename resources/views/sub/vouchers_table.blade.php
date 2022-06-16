@@ -1,0 +1,31 @@
+<table>
+    <thead>
+        <tr>
+            <th>Voucher Number</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($vouchers as $voucher)
+            <tr>
+                <td>{{ $voucher->id }}</td>
+                <td>{{ $voucher->type }}</td>
+                <td>{{ $voucher->amount }}</td>
+                <td>{{ $voucher->created_at }}</td>
+                <td>{{ $voucher->descripton }}</td>
+                <td class="action-section">
+                    <span onclick="deletevoucher(this)" data-id="{{ $voucher->id }}"
+                        class="material-icons-outlined">delete</span>
+                    <span onclick="showvoucherItems(this)" id="show-items" data-id="{{ $voucher->id }}"
+                        class="material-icons-outlined">visibility</span>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+
+
+</table>

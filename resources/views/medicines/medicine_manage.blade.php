@@ -15,22 +15,32 @@
         <h1 class="title">Manage Medicine</h1>
         <!-- End Of Main Head -->
         <div class="container">
-            <div class="search-area">
-                <span>Search</span>
-                <input oninput="search()" id="sea-name" type="text" placeholder="By Medicine Name">
-                <input oninput="search()" id="sea-generic" type="text" placeholder="By Generic Name">
-                <input oninput="search()" id="sea-supplier" type="text" placeholder="By Supplier Name">
+         <div class= "bill">
+            <div class="search-area bill-header">
+                <div class="bill-labelsandinputs">
+                    <div class="sub-title">Search By Medicine Name:</div>
+                    <input oninput="search()" id="sea-name" class="input-field" type="text" placeholder="Medicine Name" name="" value="">
+                  </div>
+      
+                  <div class="bill-labelsandinputs">
+                    <div class="sub-title">Search By Generic Name:</div>
+                    <input oninput="search()" id="sea-generic" class="input-field" type="text" placeholder="Generic Name" name="" value="">
+                  </div>
+
+                  <div class="bill-labelsandinputs">
+                    <div class="sub-title">Search By Supplier Name:</div>
+                    <input oninput="search()" id="sea-supplier" class="input-field" type="text" placeholder="Supplier Name" name="" value="">
+                  </div>
             </div>
-
-
             <hr>
-            <div id="table-area">
+            <div id="table-area" class="table-data">
                 @push('scripts')
                     <script>
                         search()
                     </script>
-                </div>
+            </div>
             @endpush
+          </div>
         </div>
         <!-- End Of Container -->
 

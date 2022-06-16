@@ -104,9 +104,9 @@
             <!-- Chart -->
             <div id="right-adjustment" class="content-data">
                 <div class="head">
-                    <h3>Sales Report</h3>
+                    <h3>Sales & Purchase Report</h3>
                     <div class="menu">
-                        <span class="icon material-icons-outlined">more_horiz</span>
+                        {{-- <span class="icon material-icons-outlined">more_horiz</span> --}}
                         <ul class="menu-link">
                             <li><a href="{{ asset('#') }}">Edit</a></li>
                             <li><a href="{{ asset('#') }}">Save</a></li>

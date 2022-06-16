@@ -16,10 +16,9 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table)
         {
             $table->id();
-            $table->foreignId("safe_id");
-            $table->foreignId("chest_id");
+            $table->enum("type", ["payment,receipt"]);
             $table->decimal("amount", 19, 5);
-            $table->string("desc", 255);
+            $table->string("description", 255);
             $table->foreignId("user_id")->constrained("users");
             $table->timestamps();
         });

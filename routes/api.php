@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\MedicinesController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\StockController;
 /*
 |--------------------------------------------------------------------------

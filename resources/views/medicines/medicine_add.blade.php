@@ -16,40 +16,59 @@
         <!-- Main Head -->
         <h1 class="title">Add a New Medicine</h1>
         <!-- End Of Main Head -->
+
         <div class="container">
-            <div class="input-container medicine">
+            <div class="content">
+                <div class="input-container">
+                    <div class="input-header-container">
+                        <label for="">Medicine Name</label>
+                    </div>
+                    <input id="medicine-name" type="text">
+                    <span class="invalid-feedback"></span>
+                </div>
 
-                <label for="">Medicine Name</label>
-                <input id="medicine-name" type="text" value="">
-                <span class="invalid-feedback"></span>
+                <div class="input-container">
+                    <div class="input-header-container">
+                        <label for="">Generic Name</label>
+                    </div>
+                    <input id="gereric-name" type="text">
+                    <span class="invalid-feedback"></span>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-header-container">
+                        <label for="">Strip</label>
+                    </div>
+                    <input id="strip" type="number">
+                    <span class="invalid-feedback"></span>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-header-container">
+                        <label for="">Price</label>
+                    </div>
+                    <input id="price" type="number">
+                    <span class="invalid-feedback"></span>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-header-container">
+                        <label for="">Description</label>
+                    </div>
+                    <textarea name="" id="description" ></textarea>
+                    <span class="invalid-feedback"></span>
+                </div>
+
+
+                <div class="add-btn">
+                    <button onclick="save()" id="save-btn" type="button" name="button">
+                        <span class="material-icons-outlined">add</span>
+                    </button>
+                </div>
             </div>
-            <div class="input-container generic-name">
-
-                <label for="">Generic Name</label>
-                <input id="gereric-name" type="text" value="">
-                <span class="invalid-feedback"></span>
+            <div class="card">
+                <span class="material-icons-outlined">vaccines</span>
             </div>
-            <div class="input-container strip">
-
-                <label for="">Strip</label>
-                <input id="strip" type="number" value="">
-                <span class="invalid-feedback"></span>
-
-            </div>
-            <div class="input-container price">
-
-                <label for="">Price</label>
-                <input id="price" type="number" value="">
-                <span class="invalid-feedback"></span>
-            </div>
-            <div class="input-container description">
-
-                <label for="">Description</label>
-
-                <textarea name="" id="description" cols="80" rows="3"></textarea>
-                <span class="invalid-feedback"></span>
-            </div>
-            <a onclick="save()" id="save-btn" href="#">SAVE</a>
         </div>
         <!-- End Of Container -->
 
