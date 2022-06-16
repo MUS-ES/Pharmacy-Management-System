@@ -11,6 +11,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Safe;
+use App\Models\Chest;
 
 
 class UsersController extends Controller
@@ -70,7 +72,8 @@ class UsersController extends Controller
         ]);
 
         event(new Registered($user));
-
+        Safe::create(["user_id" => Auth::user()->id, "total" => "0"]);
+        Chest::create(["user_id" => Auth::user()->id, "total" => "0"]);
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);

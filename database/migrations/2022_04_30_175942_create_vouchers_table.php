@@ -16,10 +16,11 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table)
         {
             $table->id();
-            $table->enum("type", ["payment,receipt"]);
+            $table->enum("type", ["Payment,Receipt"]);
             $table->decimal("amount", 19, 5);
             $table->string("description", 255);
             $table->foreignId("user_id")->constrained("users");
+            $table->date("date");
             $table->timestamps();
         });
     }

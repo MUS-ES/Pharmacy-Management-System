@@ -25,10 +25,12 @@
                 <td>{{ $invoice->total }}</td>
                 <td>{{ $invoice->total_discount }}</td>
                 <td>{{ $invoice->total_net }}</td>
-                <td>{{ $invoice->created_at }}</td>
+                <td>{{ $invoice->date }}</td>
                 <td class="action-section">
-                        <span onclick="deleteInvoice(this)" data-id="{{ $invoice->id }}" class="material-icons-outlined">delete</span>
-                        <span onclick="showInvoiceItems(this)" id="show-items" data-id="{{ $invoice->id }}" class="material-icons-outlined">visibility</span>
+                    <span onclick="deleteInvoice(this)" data-id="{{ $invoice->id }}"
+                        class="material-icons-outlined">delete</span>
+                    <span onclick="showInvoiceItems(this)" id="show-items" data-id="{{ $invoice->id }}"
+                        class="material-icons-outlined">visibility</span>
                 </td>
             </tr>
         @endforeach

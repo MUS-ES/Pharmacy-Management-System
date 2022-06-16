@@ -21,7 +21,7 @@
                     @endif
                 </td>
                 <td>{{ $purchase->total }}</td>
-                <td>{{ $purchase->created_at }}</td>
+                <td>{{ $purchase->date }}</td>
                 <td class="action-section">
                     <a onclick="deletePurchase(this)" data-id="{{ $purchase->id }}"
                         style="color:#737373;margin-right:5px">

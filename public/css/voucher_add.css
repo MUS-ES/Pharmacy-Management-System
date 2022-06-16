@@ -109,7 +109,7 @@ main .title {
 
 .bill .bill-body-header {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     font-size: 1.2rem;
     font-family: "Ubuntu", sans-serif;
     font-weight: 600;
@@ -130,7 +130,7 @@ main .title {
 
 .bill .bill-body-values {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 0.5rem;
     /* margin-top: 1rem; */
 }
@@ -186,10 +186,8 @@ main .title {
 
 /* Final Bill Result */
 .bill .final-sub-bill-results {
-    display: grid;
-    column-gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 120px;
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -226,7 +224,21 @@ main .title {
 
 /* End Of Final Bill Result */
 
+/* Start Invalid Feedback */
+.invalid-feedback-container {
+    margin-top: 20px;
+}
 
+
+.invalid-feedback-container li {
+    margin-left: 20px;
+    color: red;
+    list-style-type: disc;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* End Invalid Feedback */
 /* Media Queries */
 @media (max-width: 1300px) {
     .bill .bill-header {

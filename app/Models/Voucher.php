@@ -10,4 +10,5 @@ use App\Models\User;
 class Voucher extends Model
 {
     use HasFactory;
+    protected $fillable = ["user_id", "type", "amount", "description", "date"];
 }

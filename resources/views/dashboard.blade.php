@@ -48,7 +48,7 @@
             <div class="card">
                 <div>
                     <div class="numbers">{{ $card['TotalSales'] }}sp</div>
-                    <div class="cardName">Total Sales Today</div>
+                    <div class="cardName">Chest</div>
                 </div>
                 <div class="iconBx">
                     <span class="material-icons-outlined">monetization_on</span>
@@ -89,7 +89,7 @@
             <div class="card">
                 <div>
                     <div class="numbers">{{ $card['safe'] }}sp</div>
-                    <div class="cardName">Treasury</div>
+                    <div class="cardName">Safe</div>
                 </div>
                 <div class="iconBx">
                     <span class="material-icons-outlined">price_change</span>

@@ -20,6 +20,7 @@ class CreatePurchasesTable extends Migration
             $table->foreignId("supplier_id");
             $table->foreignId("payment_id");
             $table->foreignId("user_id");
+            $table->date("date");
             $table->timestamps();
         });
     }

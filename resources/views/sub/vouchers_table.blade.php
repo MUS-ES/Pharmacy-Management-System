@@ -15,8 +15,8 @@
                 <td>{{ $voucher->id }}</td>
                 <td>{{ $voucher->type }}</td>
                 <td>{{ $voucher->amount }}</td>
-                <td>{{ $voucher->created_at }}</td>
-                <td>{{ $voucher->descripton }}</td>
+                <td>{{ $voucher->date }}</td>
+                <td>{{ $voucher->description }}</td>
                 <td class="action-section">
                     <span onclick="deletevoucher(this)" data-id="{{ $voucher->id }}"
                         class="material-icons-outlined">delete</span>

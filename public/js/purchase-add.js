@@ -61,7 +61,7 @@ function fillPurchaseDetails() {
 
     let totalElements = document.querySelectorAll("#sub-purchase-total");
     let qtyElements = document.querySelectorAll("#sub-purchase-qty");
-    let salePriceElements = document.querySelectorAll("#sub-purchase-sale-price");
+    let salePriceElements = document.querySelectorAll("#sub-purchase-supplier-price");
     let finalpriceElement = document.querySelector("#finalprice");
     let length = totalElements.length;
     let totalSum = 0;
@@ -100,6 +100,7 @@ function getPurchaseDetails() {
 function savePurchase() {
     let purchase = getPurchaseDetails();
     promiseJax("/purchase/add", purchase, "POST", true, true).then(response => {
+        console.log(response);
         let errorList = document.getElementById("invalid-feedback-list");
 
         if (response.success == 1) {

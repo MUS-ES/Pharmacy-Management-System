@@ -24,6 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->foreignId('customer_id')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('payment_id');
+            $table->date("date");
             $table->timestamps();
         });
     }

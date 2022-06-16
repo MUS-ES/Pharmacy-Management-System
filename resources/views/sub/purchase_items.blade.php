@@ -31,7 +31,7 @@
 
             <div class="bill-labelsandinputs">
                 <div class="sub-title">Date:</div>
-                <input disabled type="text" class="input-field" value="{{ $purchase->created_at }}">
+                <input disabled type="text" class="input-field" value="{{ $purchase->date }}">
             </div>
 
             <div class="bill-labelsandinputs">

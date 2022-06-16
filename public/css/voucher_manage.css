@@ -146,6 +146,7 @@ main .title {
     color: var(--blue);
 }
 
+
 /* Media Queries */
 @media (max-width: 1310px) {
     .bill .bill-header {

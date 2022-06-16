@@ -27,7 +27,7 @@ class Invoice extends Model
         'customer_id',
         'user_id',
         'payment_id',
-        'created_at',
+        'date',
     ];
     public function user()
     {

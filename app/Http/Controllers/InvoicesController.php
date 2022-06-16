@@ -54,39 +54,27 @@ class InvoicesController extends Controller
     }
     public function store(StoreInvoiceRequest $request)
     {
-
+        $validated = $request->validated();
         $customerId = null;
         if ($request->filled("customer"))
             $customerId = Customer::where("user_id", Auth::user()->id)->where("name", $request->customer)->first()->id;
 
         DB::beginTransaction();
-        $payment = Payment::create([
-            'provider' => $request->provider,
-            'status' => $request->status,
-            'created_at' => $request->date,
-        ]);
+        $payment = Payment::create($validated);
 
-        $invoice = Invoice::create([
+        $invoice = Invoice::create($validated + [
             'user_id' => Auth::user()->id,
             'payment_id' => $payment->id,
-            'customer_id' => $customerId,
-            'created_at' => $request->date,
-            'total_discount' => $request->total_discount,
-            'total_net' => $request->total_net,
-            'total' => $request->total,
-            'paid' => $request->paid,
+            'customer_id' => $customerId
         ]);
 
         foreach ($request->items as $item)
         {
 
             $medicine = Medicine::where("user_id", Auth::user()->id)->where("name", $item['medicine'])->first();
-            $invoiceItem = InvoiceItems::create([
+            $invoiceItem = InvoiceItems::create($item + [
                 "medicine_id" => $medicine->id,
-                "qty" => $item['qty'],
-                "discount" => $item['discount'],
                 "invoice_id" => $invoice->id,
-                "exp" => $item['exp'],
             ]);
             $query = Stock::where("user_id", Auth::user()->id)->where("medicine_id", $medicine->id)->where("exp", $item['exp'])->first();
             if ($query->qty == $item['qty'])
