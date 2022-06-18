@@ -24,6 +24,11 @@
                         <input oninput="search()" id="sea-voucher-number" class="input-field" type="number"
                             placeholder="Voucher Number" name="" value="">
                     </div>
+                    <div class="bill-labelsandinputs">
+                        <div class="sub-title">Search By Voucher Type:</div>
+                        <input oninput="search()" id="sea-voucher-type" class="input-field" type="text"
+                            placeholder="Voucher Type" name="" value="">
+                    </div>
 
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Date:</div>

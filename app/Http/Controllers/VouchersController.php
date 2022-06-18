@@ -29,6 +29,11 @@ class VouchersController extends Controller
         {
             $query = $query->where("id", $request->id);
         }
+        if ($request->filled("type"))
+        {
+            $type = ucfirst(strtolower($request->type));
+            $query = $query->where("type", "like", $type . "%");
+        }
         if ($request->filled("from"))
         {
             $query = $query->where("created_at", ">=", $request->from);

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/purchase_manage.css') }}">
 @endpush
 @push('scripts')
-    <script src="{{ asset('js/purchase-manage.js') }}"></script>
+    <script src="{{ asset('js/purchase_manage.js') }}"></script>
 @endpush
 @section('main')
 

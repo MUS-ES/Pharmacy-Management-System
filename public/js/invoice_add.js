@@ -228,9 +228,7 @@ function fillInvoiceDetails() {
 function validateAndCreate() {
     validate();
     invoice = getInvoiceDetails();
-    console.log(invoice);
     promiseJax("/invoice/add", invoice, "POST", false).then(response => {
-        console.log(response);
         if (response.success == 1) {
 
             openPopup('/ajax/popup/feedback', { msg: "success" });

@@ -55,7 +55,7 @@
                     <div class="input-header-container">
                         <label for="">Description</label>
                     </div>
-                    <textarea name="" id="description" ></textarea>
+                    <textarea name="" id="description"></textarea>
                     <span class="invalid-feedback"></span>
                 </div>
 
@@ -81,6 +81,6 @@
 
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/medicine-add.js') }}"></script>
+    <script src="{{ asset('js/medicine_add.js') }}"></script>
     <script src="{{ asset('js/popup.js') }}"></script>
 @endpush

@@ -1,9 +1,9 @@
 
-function closePopup(element) {
+function closePopup(element, reload = false) {
 
     document.querySelector(element).remove();
-
-
+    if (reload)
+        location.reload();
 
 
 }

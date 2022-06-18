@@ -41,7 +41,6 @@ function removeVoucher(element) {
 function save() {
     let vouchers = getVoucherDetails();
     promiseJax("/voucher/add", vouchers, "POST", false).then(response => {
-        console.log(response);
         if (response.success == 1) {
             openPopup('/ajax/popup/feedback', { msg: "success" });
 

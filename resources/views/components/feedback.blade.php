@@ -8,7 +8,7 @@
                 </span>
                 <h3> {{ $msg }}</h3>
             </div>
-            <button onclick="closePopup('.feedback')" id="feedback-btn-done"
+            <button onclick="closePopup('.feedback',true)" id="feedback-btn-done"
                 style="left:0;font-size:15px; font-weight:bolder" id="popup-button" type="button"
                 name="button">DONE</button>
         </div>

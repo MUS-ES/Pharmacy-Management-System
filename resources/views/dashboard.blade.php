@@ -38,7 +38,7 @@
             <div class="card">
                 <div>
                     <div class="numbers">{{ $card['TotalMedicines'] }}</div>
-                    <div class="cardName">Total Medicine</div>
+                    <div class="cardName">Total Medicine </div>
                 </div>
                 <div class="iconBx">
                     <span class="material-icons-outlined">medical_services</span>
@@ -142,10 +142,10 @@
                         </thead>
                         @foreach ($RecentOrders as $order)
                             <tr>
-                                <td>{{ $order->name }}</td>
+                                <td>{{ $order->medicine->name }}</td>
                                 <td>{{ $order->qty }}</td>
-                                <td>{{ $order->price }}</td>
-                                <td>{{ $order->total }}</td>
+                                <td>{{ $order->medicine->price }}</td>
+                                <td>{{ $order->invoice->total_net }}</td>
                                 @if ($order->status == 'paid')
                                     <td><span class="status-paid">Paid</span></td>
                                 @else

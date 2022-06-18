@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\InvoiceItems;
 use App\Models\Medicine;
 use App\Http\Requests\Invoice\StoreInvoiceRequest;
+use App\Models\Chest;
 use App\Models\Payment;
 use App\Models\Stock;
 use Illuminate\Http\Request;
@@ -58,8 +59,6 @@ class InvoicesController extends Controller
         $customerId = null;
         if ($request->filled("customer"))
             $customerId = Customer::where("user_id", Auth::user()->id)->where("name", $request->customer)->first()->id;
-
-        DB::beginTransaction();
         $payment = Payment::create($validated);
 
         $invoice = Invoice::create($validated + [
@@ -86,7 +85,8 @@ class InvoicesController extends Controller
                 $query->decrement('qty', $item['qty']);
             }
         }
-        DB::commit();
+        Chest::where("user_id", Auth::user()->id)->increment("total", (int)$validated["paid"]);
+
         return response()->json(["success" => 1, "invoice" => $invoice, "payment" => $payment]);
     }
     public function destroy(Request $request)

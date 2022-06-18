@@ -5,7 +5,7 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/supplier-add.js') }}"></script>
+    <script src="{{ asset('js/supplier_add.js') }}"></script>
     <script src="{{ asset('js/popup.js') }}"></script>
 @endpush
 

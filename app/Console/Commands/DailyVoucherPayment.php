@@ -9,14 +9,14 @@ use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class DailyChestPayment extends Command
+class DailyVoucherPayment extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'chest:payment';
+    protected $signature = 'voucher:payment';
 
     /**
      * The console command description.
@@ -47,7 +47,7 @@ class DailyChestPayment extends Command
         {
             $chest = Chest::where("user_id", $user->id)->first();
             $safe = Safe::where("user_id", $user->id)->first();
-            Voucher::create(["user_id" => $user->id, "date" => Carbon::now()->format("Y-m-d"), "type" => "Payment", "amount" => (float)$chest->total, "description" => "The Daily Payment To Safe"]);
+            Voucher::create(["user_id" => $user->id, "date" => Carbon::now()->format("Y-m-d"), "type" => "Payment", "amount" => $chest->total, "description" => "The Daily Payment To Safe"]);
             $safe->increment("total", $chest->total);
             $chest->total = 0;
             $chest->save();

@@ -1,11 +1,11 @@
 @extends("layouts.master")
 @section('title', 'PMS')
 @push('head')
-    <link rel="stylesheet" href="{{ asset('css/customer-add.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/customer_add.css') }}">
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/customer-add.js') }}"></script>
+    <script src="{{ asset('js/customer_add.js') }}"></script>
     <script src="{{ asset('js/popup.js') }}"></script>
 @endpush
 

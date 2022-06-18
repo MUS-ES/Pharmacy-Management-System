@@ -6,7 +6,7 @@
 
 @push('scripts')
     <script src="{{ asset('js/popup.js') }}"></script>
-    <script src="{{ asset('js/invoice-add.js') }}"></script>
+    <script src="{{ asset('js/invoice_add.js') }}"></script>
     <script src="{{ asset('js/suggestion.js') }}"></script>
 @endpush
 

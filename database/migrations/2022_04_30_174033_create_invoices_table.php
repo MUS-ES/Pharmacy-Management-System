@@ -20,7 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->decimal('total_discount', 10, 3)->default(0);
             $table->decimal('total_net', 10, 3)->default(0);
             $table->decimal('paid', 10, 3)->default(0);
-            $table->decimal('rest', 10, 3)->default(0)->virtualAs("total-(total_discount+paid)");
+            $table->decimal('rest', 10, 3)->default(0);
             $table->foreignId('customer_id')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('payment_id');
