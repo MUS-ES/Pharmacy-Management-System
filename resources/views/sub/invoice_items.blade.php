@@ -48,42 +48,46 @@
         <!-- End Of Popup Body -->
 
         <!-- <hr class="lower-hr"> -->
+        @if (count($items))
 
-        <div class="bill-rows">
-            <div class="table-data">
-                <table class="popup-table">
-                    <thead>
-                        <tr>
-                            <th>Med-Name</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Exp</th>
-                            <th>Discount</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($items as $item)
+            <div class="bill-rows">
+                <div class="table-data">
+                    <table class="popup-table">
+                        <thead>
                             <tr>
-                                <td>{{ $item->medicine->name }}</td>
-                                <td>{{ $item->qty }}</td>
-                                <td>{{ $item->medicine->price }}</td>
-                                <td>{{ $item->exp }}</td>
-                                <td>{{ $item->discount }}</td>
-                                <td>{{ $item->medicine->price - $item->discount }}</td>
+                                <th>Med-Name</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Exp</th>
+                                <th>Discount</th>
+                                <th>Price</th>
                             </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
+                            @foreach ($items as $item)
+                                <tr>
+                                    <td>{{ $item->medicine->name }}</td>
+                                    <td>{{ $item->qty }}</td>
+                                    <td>{{ $item->medicine->price }}</td>
+                                    <td>{{ $item->exp }}</td>
+                                    <td>{{ $item->discount }}</td>
+                                    <td>{{ $item->medicine->price - $item->discount }}</td>
+                                </tr>
+                            @endforeach
 
-                </table>
+                    </table>
 
+
+                </div>
+                <!-- <div class="bill-body-values">                                                                                                                                                                                                                                                                                                                                         </div> -->
+                <!-- End Of Bill Body Values -->
+
+                <!-- <hr class="horizontal-rule"> -->
 
             </div>
-            <!-- <div class="bill-body-values">                                                                                                                                                                                                                                                                                                                                         </div> -->
-            <!-- End Of Bill Body Values -->
-
-            <!-- <hr class="horizontal-rule"> -->
-
-        </div>
+        @else
+            <h3 style="color:#FF6D55;text-align:center;padding:20px;">Sorry no data available</h3>
+        @endif
         <!-- End Of Bill Rows -->
 
         <hr class="horizontal-rule">

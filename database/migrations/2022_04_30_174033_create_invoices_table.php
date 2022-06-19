@@ -21,9 +21,9 @@ class CreateInvoicesTable extends Migration
             $table->decimal('total_net', 10, 3)->default(0);
             $table->decimal('paid', 10, 3)->default(0);
             $table->decimal('rest', 10, 3)->default(0);
-            $table->foreignId('customer_id')->nullable();
-            $table->foreignId('user_id');
-            $table->foreignId('payment_id');
+            $table->foreignId('customer_id')->nullable()->constrained("customers")->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('user_id')->constrained("users")->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('payment_id')->constrained("payments")->onUpdate('cascade')->onDelete('cascade');;
             $table->date("date");
             $table->timestamps();
         });

@@ -26,7 +26,7 @@
                         <div class="actual-form">
 
                             <div class="inputandlabel">
-                                <input autocomplete="off" name="email" id="signin-email"
+                                <input autocomplete="off" name="email" id="signin-email" value="{{ old('email') }}"
                                     onkeyup="validateEmail(this.value,'signin-email-error')" class="input-field"
                                     type="text" />
                                 <label for="name">Email</label>
@@ -42,9 +42,11 @@
                                 <i class="fa-solid fa-circle-exclamation"></i>
                                 <span class="error" id="signin-password-error"></span>
                             </div>
-                            @if (count($errors))
-                                <span id="signin-error" class="active">Credianlas</span>
-                            @endif
+
+                            @foreach ($errors->all() as $error)
+                                <span id="signin-error" class="active">{{ $error }}</span>
+                            @endforeach
+
                             <input autocomplete="off" class="sign-btn" type="submit" value="Sign In" />
                             <p class="text">Forgotten your Email or Password? <a href="#"><br>Get Help </a>in
                                 Signing In</p>

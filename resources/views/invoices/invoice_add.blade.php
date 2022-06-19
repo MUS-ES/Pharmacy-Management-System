@@ -37,7 +37,7 @@
                                 name="button">New
                                 Customer</button>
                         </div>
-                        <input oninput="showSuggestions(this,'/ajax/customersuggestions') autocomplete=" off"
+                        <input oninput="showSuggestions(this,'/ajax/customersuggestions')" autocomplete="off"
                             id="customer-name" class="input-field" type="text" placeholder="Customer Name" name=""
                             value="">
                     </div>

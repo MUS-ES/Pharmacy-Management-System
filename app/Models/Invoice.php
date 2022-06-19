@@ -11,13 +11,14 @@ class Invoice extends Model
     use HasFactory;
     protected $hidden = [];
     protected $casts = [
-        'total' => 'integer',
-        'total_discount' => 'integer',
-        'total_net' => 'integer',
-        'paid' => 'integer',
+        'total' => 'double',
+        'total_discount' => 'double',
+        'total_net' => 'double',
+        'paid' => 'double',
         'customer_id' => 'integer',
         'user_id' => 'integer',
         'payment_id' => 'integer',
+        'rest' => 'double',
     ];
     protected $fillable = [
         'total',

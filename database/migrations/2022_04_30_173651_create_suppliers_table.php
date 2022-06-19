@@ -17,10 +17,10 @@ class CreateSuppliersTable extends Migration
         {
             $table->id();
             $table->string("name");
-            $table->string("email");
-            $table->string("contact");
-            $table->string("address");
-            $table->foreignId("user_id");
+            $table->string("email")->nullable();
+            $table->string("contact")->nullable();
+            $table->string("address")->nullable();
+            $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

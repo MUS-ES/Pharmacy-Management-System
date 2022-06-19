@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\View\Components\popup\CustomerNewEntry;
 use App\View\Components\popup\MedicineNewEntry;
 use App\View\Components\popup\StockNewEntry;
@@ -46,7 +47,26 @@ class AjaxController extends Controller
         $SupplierNewEntry = new SupplierNewEntry();
         return $SupplierNewEntry->render()->with($SupplierNewEntry->data());
     }
-    public function showMedicinesSuggestions(Request $request)
+
+    public function getChartData(Request $request)
+    {
+        $user = Auth::user();
+        $offest = $request->offest;
+        $invoices = DB::table('invoices')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
+        $purchases  = DB::table('purchases')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
+        return response()->json(["invoices" => $invoices, "purchases" => $purchases]);
+    }
+    public function getSupplierSuggestions(Request $request)
+    {
+        $suggestions = [];
+        if ($request->filled("term"))
+        {
+
+            $suggestions = Supplier::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
+        }
+        return response()->json(["success" => true, "suggestions" => $suggestions]);
+    }
+    public function getMedicineSuggestions(Request $request)
     {
         $suggestions = [];
         if ($request->filled("term"))
@@ -56,21 +76,13 @@ class AjaxController extends Controller
         }
         return response()->json(["success" => true, "suggestions" => $suggestions]);
     }
-    public function getChartData(Request $request)
-    {
-        $user = Auth::user();
-        $offest = $request->offest;
-        $invoices = DB::table('invoices')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
-        $purchases  = DB::table('purchases')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
-        return response()->json(["invoices" => $invoices, "purchases" => $purchases]);
-    }
-    public function showSuppliersSuggestions(Request $request)
+    public function getCustomerSuggestions(Request $request)
     {
         $suggestions = [];
         if ($request->filled("term"))
         {
 
-            $suggestions = Supplier::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
+            $suggestions = Customer::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
         }
         return response()->json(["success" => true, "suggestions" => $suggestions]);
     }

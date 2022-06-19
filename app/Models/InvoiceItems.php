@@ -12,7 +12,7 @@ class InvoiceItems extends Model
     protected $casts = [
         'meidcine_id' => 'integer',
         'qty' => 'integer',
-        'discount' => 'integer',
+        'discount' => 'double',
         'invoice_id' => 'integer',
         'created_at' => 'date',
     ];

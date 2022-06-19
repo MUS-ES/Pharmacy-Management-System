@@ -17,7 +17,7 @@ class CreateChestsTable extends Migration
         {
             $table->id();
             $table->decimal("total", 19, 5);
-            $table->foreignId("user_id");
+            $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

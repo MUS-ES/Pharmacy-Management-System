@@ -10,6 +10,7 @@ function save() {
         address: address
     };
     promiseJax("/supplier/add", data, "POST", 1, 1).then(response => {
+        console.log(response);
         if (response.status == 422) {
             validate(response.errors);
         } else if (response.success == 1) {
@@ -24,9 +25,9 @@ function save() {
 
 function validate(errors) {
     let nameElement = document.getElementById("supplier-name");
-    let emailElement = document.getElementById("supplier-name");
+    let emailElement = document.getElementById("supplier-email");
     let contactElement = document.getElementById("supplier-contact");
-    let addressElement = document.getElementById("supplier-contact");
+    let addressElement = document.getElementById("supplier-address");
     let feedbacksElements = document.getElementsByClassName("invalid-feedback");
     Array.from(feedbacksElements).forEach(element => {
         element.innerText = "";
@@ -39,7 +40,7 @@ function validate(errors) {
         error.innerText = errors.name;
 
     }
-    
+
     if (errors.hasOwnProperty('email')) {
         nameElement.focus();
         let error = emailElement.nextElementSibling;

@@ -40,6 +40,7 @@ function validate(errors) {
 function save() {
 
     promiseJax("/medicine/add", { name: medicineName.value, generic: genericName.value, strip: strip.value, price: price.value, description: description.value }, "POST", 1, 1).then(response => {
+
         if (response.status == 422) {
             validate(response.errors);
         }

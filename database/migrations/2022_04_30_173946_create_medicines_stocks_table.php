@@ -16,12 +16,12 @@ class CreateMedicinesStocksTable extends Migration
         Schema::create('medicines_stocks', function (Blueprint $table)
         {
             $table->id();
-            $table->foreignId("medicine_id");
+            $table->foreignId("medicine_id")->constrained("medicines")->onUpdate('cascade')->onDelete('cascade');
             $table->date("mfd");
             $table->date("exp");
             $table->bigInteger("qty");
-            $table->foreignId("supplier_id")->nullable()->default(NUll);
-            $table->foreignId("user_id");
+            $table->foreignId("supplier_id")->nullable()->constrained("suppliers")->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

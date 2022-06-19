@@ -17,9 +17,9 @@ class CreatePurchasesTable extends Migration
         {
             $table->id();
             $table->decimal("total", 11, 3);
-            $table->foreignId("supplier_id");
-            $table->foreignId("payment_id");
-            $table->foreignId("user_id");
+            $table->foreignId("supplier_id")->nullable()->constrained("suppliers")->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId("payment_id")->constrained("payments")->onUpdate('cascade')->onDelete('cascade');;
+            $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');
             $table->date("date");
             $table->timestamps();
         });

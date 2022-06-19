@@ -16,10 +16,10 @@ class CreatePurchasesItemsTable extends Migration
         Schema::create('purchases_items', function (Blueprint $table)
         {
             $table->id();
-            $table->foreignId("medicine_id");
+            $table->foreignId("medicine_id")->constrained("medicines")->onUpdate('cascade')->onDelete('cascade');;
             $table->bigInteger("qty");
             $table->decimal("unit_price", 10, 3);
-            $table->foreignId("purchase_id");
+            $table->foreignId("purchase_id")->constrained("purchases")->onUpdate('cascade')->onDelete('cascade');;
             $table->date("mfd");
             $table->date("exp");
             $table->timestamps();

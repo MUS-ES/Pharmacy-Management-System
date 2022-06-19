@@ -81,9 +81,9 @@ Route::middleware(['auth'])->group(function ()
             Route::POST("/stock/add", [AjaxController::class, "getStockNewEntryComponent"]);
             Route::POST("/supplier/add", [AjaxController::class, "getSupplierNewEntryComponent"]);
         });
-        Route::post("/medicinesuggestions", [AjaxController::class, "showMedicinesSuggestions"]);
-
-        Route::post("/suppliersuggestions", [AjaxController::class, "showSuppliersSuggestions"]);
+        Route::post("/medicinesuggestions", [AjaxController::class, "getMedicineSuggestions"]);
+        Route::post("/suppliersuggestions", [AjaxController::class, "getSupplierSuggestions"]);
+        Route::post("/customersuggestions", [AjaxController::class, "getCustomerSuggestions"]);
     });
     Route::prefix("/customer")->group(
         function ()

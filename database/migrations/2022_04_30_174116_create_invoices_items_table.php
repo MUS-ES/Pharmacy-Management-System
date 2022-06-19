@@ -16,11 +16,11 @@ class CreateInvoicesItemsTable extends Migration
         Schema::create('invoices_items', function (Blueprint $table)
         {
             $table->id();
-            $table->foreignId("medicine_id");
+            $table->foreignId("medicine_id")->constrained("medicines")->onUpdate('cascade')->onDelete('cascade');;
             $table->bigInteger("qty");
             $table->date("exp");
             $table->decimal("discount", 8, 3);
-            $table->foreignId("invoice_id");
+            $table->foreignId("invoice_id")->constrained("invoices")->onUpdate('cascade')->onDelete('cascade');;
             $table->timestamps();
         });
     }

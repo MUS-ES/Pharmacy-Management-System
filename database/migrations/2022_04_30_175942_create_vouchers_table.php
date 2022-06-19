@@ -19,7 +19,7 @@ class CreateVouchersTable extends Migration
             $table->enum("type", ["Payment", "Receipt"]);
             $table->decimal("amount", 19, 5);
             $table->string("description", 255)->nullable();
-            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');
             $table->date("date");
             $table->timestamps();
         });

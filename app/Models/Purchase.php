@@ -16,6 +16,9 @@ class Purchase extends Model
         'payment_id',
         'date',
     ];
+    protected $casts = [
+        'total' => 'double',
+    ];
     public function user()
     {
         return  $this->belongsTo(User::class);

@@ -20,6 +20,9 @@ class PurchaseItems extends Model
         'exp',
         'created_at',
     ];
+    protected $casts = [
+        'unit_price' => 'double',
+    ];
     public function purchase()
     {
         return $this->belongsTo(Purchase::class);

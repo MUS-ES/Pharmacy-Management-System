@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string("name");
             $table->string("contact");
             $table->string("address");
-            $table->foreignId("user_id");
+            $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
