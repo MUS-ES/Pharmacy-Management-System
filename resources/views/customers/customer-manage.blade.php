@@ -6,6 +6,7 @@
 
 @push('scripts')
     <script src="{{ asset('js/customer_manage.js') }}"></script>
+    <script src="{{ asset('js/popup.js') }}"></script>
 @endpush
 
 @section('main')

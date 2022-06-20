@@ -7,10 +7,12 @@ function closePopup(element, reload = false) {
 
 
 }
-function openPopup(url, data = {}) {
+
+
+async function openPopup(url, data = {}) {
 
     let popupSection = document.getElementById("popup");
-    promiseJax(url, data, "POST", 1, 0).then((response) => {
+    return promiseJax(url, data, "POST", false, 0).then((response) => {
         popupSection.insertAdjacentHTML("beforeend", response);
     });
 

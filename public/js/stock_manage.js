@@ -60,9 +60,16 @@ function validateStock() {
     let data = { medicine: medicineELement.value, mfd: mfdElement.value, exp: expElement.value, qty: qtyElement.value, supplier: supplierElement.value };
     return { valid: valid, data: data };
 }
-function deleteStock(currentElement) {
-    promiseJax("/stock/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
-        console.log(response);
-        search();
-    })
+async function deleteStock(currentElement) {
+
+
+    await openPopup('/ajax/popup/confirm', { msg: 'Are you sure ?' });
+    document.getElementById("confirm-btn").onclick = function () {
+        promiseJax("/stock/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
+            closePopup('.confirm');
+            search();
+
+        });
+
+    }
 }

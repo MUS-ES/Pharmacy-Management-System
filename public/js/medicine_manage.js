@@ -3,12 +3,20 @@ function search() {
     let genericName = document.getElementById("sea-generic").value.trim();
     let supplierName = document.getElementById("sea-supplier").value.trim();
     promiseJax('/medicine/search', { name: medicineName, generic: genericName }, "POST", 1, 0).then(Response => {
-        console.log(Response);
         document.getElementById("table-area").innerHTML = Response;
     })
 }
-function deleteMedicine(currentElement) {
-    promiseJax("/medicine/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
-        search();
-    })
+async function deleteMedicine(currentElement) {
+
+
+    await openPopup('/ajax/popup/confirm', { msg: 'Are you sure ?' });
+    document.getElementById("confirm-btn").onclick = function () {
+        promiseJax("/medicine/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
+            closePopup('.confirm');
+            search();
+
+        });
+
+    }
+
 }

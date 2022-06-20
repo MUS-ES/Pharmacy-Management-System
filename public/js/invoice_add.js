@@ -312,3 +312,9 @@ function validate() {
 
 }
 
+let discardBtn = document.getElementById("discard-btn").onclick = function () {
+    inputs = document.getElementsByTagName("input");
+    Array.from(inputs).forEach((ele) => {
+        ele.value = "";
+    });
+};

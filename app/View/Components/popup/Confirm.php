@@ -11,9 +11,11 @@ class Confirm extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $msg;
+
+    public function __construct($msg)
     {
-        //
+        $this->msg = $msg;
     }
 
     /**

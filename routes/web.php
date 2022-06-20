@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function ()
         {
 
             Route::POST("/feedback", [AjaxController::class, "getFeedbackComponent"]);
+            Route::POST("/confirm", [AjaxController::class, "getConfirmComponent"]);
             Route::POST("/customer/add", [AjaxController::class, "getCustomerNewEntryComponent"]);
             Route::POST("/medicine/add", [AjaxController::class, "getMedicineNewEntryComponent"]);
             Route::POST("/stock/add", [AjaxController::class, "getStockNewEntryComponent"]);

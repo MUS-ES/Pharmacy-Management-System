@@ -5,6 +5,7 @@
 @endpush
 @push('scripts')
     <script src="{{ asset('js/medicine_manage.js') }}"></script>
+    <script src="{{ asset('js/popup.js') }}"></script>
 @endpush
 
 @section('main')

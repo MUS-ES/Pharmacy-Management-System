@@ -39,7 +39,7 @@ class PurchasesController extends Controller
         {
             $query = $query->whereRelation("supplier", "like", "%" . $request->supplier . "%");
         }
-        $purchases = $query->orderBy("created_at", "desc")->get();
+        $purchases = $query->orderBy("date", "desc")->get();
         return view("sub.purchase_table", compact("purchases"))->render();
     }
     public function getPurchaseItems($id)

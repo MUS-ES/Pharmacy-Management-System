@@ -6,6 +6,7 @@
 
 @push('scripts')
     <script src="{{ asset('js/voucher_manage.js') }}"></script>
+    <script src="{{ asset('js/popup.js') }}"></script>
 @endpush
 
 @section('main')
@@ -22,24 +23,26 @@
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Voucher Number:</div>
                         <input oninput="search()" id="sea-voucher-number" class="input-field" type="number"
-                            placeholder="Voucher Number" name="" value="">
+                            placeholder="Voucher Number" name="voucher_id" value="{{ old('voucher_id') }}">
                     </div>
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Voucher Type:</div>
                         <input oninput="search()" id="sea-voucher-type" class="input-field" type="text"
-                            placeholder="Voucher Type" name="" value="">
+                            placeholder="Voucher Type" name="voucher_type" value="{{ old('voucher_type') }}">
                     </div>
 
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Date:</div>
                         From:
-                        <input oninput="search()" id="sea-from-date" class="input-field" type="date" name="" value="">
+                        <input oninput="search()" id="sea-from-date" class="input-field" type="date" name="voucher_fdate"
+                            value="{{ old('voucher_fdate') }}">
                     </div>
 
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Date:</div>
                         To:
-                        <input oninput="search()" id="sea-to-date" class="input-field" type="date" name="" value="">
+                        <input oninput="search()" id="sea-to-date" class="input-field" type="date" name="voucher_tdate"
+                            value="{{ old('voucher_tdate') }}">
                     </div>
 
                     <div class="refresh-btn">

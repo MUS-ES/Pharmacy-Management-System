@@ -34,7 +34,7 @@ class MedicinesController extends Controller
         {
             $query = $query->where("generic_name", "like", $request->generic . "%");
         }
-        $medicines = $query->get();
+        $medicines = $query->orderBy("name", "asc")->get();
         //return response()->json(["meid" => $medicines]);
         return view("sub.medicine_table", compact("medicines"))->render();
     }

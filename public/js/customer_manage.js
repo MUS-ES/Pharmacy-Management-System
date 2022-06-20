@@ -5,8 +5,15 @@ function search() {
         document.getElementById("table-area").innerHTML = Response;
     })
 }
-function deleteCustomer(currentElement) {
-    promiseJax("/customer/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
-        search();
-    })
+async function deleteCustomer(currentElement) {
+
+    await openPopup('/ajax/popup/confirm', { msg: 'Are you sure ?' });
+    document.getElementById("confirm-btn").onclick = function () {
+        promiseJax("/customer/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
+            closePopup('.confirm');
+            search();
+
+        });
+
+    }
 }

@@ -14,6 +14,7 @@ use App\View\Components\popup\SupplierNewEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Supplier;
+use App\View\Components\popup\Confirm;
 
 class AjaxController extends Controller
 {
@@ -46,6 +47,12 @@ class AjaxController extends Controller
 
         $SupplierNewEntry = new SupplierNewEntry();
         return $SupplierNewEntry->render()->with($SupplierNewEntry->data());
+    }
+    public function getConfirmComponent(Request $request)
+    {
+
+        $Confirm = new Confirm($request->msg);
+        return $Confirm->render()->with($Confirm->data());
     }
 
     public function getChartData(Request $request)

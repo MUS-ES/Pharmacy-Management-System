@@ -19,7 +19,7 @@
                     <td>{{ $voucher->date }}</td>
                     <td>{{ $voucher->description }}</td>
                     <td class="action-section">
-                        <span onclick="deletevoucher(this)" data-id="{{ $voucher->id }}"
+                        <span onclick="deleteVoucher(this)" data-id="{{ $voucher->id }}"
                             class="material-icons-outlined">delete</span>
                         <span onclick="showvoucherItems(this)" id="show-items" data-id="{{ $voucher->id }}"
                             class="material-icons-outlined">visibility</span>
@@ -30,6 +30,7 @@
 
 
     </table>
+    {{-- {!! $vouchers->render() !!} --}}
 @else
     <h3 style="color:#FF6D55;text-align:center;padding:20px;">Sorry no data until yet</h3>
 @endif

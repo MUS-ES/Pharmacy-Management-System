@@ -2,23 +2,18 @@
     <div class="popup-overlay"></div>
     <div class="popup-container">
         <div class="body">
-
-            <div class="input-container">
-                <div class="input-header-container">
-                    <label for="">Supplier Name</label>
-                </div>
-                <input id="popup-new-supplier-name" type="text">
-                <span class="invalid-feedback"></span>
+            <div class="title">
+                <span class="material-icons-outlined">
+                    help_outline
+                </span>
+                <h3> {{ $msg }}</h3>
             </div>
+            <div class="buttons-container">
+                <button id="confirm-btn" type="submit">Yes</button>
 
-
-            <div class="popup-btn">
-                <button onclick="saveSupplier()" id="popup-new-supplier-btn" type="button" name="button"><span
-                        style="font-size:30px" class="material-icons-outlined">
-                        add_circle_outline
-                    </span></button>
+                <button onclick="closePopup('.confirm')" id="ignore-btn" name="button">No</button>
+                </form>
             </div>
-
         </div>
     </div>
 </div>

@@ -24,7 +24,7 @@ class DashboardController extends Controller
             "OutOfStock" => DB::table("medicines")->leftjoin("medicines_stocks", "medicines.id", "=", "medicines_stocks.medicine_id")->where("medicines_stocks.id", null)->where("medicines.user_id", Auth::user()->id)->count(),
             "TotalPurchasesToday" => $user->purchases->sum("total"),
         ];
-        $RecentOrders = InvoiceItems::with("medicine", "invoice")->whereRelation("invoice", "user_id", Auth::user()->id)->limit(10)->get();
+        $RecentOrders = InvoiceItems::with("medicine", "invoice")->whereRelation("invoice", "user_id", Auth::user()->id)->orderBy("created_at", "desc")->limit(10)->get();
         return view("dashboard", compact("card", "RecentOrders"));
     }
 }

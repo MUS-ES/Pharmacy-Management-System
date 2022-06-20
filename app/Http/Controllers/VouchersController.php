@@ -40,8 +40,9 @@ class VouchersController extends Controller
         }
         if ($request->filled("to"))
         {
-            $query = $query->where("created_at", "<=", $request->to);
+            $query = $query->orderBy("date", "desc")->where("created_at", "<=", $request->to);
         }
+        //$vouchers = $query->simplePaginate(1);
         $vouchers = $query->get();
         return view("sub.vouchers_table", compact("vouchers"))->render();
     }
@@ -66,5 +67,16 @@ class VouchersController extends Controller
             Voucher::create($voucher + ["user_id" => Auth::user()->id]);
         }
         return response()->json(["success" => 1]);
+    }
+    public function destroy(Request $request)
+    {
+        if ($request->filled("id"))
+        {
+            Voucher::destroy($request->id);
+        }
+        if ($request->ajax())
+            return response()->json(["success" => 1]);
+
+        return redirect()->back()->withInput();
     }
 }

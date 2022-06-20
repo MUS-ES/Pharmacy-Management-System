@@ -5,8 +5,14 @@ function search() {
         document.getElementById("table-area").innerHTML = Response;
     })
 }
-function deleteSupplier(currentElement) {
-    promiseJax("/supplier/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
-        search();
-    })
+async function deleteSupplier(currentElement) {
+    await openPopup('/ajax/popup/confirm', { msg: 'Are you sure ?' });
+    document.getElementById("confirm-btn").onclick = function () {
+        promiseJax("/supplier/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
+            closePopup('.confirm');
+            search();
+
+        });
+
+    }
 }

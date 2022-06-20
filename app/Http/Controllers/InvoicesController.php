@@ -36,7 +36,7 @@ class InvoicesController extends Controller
         {
             $query = $query->whereRelation("customer", "like", "%" . $request->customer . "%");
         }
-        $invoices = $query->get();
+        $invoices = $query->orderBy("date", "desc")->get();
         return view("sub.invoice_table", compact("invoices"))->render();
     }
     public function manageInvoices()

@@ -26,9 +26,17 @@ function search() {
 }
 
 
-function deleteInvoice(currentElement) {
-    promiseJax("/invoice/delete", { id: currentElement.dataset.id }, "DELETE").then(response => {
-        search();
-    });
+async function deleteInvoice(currentElement) {
+
+    await openPopup('/ajax/popup/confirm', { msg: 'Are you sure ?' });
+    document.getElementById("confirm-btn").onclick = function () {
+        promiseJax("/invoice/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
+            closePopup('.confirm');
+            search();
+
+        });
+
+    }
+
 }
 
