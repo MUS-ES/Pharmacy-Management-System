@@ -9,7 +9,7 @@ function search() {
 async function deleteMedicine(currentElement) {
 
 
-    await openPopup('/ajax/popup/confirm', { msg: 'Are you sure ?' });
+    await openPopup('/ajax/popup/confirm', { msg: 'if you delete this all records depends in this record will also deleted ?' });
     document.getElementById("confirm-btn").onclick = function () {
         promiseJax("/medicine/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
             closePopup('.confirm');
