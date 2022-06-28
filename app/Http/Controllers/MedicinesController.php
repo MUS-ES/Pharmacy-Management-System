@@ -35,7 +35,6 @@ class MedicinesController extends Controller
             $query = $query->where("generic_name", "like", $request->generic . "%");
         }
         $medicines = $query->orderBy("name", "asc")->get();
-        //return response()->json(["meid" => $medicines]);
         return view("sub.medicine_table", compact("medicines"))->render();
     }
 
@@ -47,15 +46,10 @@ class MedicinesController extends Controller
     public function store(StoreMedicineRequest $request)
     {
         $validated = $request->validated();
-        $medicine = Medicine::create([
-            "name" => $validated['name'],
-            "generic_name" => $validated['generic'],
-            "strip_unit" => $validated['strip'],
-            "description" => $validated['description'],
-            "price" => $validated['price'],
+        $medicine = Medicine::create($validated + [
             "user_id" => Auth::user()->id,
         ]);
-        return response()->json(["success" => 1, "instance" => $medicine]);
+        return response()->json(["instance" => $medicine], 201);
     }
 
 
@@ -68,7 +62,7 @@ class MedicinesController extends Controller
         if ($request->has("medicine"))
         {
 
-            $exist = Medicine::join("medicines_stocks", "medicines.id", "=", "medicines_stocks.medicine_id")->where("medicines_stocks.user_id", "=", Auth::User()->id)->where("name", "=", $request->medicine)->count();
+            $exist = Medicine::join("stocks", "medicines.id", "=", "stocks.medicine_id")->where("stocks.user_id", "=", Auth::User()->id)->where("name", "=", $request->medicine)->count();
             if ($exist !== 0)
             {
                 $exist = 1;

@@ -24,6 +24,7 @@ class Invoice extends Model
         'total',
         'total_discount',
         'total_net',
+        'rest',
         'paid',
         'customer_id',
         'user_id',

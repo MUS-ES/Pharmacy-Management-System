@@ -17,17 +17,13 @@
             <tr>
                 @foreach ($stocks as $stock)
                     <td>{{ $stock->medicine->name }}</td>
-                    <td>{{ $stock->medicine->strip_unit }}</td>
-                    <td>{{ $stock->medicine->generic_name }}</td>
+                    <td>{{ $stock->medicine->unit }}</td>
+                    <td>{{ $stock->medicine->generic }}</td>
                     <td>{{ $stock->qty }}</td>
                     <td>{{ $stock->medicine->price }}</td>
                     <td>{{ $stock->exp }}</td>
                     <td>
-                        @if ($stock->supplier != null)
-                            {{ $stock->supplier->name }}
-                        @else
-                            No Supplier
-                        @endif
+                        {{ $stock->supplier ? $stock->supplier->name : 'No Supplier Name' }}
                     </td>
                     <td><span data-id="{{ $stock->id }}" id="edit-medicine-btn" class="material-icons-outlined">
                             edit

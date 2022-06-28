@@ -7,6 +7,9 @@ function search() {
     let data = { name: medicineName, generic: genericName, supplier: supplierName, outOfStock: outOfStockBtn, expire: expireBtn };
     promiseJax('/stock/search', data, "POST", 1, 0).then(Response => {
         document.getElementById("table-area").innerHTML = Response;
+    }).catch((error) => {
+
+        console.log(error);
     });
 }
 
@@ -26,7 +29,10 @@ function saveStock() {
     if (validated) {
         promiseJax("stock/add", validated.data, "post", 1, 0).then(response => {
             console.log(response);
-        })
+        }).catch((error) => {
+
+            console.log(error);
+        });
     }
 }
 
@@ -69,6 +75,9 @@ async function deleteStock(currentElement) {
             closePopup('.confirm');
             search();
 
+        }).catch((error) => {
+
+            console.log(error);
         });
 
     }

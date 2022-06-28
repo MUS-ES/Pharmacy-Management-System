@@ -162,11 +162,15 @@
                     </div>
 
                     <div class="btn-adjustment">
-                        <button onclick="validateAndCreate()" class="btn-decoration" id="save-btn" type="button"
+                        <button onclick="saveInvoice()" class="btn-decoration" id="save-btn" type="button"
                             name="button">Save</button>
                         <button class="btn-decoration" id="discard-btn" type="button" name="button">Discard</button>
                     </div>
 
+                </div>
+                <div class="invalid-feedback-container">
+                    <ul id="invalid-feedback-list">
+                    </ul>
                 </div>
                 <!-- End Of Final Results -->
 

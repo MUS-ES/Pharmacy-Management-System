@@ -128,21 +128,6 @@
 
             <li>
                 <a href="#">
-                    <span class="icon material-icons-outlined">manage_search</span>
-                    <h3>Search</h3>
-                    <span class="icon-right material-icons-outlined">expand_more</span>
-                </a>
-                <ul class="side-dropdown">
-                    <li><a href="#"><span class="icon material-icons-outlined">list_alt</span>Invoice</a></li>
-                    <li><a href="#"><span class="icon material-icons-outlined">personal_injury</span>Customer</a></li>
-                    <li><a href="#"><span class="icon material-icons-outlined">medication</span>Medicine</a></li>
-                    <li><a href="#"><span class="icon material-icons-outlined">airport_shuttle</span>Supplier</a></li>
-                    <li><a href="#"><span class="icon material-icons-outlined">point_of_sale</span>Purchase</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
                     <span class="icon material-icons-outlined">people_alt</span>
                     <h3>About Us</h3>
                 </a>

@@ -17,11 +17,11 @@ class CreateMedicinesTable extends Migration
         {
             $table->id();
             $table->string("name");
-            $table->tinyInteger("strip_unit");
-            $table->string("generic_name");
+            $table->tinyInteger("unit");
+            $table->string("generic");
             $table->decimal("price", 10, 3);
             $table->string("description", 255)->nullable();
-            $table->decimal("strip_price", 10, 3)->virtualAs("price/strip_unit");
+            $table->decimal("unit_price", 10, 3)->virtualAs("price/unit");
             $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');;
             $table->timestamps();
         });

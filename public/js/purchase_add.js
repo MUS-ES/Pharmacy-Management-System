@@ -1,3 +1,4 @@
+
 class PurchaseItem {
     constructor(medicine, mfd, exp, qty, price, supplierPrice) {
         this.medicine = medicine;
@@ -43,17 +44,17 @@ function removeInvoice(element) {
 
 function fillFields(billElement) {
     let medicineElement = billElement.querySelector("#sub-purchase-medicine")
-    let packingElement = billElement.querySelector("#sub-purchase-packing");
     let salepriceElement = billElement.querySelector("#sub-purchase-sale-price");
-    packingElement.value = 0;
     salepriceElement.value = 0;
 
     promiseJax("/medicine/show", { medicine: medicineElement.value }, "POST", true, true).then((response) => {
         if (response.instance != null) {
 
-            packingElement.value = response.instance.strip_unit;
             salepriceElement.value = response.instance.price;
         }
+    }).catch((error) => {
+
+        console.log(error);
     });
 
 }
@@ -94,29 +95,24 @@ function getPurchaseDetails() {
         let purchaseItemObject = new PurchaseItem(medicine.value, mfdDate.value, expDate.value, qty.value, unitPrice.value, supplierPrice.value);
         purchaseItemsArray.push(purchaseItemObject);
     });
-    return { total: total.value, status: ((paid.value == total.value) ? "Paid" : "Partially Paid"), date: purchaseDate.value, provider: paymentType.value, supplier: supplier.value, items: purchaseItemsArray };
+    return { total: total.value, paid: paid.value, status: ((paid.value == total.value) ? "Paid" : "Partially Paid"), date: purchaseDate.value, provider: paymentType.value, supplier: supplier.value, items: purchaseItemsArray };
 }
 
 function savePurchase() {
     let purchase = getPurchaseDetails();
     promiseJax("/purchase/add", purchase, "POST", true, true).then(response => {
-        console.log(response);
+
+        openPopup('/ajax/popup/feedback', { msg: "success" });
+    }).catch((response) => {
+
         let errorList = document.getElementById("invalid-feedback-list");
-
-        if (response.success == 1) {
-
-            while (child = errorList.firstElementChild) {
-                child.remove();
-            }
-            openPopup('/ajax/popup/feedback', { msg: "success" });
+        while (errorList.firstChild) {
+            errorList.removeChild(errorList.lastChild);
         }
-        else if (response.status = 422) {
-
-            for (let item of Object.values(response.errors)) {
-                let li = document.createElement("li");
-                li.innerText = item;
-                errorList.appendChild(li);
-            }
+        for (let item of Object.values(response.errors)) {
+            let li = document.createElement("li");
+            li.innerText = item;
+            errorList.appendChild(li);
         }
     });
 }

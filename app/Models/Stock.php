@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
-    protected $table = "medicines_stocks";
+    protected $table = "stocks";
     use HasFactory;
     protected $fillable = [
         'user_id',

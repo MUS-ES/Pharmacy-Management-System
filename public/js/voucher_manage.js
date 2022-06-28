@@ -17,7 +17,24 @@ async function deleteVoucher(currentElement) {
             closePopup('.confirm');
             search();
 
+        }).catch((error) => {
+
+            console.log(error);
         });
 
+
     }
+}
+ele = document.getElementsByClassName("paginator");
+console.log(ele[0]);
+ele.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log(event);
+
+});
+function lll(ele) {
+
+    promiseJax('/voucher/search', { page: 2 }, "POST", 1, 0).then(response => {
+        document.getElementById("table-area").innerHTML = response;
+    });
 }

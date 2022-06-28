@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMedicinesStocksTable extends Migration
+class CreateStocksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMedicinesStocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('medicines_stocks', function (Blueprint $table)
+        Schema::create('stocks', function (Blueprint $table)
         {
             $table->id();
             $table->foreignId("medicine_id")->constrained("medicines")->onUpdate('cascade')->onDelete('cascade');
@@ -33,6 +33,6 @@ class CreateMedicinesStocksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicines_stocks');
+        Schema::dropIfExists('stocks');
     }
 }

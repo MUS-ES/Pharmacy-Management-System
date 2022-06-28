@@ -57,7 +57,6 @@
 
                 <div class="bill-body-header">
                     <div class="headers">Medicine Name</div>
-                    <div class="headers">Packing</div>
                     <div class="headers">Quantity</div>
                     <div class="headers">Mfd Date</div>
                     <div class="headers">Expiry</div>
@@ -82,12 +81,6 @@
                             <input autocomplete="off" id="sub-purchase-medicine"
                                 oninput="showSuggestions(this,'/ajax/medicinesuggestions',fillFields,this.closest('#bill-body'));"
                                 class=" body-input-field" type="text" name="medicine" value="">
-
-                        </div>
-
-                        <div>
-                            <input id="sub-purchase-packing" class="body-input-field" type="number" name="packing" value="">
-
 
                         </div>
 

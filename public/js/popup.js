@@ -68,17 +68,16 @@ function saveCustomer() {
         address: address
     };
     promiseJax("/customer/add", data, "POST", 1, 1).then(response => {
-        if (response.status == 422) {
-            validateCustomer(response.errors);
-        } else if (response.success == 1) {
 
-            closePopup('.new-customer');
-            openPopup('/ajax/popup/feedback', {
-                msg: "Customer " + name + " has been added"
-            });
-            document.querySelector("#customer-name").value = name;
-        };
+        closePopup('.new-customer');
+        openPopup('/ajax/popup/feedback', {
+            msg: "Customer " + name + " has been added"
+        });
+        document.querySelector("#customer-name").value = name;
 
+    }).catch((response) => {
+
+        validateCustomer(response.errors);
     });
 }
 
@@ -126,15 +125,14 @@ function saveStock() {
         supplier: supplier,
     };
     promiseJax("/stock/add", data, "POST", 1, 1).then((response) => {
-        if (response.status == 422) {
-            validateStock(response.errors);
-        } else if (response.success == 1) {
+        closePopup('.stock-new-entry');
+        openPopup('/ajax/popup/feedback', {
+            msg: "New entry  has been added"
+        });
 
-            closePopup('.stock-new-entry');
-            openPopup('/ajax/popup/feedback', {
-                msg: "New entry  has been added"
-            });
-        }
+    }).catch((response) => {
+
+        validateStock(response.errors);
     });
 }
 
@@ -188,26 +186,25 @@ function validateStock(errors) {
 function saveMedicine() {
     let name = document.getElementById("popup-new-medicine-name").value;
     let generic = document.getElementById("popup-new-medicine-generic").value;
-    let strip = document.getElementById("popup-new-medicine-strip").value;
+    let unit = document.getElementById("popup-new-medicine-unit").value;
     let price = document.getElementById("popup-new-medicine-price").value;
     let description = document.getElementById("popup-new-medicine-description").value;
     let data = {
         name: name,
         generic: generic,
-        strip: strip,
+        unit: unit,
         price: price,
         description: description,
     };
     promiseJax("/medicine/add", data, "POST", 1, 1).then((response) => {
-        if (response.status == 422) {
-            validateMedicine(response.errors);
-        } else if (response.success == 1) {
 
-            closePopup('.new-medicine');
-            openPopup('/ajax/popup/feedback', {
-                msg: "New medicine " + name + " has been added"
-            });
-        };
+        closePopup('.new-medicine');
+        openPopup('/ajax/popup/feedback', {
+            msg: "New medicine " + name + " has been added"
+        });
+    }).catch((response) => {
+
+        validateMedicine(response.errors);
     });
 }
 
@@ -215,7 +212,7 @@ function saveMedicine() {
 function validateMedicine(errors) {
     let nameElement = document.getElementById("popup-new-medicine-name");
     let genericElement = document.getElementById("popup-new-medicine-generic");
-    let stripElement = document.getElementById("popup-new-medicine-strip");
+    let unitElement = document.getElementById("popup-new-medicine-unit");
     let priceElement = document.getElementById("popup-new-medicine-price");
     let descriptionElement = document.getElementById("popup-new-medicine-description");
 
@@ -237,10 +234,10 @@ function validateMedicine(errors) {
         error.innerText = errors.generic;
 
     }
-    if (errors.hasOwnProperty('strip')) {
-        stripElement.focus();
-        let error = stripElement.nextElementSibling;
-        error.innerText = errors.strip;
+    if (errors.hasOwnProperty('unit')) {
+        unitElement.focus();
+        let error = unitElement.nextElementSibling;
+        error.innerText = errors.unit;
 
     }
     if (errors.hasOwnProperty('price')) {
@@ -271,16 +268,14 @@ function saveSupplier() {
         address: address,
     };
     promiseJax("/supplier/add", data, "POST", 1, 1).then((response) => {
-        console.log(response);
-        if (response.status == 422) {
-            validateSupplier(response.errors);
-        } else if (response.success == 1) {
+        closePopup('.new-supplier');
+        openPopup('/ajax/popup/feedback', {
+            msg: "New supplier " + name + " has been added"
+        });
 
-            closePopup('.new-supplier');
-            openPopup('/ajax/popup/feedback', {
-                msg: "New supplier " + name + " has been added"
-            });
-        };
+    }).catch((response) => {
+
+        validateSupplier(response.errors);
     });
 }
 

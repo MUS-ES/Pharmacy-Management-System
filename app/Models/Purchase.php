@@ -11,6 +11,7 @@ class Purchase extends Model
     use HasFactory;
     protected $fillable = [
         'total',
+        'paid',
         'supplier_id',
         'user_id',
         'payment_id',
@@ -18,6 +19,8 @@ class Purchase extends Model
     ];
     protected $casts = [
         'total' => 'double',
+        'paid' => 'double',
+        'rest' => 'double',
     ];
     public function user()
     {

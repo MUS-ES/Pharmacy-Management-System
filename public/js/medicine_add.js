@@ -1,6 +1,6 @@
 let medicineName = document.getElementById("medicine-name");
 let genericName = document.getElementById("gereric-name");
-let strip = document.getElementById("strip");
+let unit = document.getElementById("unit");
 let price = document.getElementById("price");
 let description = document.getElementById("description");
 let feedbacksElements = document.getElementsByClassName("invalid-feedback");
@@ -23,10 +23,10 @@ function validate(errors) {
         error.innerText = errors.generic;
 
     }
-    if (errors.hasOwnProperty('strip')) {
-        strip.focus();
-        let error = strip.nextElementSibling;
-        error.innerText = errors.strip;
+    if (errors.hasOwnProperty('unit')) {
+        unit.focus();
+        let error = unit.nextElementSibling;
+        error.innerText = errors.unit;
 
     }
     if (errors.hasOwnProperty('price')) {
@@ -38,18 +38,15 @@ function validate(errors) {
 }
 
 function save() {
+    let data = { name: medicineName.value, generic: genericName.value, unit: unit.value, price: price.value, description: description.value }
+    promiseJax("/medicine/add", data, "POST", 1, 1).then(response => {
 
-    promiseJax("/medicine/add", { name: medicineName.value, generic: genericName.value, strip: strip.value, price: price.value, description: description.value }, "POST", 1, 1).then(response => {
+        openPopup('/ajax/popup/feedback', {
+            msg: "New medicine " + medicineName.value + " has been added"
+        });
+    }).catch((response) => {
 
-        if (response.status == 422) {
-            validate(response.errors);
-        }
-        else if (response.success == 1) {
-
-            openPopup('/ajax/popup/feedback', {
-                msg: "New medicine " + medicineName.value + " has been added"
-            });
-        }
+        validate(response.errors);
     });
 }
 

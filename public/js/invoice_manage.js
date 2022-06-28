@@ -1,7 +1,6 @@
 function showInvoiceItems(currentElement) {
 
     promiseJax("/invoice/items/" + currentElement.dataset.id, null, "GET", true, 0).then(response => {
-        console.log(response);
         let popup = document.getElementById("popup");
         popup.classList.add("active");
         popup.innerHTML = response;
@@ -9,6 +8,9 @@ function showInvoiceItems(currentElement) {
         document.getElementById("close-btn").addEventListener("click",
             function () {
                 document.querySelector(".container1").style.display = "none";
+            }).catch((error) => {
+
+                console.log(error);
             });
     });
 
@@ -22,6 +24,9 @@ function search() {
     let toDate = document.getElementById("sea-to-date").value.trim();
     promiseJax('/invoice/search', { id: invoiceNumber, customer: customerName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
         document.getElementById("table-area").innerHTML = response;
+    }).catch((error) => {
+
+        console.log(error);
     });
 }
 
@@ -34,6 +39,9 @@ async function deleteInvoice(currentElement) {
             closePopup('.confirm');
             search();
 
+        }).catch((error) => {
+
+            console.log(error);
         });
 
     }

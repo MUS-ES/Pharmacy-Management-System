@@ -237,6 +237,21 @@ main .title {
 }
 
 /* End Of Final Bill Result */
+/* Start Invalid Feedback */
+.invalid-feedback-container {
+    margin-top: 20px;
+}
+
+
+.invalid-feedback-container li {
+    margin-left: 20px;
+    color: red;
+    list-style-type: disc;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* End Invalid Feedback */
 
 
 /* Media Queries */

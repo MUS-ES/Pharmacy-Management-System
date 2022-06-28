@@ -688,7 +688,8 @@ body .not-active-title {
 /* End Of Media Queries */
 
 /* Start General Input Style */
-input {
+input,
+select {
     font-family: "Ubuntu";
     font-size: 1.1rem;
     font-weight: 400;

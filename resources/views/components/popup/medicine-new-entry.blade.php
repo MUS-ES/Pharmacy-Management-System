@@ -25,9 +25,9 @@
 
             <div class="input-container merge two">
                 <div class="input-header-container">
-                    <label for="">Strip</label>
+                    <label for="">Unit</label>
                 </div>
-                <input id="popup-new-medicine-strip" type="number">
+                <input id="popup-new-medicine-unit" type="number">
                 <span class="invalid-feedback"></span>
             </div>
             <div class="input-container merge two">

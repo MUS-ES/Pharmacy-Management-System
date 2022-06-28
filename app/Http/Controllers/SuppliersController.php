@@ -12,14 +12,8 @@ class SuppliersController extends Controller
     public function store(StoreSupplierRequest $request)
     {
         $validated = $request->validated();
-        $supplier = Supplier::create([
-            "name" => $validated['name'],
-            "email" => $validated['email'],
-            "contact" => $validated['contact'],
-            "address" => $validated['address'],
-            "user_id" => Auth::user()->id,
-        ]);
-        return response()->json(["success" => 1, "instance" => $supplier]);
+        $supplier = Supplier::create($validated + ["user_id" => Auth::user()->id]);
+        return response()->json(["instance" => $supplier], 201);
     }
 
     public function add()
@@ -70,7 +64,7 @@ class SuppliersController extends Controller
                 $supplier->address = $request['address'];
             }
         }
-        return response()->json(["success" => 1, "instance" => $supplier]);
+        return response()->json(["instance" => $supplier], 200);
     }
     public function destroy(Request $request)
     {
@@ -79,6 +73,6 @@ class SuppliersController extends Controller
 
             Supplier::destroy($request->id);
         }
-        return response()->json(["success" => 1]);
+        return response()->json(["success" => 1], 200);
     }
 }

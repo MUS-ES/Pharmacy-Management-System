@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Purchase;
 use App\Http\Requests\Purchase\StorePurchaseRequest;
 use App\Models\Safe;
+use App\Models\Chest;
 use App\Models\Medicine;
 use App\Models\Payment;
 use App\Models\Stock;
@@ -29,17 +30,17 @@ class PurchasesController extends Controller
         }
         if ($request->filled("from"))
         {
-            $query = $query->where("created_at", ">=", $request->from);
+            $query = $query->where("date", ">=", $request->from);
         }
         if ($request->filled("to"))
         {
-            $query = $query->where("created_at", "<=", $request->to);
+            $query = $query->where("date", "<=", $request->to);
         }
         if ($request->filled("supplier"))
         {
-            $query = $query->whereRelation("supplier", "like", "%" . $request->supplier . "%");
+            $query = $query->whereRelation("supplier", "name", "like", "%" . $request->supplier . "%");
         }
-        $purchases = $query->orderBy("date", "desc")->get();
+        $purchases = $query->orderBy("created_at", "desc")->get();
         return view("sub.purchase_table", compact("purchases"))->render();
     }
     public function getPurchaseItems($id)
@@ -65,13 +66,20 @@ class PurchasesController extends Controller
                 "price" => $item["price"],
             ]);
             $purchase->purchaseItems()->create($item + ["medicine_id" => $medicine->id, 'unit_price' => $item['supplierPrice']]);
-
-            $stock = Stock::create($item + ['user_id' => Auth::user()->id, 'medicine_id' => $medicine->id, 'supplier_id' => $supplier->id]);
+            $stock = Stock::where("user_id", Auth::user()->id)->whereRelation("medicine", "name", "=", $item['medicine'])->first();
+            if ($stock)
+            {
+                $stock->increment("qty", $item["qty"]);
+            }
+            else
+            {
+                $stock = Stock::create($item + ['user_id' => Auth::user()->id, 'medicine_id' => $medicine->id, 'supplier_id' => $supplier->id]);
+            }
         }
-        Voucher::create(["user_id" => Auth::user()->id, "date" => $validated["date"], "type" => "Receipt", "amount" => $validated["total"], "description" => "Buy New Drugs (Purchase id : " . $purchase->id . " )"]);
-        Safe::where("user_id", Auth::user()->id)->first()->decrement("total", $validated['total']);
+        //Voucher::create(["user_id" => Auth::user()->id, "date" => $validated["date"], "type" => "Receipt", "amount" => $validated["total"], "description" => "Buy New Drugs (Purchase id : " . $purchase->id . " )"]);
+        Chest::where("user_id", Auth::user()->id)->first()->decrement("total", $validated['paid']);
 
-        return response()->json(['success' => true, 'instance' => $purchase]);
+        return response()->json(['instance' => $purchase], 201);
     }
     public function manage()
     {

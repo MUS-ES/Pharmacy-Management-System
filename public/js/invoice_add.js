@@ -9,23 +9,6 @@ class InvoiceItem {
     }
 }
 
-function addCustomer(currentElement) {
-    let newCustomer = currentElement.closest(".new-customer");
-    let address = newCustomer.querySelector("#customer-address");
-    let contact = newCustomer.querySelector("#contact-number");
-    let name = newCustomer.querySelector("#customer-name");
-    promiseJax("/customer/add", { name: name.value, contact: contact.value, address: address.value }, "POST", true).then(response => {
-        console.log(response);
-        if (response.success == 1) {
-
-            let feedbackEle = document.querySelector("#popup .feedback");
-            feedbackEle.classList.add("active");
-            document.querySelector(".container1").style.display = "none";
-
-        }
-    });
-}
-
 function addInvoice() {
     let container = document.getElementById("bill-rows");
     let bill = container.firstElementChild;
@@ -129,17 +112,17 @@ function fillExpDates(billElement) {
     let medicineELement = billElement.querySelector("#medicine");
 
     return promiseJax("/stock/show", { medicine: medicineELement.value }, "POST").then(response => {
-        console.log(response);
-        if (response.success == 1) {
 
-            removeChilderns(expElement);
-            response.instance.forEach(date => {
-                let option = document.createElement("option");
-                option.setAttribute("value", date.exp);
-                option.innerText = date.exp;
-                expElement.appendChild(option);
-            })
-        }
+        removeChilderns(expElement);
+        response.instance.forEach(date => {
+            let option = document.createElement("option");
+            option.setAttribute("value", date.exp);
+            option.innerText = date.exp;
+            expElement.appendChild(option);
+        })
+    }).catch((error) => {
+
+        console.log(error);
     });
 }
 
@@ -148,7 +131,6 @@ function fillAvQty(billElement) {
     let expElement = billElement.querySelector("#exp_date");
     let medicineELement = billElement.querySelector("#medicine");
     return promiseJax("/stock/show", { medicine: medicineELement.value, "exp": expElement.value }, "POST", true).then(response => {
-        console.log(response);
         if (response.success == 1) {
 
 
@@ -159,6 +141,9 @@ function fillAvQty(billElement) {
 
             avQtyElement.value = 0;
         }
+    }).catch((error) => {
+
+        console.log(error);
     });
 }
 
@@ -168,21 +153,18 @@ function fillUnitPrice(billElement) {
     let typeElement = billElement.querySelector("#type");
     return promiseJax("/medicine/show", { medicine: medicineELement.value }, "POST", true).then(response => {
 
-        if (response.success == 1) {
-            if (typeElement.value == "strip") {
+        if (typeElement.value == "strip") {
 
-                unitPriceElement.value = response.instance.strip_price;
-            }
-            else if (typeElement.value == "pack") {
-
-                unitPriceElement.value = response.instance.price;
-            }
+            unitPriceElement.value = response.instance.strip_price;
         }
-        else {
-            unitPriceElement.value = "";
+        else if (typeElement.value == "pack") {
 
+            unitPriceElement.value = response.instance.price;
         }
 
+    }).catch((response) => {
+
+        console.log(response);
     });
 
 }
@@ -225,13 +207,23 @@ function fillInvoiceDetails() {
 
 
 
-function validateAndCreate() {
+function saveInvoice() {
     validate();
     invoice = getInvoiceDetails();
+    console.log(invoice);
     promiseJax("/invoice/add", invoice, "POST", false).then(response => {
-        if (response.success == 1) {
+        openPopup('/ajax/popup/feedback', { msg: "success" });
 
-            openPopup('/ajax/popup/feedback', { msg: "success" });
+    }).catch((response) => {
+        console.log(response);
+        let errorList = document.getElementById("invalid-feedback-list");
+        while (errorList.firstChild) {
+            errorList.removeChild(errorList.lastChild);
+        }
+        for (let item of Object.values(response.errors)) {
+            let li = document.createElement("li");
+            li.innerText = item;
+            errorList.appendChild(li);
         }
     });
 

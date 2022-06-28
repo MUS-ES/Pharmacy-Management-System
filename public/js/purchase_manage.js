@@ -10,6 +10,9 @@ function showPurchaseItems(currentElement) {
             function () {
                 document.querySelector(".container1").style.display = "none";
             });
+    }).catch((error) => {
+
+        console.log(error);
     });
 
 }
@@ -22,7 +25,10 @@ function search() {
     let toDate = document.getElementById("sea-to-date").value.trim();
     promiseJax('/purchase/search', { id: purchaseNumber, supplier: supplierName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
         document.getElementById("table-area").innerHTML = response;
-    })
+    }).catch((error) => {
+
+        console.log(error);
+    });
 }
 
 
@@ -35,6 +41,9 @@ async function deletePurchase(currentElement) {
             closePopup('.confirm');
             search();
 
+        }).catch((error) => {
+
+            console.log(error);
         });
 
     }

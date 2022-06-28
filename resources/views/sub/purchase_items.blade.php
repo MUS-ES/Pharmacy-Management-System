@@ -19,13 +19,13 @@
             <div class="bill-labelsandinputs">
                 <div class="sub-title">Address:</div>
                 <input disabled type="text" class="input-field"
-                    value="@if ($supplier !== null) {{ $supplier->address }}@else no address @endif">
+                    value="@if ($supplier !== null) {{ $supplier->address ? $supplier->address : 'No Address' }}@else no address @endif">
             </div>
 
             <div class="bill-labelsandinputs">
                 <div class="sub-title">Contact:</div>
                 <input disabled type="text" class="input-field"
-                    value="@if ($supplier !== null) {{ $supplier->contact }}@else no number @endif">
+                    value="@if ($supplier !== null) {{ $supplier->contact ? $supplier->contact : 'No Number' }}@else no number @endif">
             </div>
 
 

@@ -26,7 +26,7 @@ function showSuggestions(currentElement, url, callback = null, ...callbackArgs) 
                 });
 
                 ul.appendChild(li);
-            });
+            })
             currentElement.parentElement.appendChild(ul);
             currentElement.addEventListener("blur", e => {
                 setTimeout(() => {
@@ -38,6 +38,9 @@ function showSuggestions(currentElement, url, callback = null, ...callbackArgs) 
 
         }
 
-    });
+    }).catch((error) => {
+
+        console.log(error);
+    });;
 
 }

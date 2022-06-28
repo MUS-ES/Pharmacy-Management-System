@@ -30,7 +30,7 @@ class StoreMedicineRequest extends FormRequest
         return [
             'name' => ['required', Rule::unique("medicines", "name")->where("user_id", Auth::user()->id)],
             'generic' => 'required|string',
-            'strip' => 'required|numeric|min:1|max:255',
+            'unit' => 'required|numeric|min:1|max:255',
             'price' => 'required|numeric',
             'description' => 'nullable|string',
         ];

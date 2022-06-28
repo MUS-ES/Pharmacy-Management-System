@@ -37,9 +37,9 @@
 
                 <div class="input-container">
                     <div class="input-header-container">
-                        <label for="">Strip</label>
+                        <label for="">Unit</label>
                     </div>
-                    <input id="strip" type="number">
+                    <input id="unit" type="number">
                     <span class="invalid-feedback"></span>
                 </div>
 

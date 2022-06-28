@@ -30,11 +30,11 @@ class InvoicesController extends Controller
         }
         if ($request->filled("to"))
         {
-            $query = $query->where("created_at", "<=", $request->to);
+            $query = $query->where("date", "<=", $request->to);
         }
         if ($request->filled("customer"))
         {
-            $query = $query->whereRelation("customer", "like", "%" . $request->customer . "%");
+            $query = $query->whereRelation("customer", "name", "like", "%" . $request->customer . "%");
         }
         $invoices = $query->orderBy("date", "desc")->get();
         return view("sub.invoice_table", compact("invoices"))->render();
@@ -87,7 +87,7 @@ class InvoicesController extends Controller
         }
         Chest::where("user_id", Auth::user()->id)->increment("total", (int)$validated["paid"]);
 
-        return response()->json(["success" => 1, "invoice" => $invoice, "payment" => $payment]);
+        return response()->json(["invoice" => $invoice, "payment" => $payment], 201);
     }
     public function destroy(Request $request)
     {
@@ -96,7 +96,7 @@ class InvoicesController extends Controller
 
             Invoice::destroy($request->id);
         }
-        return response()->json(["success" => 1]);
+        return response()->json(["success" => 1], 200);
     }
 
     public function getInvoiceItems($id)

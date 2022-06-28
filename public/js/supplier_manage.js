@@ -3,7 +3,10 @@ function search() {
     promiseJax('/supplier/search', { name: supplierName }, "POST", 1, 0).then(Response => {
 
         document.getElementById("table-area").innerHTML = Response;
-    })
+    }).catch((error) => {
+
+        console.log(error);
+    });
 }
 async function deleteSupplier(currentElement) {
     await openPopup('/ajax/popup/confirm', { msg: 'Are you sure ?' });
@@ -12,7 +15,10 @@ async function deleteSupplier(currentElement) {
             closePopup('.confirm');
             search();
 
-        });
+        }).catch((error) => {
+
+            console.log(error);
+        });;
 
     }
 }

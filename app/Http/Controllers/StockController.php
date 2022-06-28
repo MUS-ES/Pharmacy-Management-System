@@ -21,7 +21,7 @@ class StockController extends Controller
             $supplierId = Supplier::where("name", $validated['supplier'])->where('user_id', Auth::user()->id)->first()->id;
         }
         $stock = Stock::create(['user_id' => Auth::user()->id, 'medicine_id' => $medicineId, 'supplier_id' => $supplierId, "mfd" => $validated['mfd'], "exp" => $validated['exp'], 'qty' => $validated['qty']]);
-        return response()->json(["success" => true, "instance" => $stock]);
+        return response()->json(["instance" => $stock], 201);
     }
     public function manage()
     {
@@ -61,7 +61,7 @@ class StockController extends Controller
 
             Stock::destroy($request->id);
         }
-        return response()->json(["success" => 1]);
+        return response()->json(["success" => true], 200);
     }
 
     public function show(Request $request)
@@ -77,6 +77,6 @@ class StockController extends Controller
             $query = $query->where("exp", $request->exp);
         }
         $stock = $query->get();
-        return response()->json(["success" => true, "instance" => $stock]);
+        return response()->json(["instance" => $stock], 200);
     }
 }

@@ -15,9 +15,9 @@
             <tr>
                 @foreach ($suppliers as $supplier)
                     <td>{{ $supplier->name }}</td>
-                    <td>{{ $supplier->email }}</td>
-                    <td>{{ $supplier->contact }}</td>
-                    <td>{{ $supplier->address }}</td>
+                    <td>{{ $supplier->email ? $supplier->email : 'No Email' }}</td>
+                    <td>{{ $supplier->contact ? $supplier->contact : 'No Number' }}</td>
+                    <td>{{ $supplier->address ? $supplier->address : 'No Address' }}</td>
                     <td><span data-id="{{ $supplier->id }}" id="edit-customer-btn" class="material-icons-outlined">
                             edit
                         </span>

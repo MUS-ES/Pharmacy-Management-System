@@ -29,12 +29,6 @@
                         <input oninput="search()" id="sea-generic" class="input-field" type="text"
                             placeholder="Generic Name" name="" value="">
                     </div>
-
-                    <div class="bill-labelsandinputs">
-                        <div class="sub-title">Search By Supplier Name:</div>
-                        <input oninput="search()" id="sea-supplier" class="input-field" type="text"
-                            placeholder="Supplier Name" name="" value="">
-                    </div>
                 </div>
                 <hr>
                 <div id="table-area" class="table-data">

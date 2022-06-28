@@ -23,7 +23,7 @@
 
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Voucher Number:</div>
-                        <div class="input-field">1</div>
+                        <div class="input-field">{{$voucher_number}}</div>
                     </div>
 
                     <div class="bill-labelsandinputs">

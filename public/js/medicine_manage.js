@@ -1,10 +1,12 @@
 function search() {
     let medicineName = document.getElementById("sea-name").value.trim();
     let genericName = document.getElementById("sea-generic").value.trim();
-    let supplierName = document.getElementById("sea-supplier").value.trim();
     promiseJax('/medicine/search', { name: medicineName, generic: genericName }, "POST", 1, 0).then(Response => {
         document.getElementById("table-area").innerHTML = Response;
-    })
+    }).catch((error) => {
+
+        console.log(error);
+    });
 }
 async function deleteMedicine(currentElement) {
 
@@ -15,6 +17,9 @@ async function deleteMedicine(currentElement) {
             closePopup('.confirm');
             search();
 
+        }).catch((error) => {
+
+            console.log(error);
         });
 
     }

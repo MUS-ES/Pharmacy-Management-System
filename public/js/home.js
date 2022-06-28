@@ -84,25 +84,33 @@ toggleSidebar.addEventListener("click", function () {
  */
 function promiseJax(url, data, method = "GET", async = true, parseJson = true) {
     return new Promise(function (resolve, reject) {
+        let successStatus = [200, 201, 202, 204];
         (data == null) ? data = {} : 1;
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         data["_token"] = token;
         let xhttp = new XMLHttpRequest();
         xhttp.onload = function () {
-            if (parseJson == true) {
-                let response = new Object();
-                response = JSON.parse(xhttp.responseText);
-                response.status = xhttp.status;
-                resolve(response);
+            if (successStatus.includes(this.status)) {
+
+                if (parseJson == true) {
+                    let response = new Object();
+                    response = JSON.parse(xhttp.responseText);
+                    resolve(response);
+                    console.log(this.status, " ", response);
+                }
+                else {
+
+                    resolve(xhttp.responseText);
+                }
             }
             else {
-
-                resolve(xhttp.responseText);
+                console.log(this.response);
+                reject(JSON.parse(this.response));
             }
 
-        };
-        xhttp.onerror = function () {
+        }
 
+        xhttp.onerror = function () {
             reject("Ajax Method Not Work!");
 
         }

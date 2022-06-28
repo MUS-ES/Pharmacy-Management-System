@@ -8,6 +8,7 @@
                 <th>Strip</th>
                 <th>Generic Name</th>
                 <th>Price</th>
+                <th>Description</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -15,9 +16,10 @@
             <tr>
                 @foreach ($medicines as $medicine)
                     <td>{{ $medicine->name }}</td>
-                    <td>{{ $medicine->strip_unit }}</td>
-                    <td>{{ $medicine->generic_name }}</td>
+                    <td>{{ $medicine->unit }}</td>
+                    <td>{{ $medicine->generic }}</td>
                     <td>{{ $medicine->price }}</td>
+                    <td>{{ $medicine->description ? $medicine->description : 'No Description' }}</td>
                     <td><span data-id="{{ $medicine->id }}" id="edit-medicine-btn" class="material-icons-outlined">
                             edit
                         </span>

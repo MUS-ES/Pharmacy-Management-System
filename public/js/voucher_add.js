@@ -45,7 +45,10 @@ function save() {
             openPopup('/ajax/popup/feedback', { msg: "success" });
 
         }
-    })
+    }).catch((error) => {
+
+        console.log(error);
+    });
 }
 
 function getVoucherDetails() {

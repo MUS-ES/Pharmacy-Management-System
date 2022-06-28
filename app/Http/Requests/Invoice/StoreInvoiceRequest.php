@@ -35,9 +35,10 @@ class StoreInvoiceRequest extends FormRequest
             "date" => "required|date",
             "customer" => ["nullable", Rule::exists("customers", "name")->where("user_id", Auth::user()->id)],
             "items.*.medicine" => ['required', Rule::exists("medicines", "name")->where("user_id", Auth::user()->id)],
-            "items.*.qty" => ["required", "numeric", "min:1",],
+            "items.*.qty" => ["required", "numeric", "min:1"],
+            "items.*.exp" => ["required", "date"],
             "items.*.discount" => "required|numeric|min:0",
-            "items" => ["required", "array", new checkMedicineQuantity()],
+            //"items" => ["required", "array", new checkMedicineQuantity()],
             "provider" => Rule::in(["Cash", "Net Banking"]),
             "status" => Rule::in(["Paid", "Partially Paid"]),
 

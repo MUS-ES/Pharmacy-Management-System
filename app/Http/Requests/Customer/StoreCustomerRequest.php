@@ -27,7 +27,7 @@ class StoreCustomerRequest extends FormRequest
     {
         return [
             'name' => ['required', Rule::unique("customers", "name")->where("user_id", Auth::user()->id)],
-            'contact' => 'string|min:10',
+            'contact' => 'nullable|string|min:10',
             'address' => 'nullable|string',
         ];
     }

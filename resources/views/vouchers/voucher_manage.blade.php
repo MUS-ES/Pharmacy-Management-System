@@ -27,8 +27,12 @@
                     </div>
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Voucher Type:</div>
-                        <input oninput="search()" id="sea-voucher-type" class="input-field" type="text"
+
+                        <select oninput="search()" id="sea-voucher-type" class="input-field" type="text"
                             placeholder="Voucher Type" name="voucher_type" value="{{ old('voucher_type') }}">
+                            <option value="Payment">Payment</option>
+                            <option value="Receipt">Receipt</option>
+                        </select>
                     </div>
 
                     <div class="bill-labelsandinputs">

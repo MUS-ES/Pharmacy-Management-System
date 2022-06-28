@@ -27,6 +27,7 @@ class StorePurchaseRequest extends FormRequest
     {
         return [
             "total" => "required|numeric",
+            "paid" => "required|numeric",
             "supplier" => [Rule::exists("suppliers", "name")->where("user_id", Auth::user()->id)],
             "provider" => Rule::in(["Cash", "Net Banking"]),
             "status" => "required",

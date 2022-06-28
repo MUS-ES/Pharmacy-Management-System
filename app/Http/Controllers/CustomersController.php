@@ -12,13 +12,10 @@ class CustomersController extends Controller
     public function store(StoreCustomerRequest $request)
     {
         $validated = $request->validated();
-        $customer = Customer::create([
-            "name" => $validated['name'],
-            "contact" => $validated['contact'],
-            "address" => $validated['address'],
-            "user_id" => Auth::user()->id,
+        $customer = Customer::create($validated + [
+            "user_id" => Auth::user()->id
         ]);
-        return response()->json(["success" => 1, "instance" => $customer]);
+        return response()->json(["instance" => $customer]);
     }
 
     public function add()
@@ -63,7 +60,7 @@ class CustomersController extends Controller
                 $customer->contact = $request['contact'];
             }
         }
-        return response()->json(["success" => 1, "instance" => $customer]);
+        return response()->json(["success" => 1, "instance" => $customer], 203);
     }
 
     public function destroy(Request $request)

@@ -10,16 +10,12 @@ function save() {
         address: address
     };
     promiseJax("/supplier/add", data, "POST", 1, 1).then(response => {
-        console.log(response);
-        if (response.status == 422) {
-            validate(response.errors);
-        } else if (response.success == 1) {
+        openPopup('/ajax/popup/feedback', {
+            msg: "Supplier " + name + " has been added"
+        });
 
-            openPopup('/ajax/popup/feedback', {
-                msg: "Supplier " + name + " has been added"
-            });
-        };
-
+    }).catch((response) => {
+        validate(response.errors);
     });
 }
 

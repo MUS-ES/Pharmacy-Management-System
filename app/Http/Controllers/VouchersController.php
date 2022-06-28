@@ -13,8 +13,8 @@ class VouchersController extends Controller
 {
     public function addVoucher()
     {
-        //$invoice_number = Invoice::max('id') + 1;
-        return view("vouchers/voucher_add" /*, compact("invoice_number")*/);
+        $voucher_number = Voucher::max('id') + 1;
+        return view("vouchers/voucher_add", compact("voucher_number"));
     }
 
     public function manageVoucher()
@@ -36,14 +36,13 @@ class VouchersController extends Controller
         }
         if ($request->filled("from"))
         {
-            $query = $query->where("created_at", ">=", $request->from);
+            $query = $query->where("date", ">=", $request->from);
         }
         if ($request->filled("to"))
         {
-            $query = $query->orderBy("date", "desc")->where("created_at", "<=", $request->to);
+            $query = $query->where("date", "<=", $request->to);
         }
-        //$vouchers = $query->simplePaginate(1);
-        $vouchers = $query->get();
+        $vouchers = $query->simplePaginate(1);
         return view("sub.vouchers_table", compact("vouchers"))->render();
     }
     public function store(StoreVoucherRequest $request)
@@ -66,16 +65,17 @@ class VouchersController extends Controller
 
             Voucher::create($voucher + ["user_id" => Auth::user()->id]);
         }
-        return response()->json(["success" => 1]);
+        return response()->json(["success" => 1], 201);
     }
     public function destroy(Request $request)
     {
+
         if ($request->filled("id"))
         {
             Voucher::destroy($request->id);
         }
         if ($request->ajax())
-            return response()->json(["success" => 1]);
+            return response()->json(["success" => 1], 200);
 
         return redirect()->back()->withInput();
     }

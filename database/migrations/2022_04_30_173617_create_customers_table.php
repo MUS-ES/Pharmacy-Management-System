@@ -17,8 +17,8 @@ class CreateCustomersTable extends Migration
         {
             $table->id();
             $table->string("name");
-            $table->string("contact");
-            $table->string("address");
+            $table->string("contact")->nullable();
+            $table->string("address")->nullable();
             $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

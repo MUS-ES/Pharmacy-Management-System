@@ -17,6 +17,8 @@ class CreatePurchasesTable extends Migration
         {
             $table->id();
             $table->decimal("total", 11, 3);
+            $table->decimal('paid', 10, 3)->default(0);
+            $table->decimal('rest', 10, 3)->virtualAs("total-paid");
             $table->foreignId("supplier_id")->nullable()->constrained("suppliers")->onUpdate('cascade')->onDelete('set null');
             $table->foreignId("payment_id")->constrained("payments")->onUpdate('cascade')->onDelete('cascade');;
             $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete('cascade');

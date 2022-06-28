@@ -61,7 +61,7 @@ class AjaxController extends Controller
         $offest = $request->offest;
         $invoices = DB::table('invoices')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
         $purchases  = DB::table('purchases')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
-        return response()->json(["invoices" => $invoices, "purchases" => $purchases]);
+        return response()->json(["invoices" => $invoices, "purchases" => $purchases], 200);
     }
     public function getSupplierSuggestions(Request $request)
     {
@@ -71,7 +71,7 @@ class AjaxController extends Controller
 
             $suggestions = Supplier::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
         }
-        return response()->json(["success" => true, "suggestions" => $suggestions]);
+        return response()->json(["success" => true, "suggestions" => $suggestions], 200);
     }
     public function getMedicineSuggestions(Request $request)
     {
@@ -81,7 +81,7 @@ class AjaxController extends Controller
 
             $suggestions = Medicine::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
         }
-        return response()->json(["success" => true, "suggestions" => $suggestions]);
+        return response()->json(["success" => true, "suggestions" => $suggestions], 200);
     }
     public function getCustomerSuggestions(Request $request)
     {
@@ -91,6 +91,6 @@ class AjaxController extends Controller
 
             $suggestions = Customer::where("user_id", Auth::user()->id)->where("name", "like", '%' . $request->term . "%")->take(5)->get("name");
         }
-        return response()->json(["success" => true, "suggestions" => $suggestions]);
+        return response()->json(["success" => true, "suggestions" => $suggestions], 200);
     }
 }

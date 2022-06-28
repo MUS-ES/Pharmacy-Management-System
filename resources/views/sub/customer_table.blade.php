@@ -14,8 +14,8 @@
             <tr>
                 @foreach ($customers as $customer)
                     <td>{{ $customer->name }}</td>
-                    <td>{{ $customer->contact }}</td>
-                    <td>{{ $customer->address }}</td>
+                    <td>{{ $customer->contact ? $customer->contact : 'No Number' }}</td>
+                    <td>{{ $customer->address ? $customer->address : 'No Address' }}</td>
                     <td><span data-id="{{ $customer->id }}" id="edit-customer-btn" class="material-icons-outlined">
                             edit
                         </span>

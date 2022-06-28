@@ -3,6 +3,9 @@ function search() {
     promiseJax('/customer/search', { name: customerName }, "POST", 1, 0).then(Response => {
 
         document.getElementById("table-area").innerHTML = Response;
+    }).catch((error) => {
+
+        console.log(error);
     })
 }
 async function deleteCustomer(currentElement) {
@@ -13,6 +16,9 @@ async function deleteCustomer(currentElement) {
             closePopup('.confirm');
             search();
 
+        }).catch((error) => {
+
+            console.log(error);
         });
 
     }
