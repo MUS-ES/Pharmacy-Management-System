@@ -30,6 +30,7 @@
 @endforeach
 </tbody>
 </table>
+{{ $suppliers->links() }}
 @else
 <h3 style="color:#FF6D55;text-align:center;padding:20px;">Sorry no data until yet</h3>
 @endif

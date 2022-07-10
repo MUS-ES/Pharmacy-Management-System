@@ -31,7 +31,8 @@ class CustomersController extends Controller
 
             $query = $query->where("name", "like", $request->name . "%");
         }
-        $customers = $query->orderBy("created_at", "desc")->get();
+        $query->orderBy("created_at", "desc")->get();
+        $customers = $query->simplePaginate(5);
 
         return view("sub.customer_table", compact("customers"))->render();
     }

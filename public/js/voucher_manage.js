@@ -1,12 +1,21 @@
 
-function search(page = 1) {
+function searchPage(Page = 1) {
     let voucherNumber = document.getElementById("sea-voucher-number").value.trim();
     let voucherType = document.getElementById("sea-voucher-type").value.trim();
     let fromDate = document.getElementById("sea-from-date").value.trim();
     let toDate = document.getElementById("sea-to-date").value.trim();
-    promiseJax('/voucher/search', { id: voucherNumber, type: voucherType, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
+
+    promiseJax('/voucher/search', { page: Page, id: voucherNumber, type: voucherType, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
         document.getElementById("table-area").innerHTML = response;
-    })
+        paginator = document.getElementsByClassName("paginator");
+        Array.from(paginator).forEach(e => {
+
+            e.addEventListener("click", function (event) {
+                event.preventDefault();
+
+            });
+        });
+    });
 }
 
 
@@ -25,16 +34,5 @@ async function deleteVoucher(currentElement) {
 
     }
 }
-ele = document.getElementsByClassName("paginator");
-console.log(ele[0]);
-ele.addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log(event);
 
-});
-function lll(ele) {
 
-    promiseJax('/voucher/search', { page: 2 }, "POST", 1, 0).then(response => {
-        document.getElementById("table-area").innerHTML = response;
-    });
-}

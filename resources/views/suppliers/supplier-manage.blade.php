@@ -20,12 +20,12 @@
                 <div class="search-area bill-header">
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Supplier Number:</div>
-                        <input oninput="search()" id="sea-name" class="input-field" type="text"
+                        <input oninput="searchPage()" id="sea-name" class="input-field" type="text"
                             placeholder="Supplier Name" name="" value="">
                     </div>
 
                     <div class="refresh-btn">
-                        <span id="refresh-btn" onclick="search()" class="material-icons-outlined">autorenew</span>
+                        <span id="refresh-btn" onclick="searchPage()" class="material-icons-outlined">autorenew</span>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                 <div id="table-area" class="table-data">
                     @push('scripts')
                         <script>
-                            search();
+                            searchPage();
                         </script>
                     @endpush
                 </div>

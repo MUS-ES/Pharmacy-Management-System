@@ -1,4 +1,5 @@
 @if (count($vouchers))
+
     <table>
         <thead>
             <tr>

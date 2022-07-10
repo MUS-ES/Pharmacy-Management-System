@@ -42,6 +42,7 @@ class VouchersController extends Controller
         {
             $query = $query->where("date", "<=", $request->to);
         }
+        $query->orderBy("created_at", "desc")->get();
         $vouchers = $query->simplePaginate(1);
         return view("sub.vouchers_table", compact("vouchers"))->render();
     }

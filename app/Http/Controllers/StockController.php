@@ -51,7 +51,8 @@ class StockController extends Controller
             $query = $query->whereRelation("supplier", "name", "like", $request->supplier . "%");
         }
 
-        $stocks = $query->orderBy("created_at", "desc")->get();
+        $query->orderBy("created_at", "desc")->get();
+        $stocks = $query->simplePaginate(5);
         return view("sub.stock_table", compact("stocks"))->render();
     }
     public function destroy(Request $request)

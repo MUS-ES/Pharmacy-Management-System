@@ -18,13 +18,21 @@ function showPurchaseItems(currentElement) {
 }
 
 
-function search() {
+function searchPage(Page = 1) {
     let purchaseNumber = document.getElementById("sea-purchase-number").value.trim();
     let supplierName = document.getElementById("sea-supplier-name").value.trim();
     let fromDate = document.getElementById("sea-from-date").value.trim();
     let toDate = document.getElementById("sea-to-date").value.trim();
-    promiseJax('/purchase/search', { id: purchaseNumber, supplier: supplierName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
+    promiseJax('/purchase/search', { page: Page, id: purchaseNumber, supplier: supplierName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
         document.getElementById("table-area").innerHTML = response;
+        paginator = document.getElementsByClassName("paginator");
+        Array.from(paginator).forEach(e => {
+
+            e.addEventListener("click", function (event) {
+                event.preventDefault();
+
+            });
+        });
     }).catch((error) => {
 
         console.log(error);

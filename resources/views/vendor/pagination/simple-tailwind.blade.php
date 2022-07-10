@@ -7,7 +7,8 @@
                 {!! __('pagination.previous') !!}
             </span>
         @else
-            <a href="{{ $paginator->previousPageUrl() }}" rel="prev"
+            <a href="{{ $paginator->previousPageUrl() }}" onclick="searchPage({{ $paginator->currentPage() - 1 }})"
+                rel="prev"
                 class="paginator relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                 {!! __('pagination.previous') !!}
             </a>
@@ -15,7 +16,8 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <a href="{{ $paginator->nextPageUrl() }}" rel="next" onclick="lll(this)"
+            <a href="{{ $paginator->nextPageUrl() }}" rel="next"
+                onclick="searchPage({{ $paginator->currentPage() + 1 }})"
                 class="paginator relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                 {!! __('pagination.next') !!}
             </a>

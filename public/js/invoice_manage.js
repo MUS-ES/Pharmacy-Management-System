@@ -17,13 +17,21 @@ function showInvoiceItems(currentElement) {
 }
 
 
-function search() {
+function searchPage(Page = 1) {
     let invoiceNumber = document.getElementById("sea-invoice-number").value.trim();
     let customerName = document.getElementById("sea-customer-name").value.trim();
     let fromDate = document.getElementById("sea-from-date").value.trim();
     let toDate = document.getElementById("sea-to-date").value.trim();
-    promiseJax('/invoice/search', { id: invoiceNumber, customer: customerName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
+    promiseJax('/invoice/search', { page: Page, id: invoiceNumber, customer: customerName, from: fromDate, to: toDate }, "POST", 1, 0).then(response => {
         document.getElementById("table-area").innerHTML = response;
+        paginator = document.getElementsByClassName("paginator");
+        Array.from(paginator).forEach(e => {
+
+            e.addEventListener("click", function (event) {
+                event.preventDefault();
+
+            });
+        });
     }).catch((error) => {
 
         console.log(error);

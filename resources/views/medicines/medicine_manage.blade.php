@@ -20,13 +20,13 @@
                 <div class="search-area bill-header">
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Medicine Name:</div>
-                        <input oninput="search()" id="sea-name" class="input-field" type="text"
+                        <input oninput="searchPage()" id="sea-name" class="input-field" type="text"
                             placeholder="Medicine Name" name="" value="">
                     </div>
 
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Search By Generic Name:</div>
-                        <input oninput="search()" id="sea-generic" class="input-field" type="text"
+                        <input oninput="searchPage()" id="sea-generic" class="input-field" type="text"
                             placeholder="Generic Name" name="" value="">
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div id="table-area" class="table-data">
                     @push('scripts')
                         <script>
-                            search()
+                            searchPage()
                         </script>
                     </div>
                 @endpush
