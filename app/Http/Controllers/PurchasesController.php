@@ -67,7 +67,7 @@ class PurchasesController extends Controller
                 "price" => $item["price"],
             ]);
             $purchase->purchaseItems()->create($item + ["medicine_id" => $medicine->id, 'unit_price' => $item['supplierPrice']]);
-            $stock = Stock::where("user_id", Auth::user()->id)->whereRelation("medicine", "name", "=", $item['medicine'])->first();
+            $stock = Stock::where("user_id", Auth::user()->id)->whereRelation("medicine", "name", "=", $item['medicine'])->where("exp", $item["exp"])->first();
             if ($stock)
             {
                 $stock->increment("qty", $item["qty"]);

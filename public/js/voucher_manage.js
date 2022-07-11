@@ -24,7 +24,7 @@ async function deleteVoucher(currentElement) {
     document.getElementById("confirm-btn").onclick = function () {
         promiseJax("/voucher/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
             closePopup('.confirm');
-            search();
+            searchPage();
 
         }).catch((error) => {
 

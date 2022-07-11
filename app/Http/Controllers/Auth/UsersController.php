@@ -63,17 +63,14 @@ class UsersController extends Controller
     public function storeRegister(UserStoreRequest $request)
     {
 
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'fullname' => $request->fullname,
-            'ph_name' => $request->ph_name,
-            'licence' => $request->licence,
-        ]);
+        $user = User::create(
+            $request->all()
+        );
+
+        $user->safe()->create(["total" => "0"]);
+        $user->chest()->create(["total" => "0"]);
 
         event(new Registered($user));
-        Safe::create(["user_id" => Auth::user()->id, "total" => "0"]);
-        Chest::create(["user_id" => Auth::user()->id, "total" => "0"]);
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);

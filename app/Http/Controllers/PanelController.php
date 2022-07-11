@@ -9,7 +9,8 @@ class PanelController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy("created_at", "desc")->get();
+
         return view("admin.panel")->with('users', $users);
     }
     public function activeUser($id)

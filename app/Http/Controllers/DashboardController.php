@@ -17,7 +17,7 @@ class DashboardController extends Controller
             "TotalInvoiceToday" =>  $user->invoices->sum("total"),
             "TotalCustomer" => $user->customers->count(),
             "TotalSuppliers" => $user->suppliers->count(),
-            "TotalMedicines" => $user->stock->count(),
+            "TotalMedicines" => $user->medicines->count(),
             "TotalSales" => $user->chest->first()->total,
             "ExpMed" => $user->stock->where("exp", "<=", date('Y-m-d'))->sum("qty"),
             "safe" => $user->safe->first()->total,

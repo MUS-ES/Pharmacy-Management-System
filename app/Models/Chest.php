@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chest extends Model
 {
     use HasFactory;
+    protected $fillable = ["user_id", "total"];
     protected $casts = [
         'total' => 'double',
     ];

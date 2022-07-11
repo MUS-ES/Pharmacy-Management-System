@@ -45,7 +45,7 @@ function save() {
             msg: "New medicine " + medicineName.value + " has been added"
         });
     }).catch((response) => {
-
+        console.log(response);
         validate(response.errors);
     });
 }

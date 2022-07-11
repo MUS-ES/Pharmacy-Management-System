@@ -21,7 +21,7 @@ async function deleteSupplier(currentElement) {
     document.getElementById("confirm-btn").onclick = function () {
         promiseJax("/supplier/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
             closePopup('.confirm');
-            search();
+            searchPage();
 
         }).catch((error) => {
 

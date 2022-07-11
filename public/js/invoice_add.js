@@ -131,7 +131,7 @@ function fillAvQty(billElement) {
     let expElement = billElement.querySelector("#exp_date");
     let medicineELement = billElement.querySelector("#medicine");
     return promiseJax("/stock/show", { medicine: medicineELement.value, "exp": expElement.value }, "POST", true).then(response => {
-        if (response.success == 1) {
+        if (response.instance !== null) {
 
 
             avQtyElement.value = response.instance[0].qty;

@@ -25,7 +25,7 @@ function searchPage(Page = 1) {
 function addRule(currentEle) {
     currentEle.onclick = function () {
         currentEle.classList.toggle("active");
-        search();
+        searchPage();
     }
 
 }
