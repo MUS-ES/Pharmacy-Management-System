@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Http\Requests\Supplier\StoreSupplierRequest;
+use App\Http\Controllers\Interfaces\ViewMethods;
 
-class SuppliersController extends Controller
+class SuppliersController extends Controller implements ViewMethods
 {
     public function store(StoreSupplierRequest $request)
     {

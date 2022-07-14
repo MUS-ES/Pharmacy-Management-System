@@ -42,16 +42,16 @@ Route::middleware(['auth'])->group(function ()
         function ()
         {
             Route::post("/add", [InvoicesController::class, "store"]);
-            Route::get("/add", [InvoicesController::class, "addInvoice"]);
-            Route::get("/manage", [invoicesController::class, "manageInvoices"]);
-            Route::post("/search", [invoicesController::class, "searchInvoices"]);
+            Route::get("/add", [InvoicesController::class, "add"]);
+            Route::get("/manage", [invoicesController::class, "manage"]);
+            Route::post("/search", [invoicesController::class, "search"]);
             Route::get("/items/{id}", [InvoicesController::class, "getInvoiceItems"]);
             Route::delete("/delete", [InvoicesController::class, "destroy"])->name("deleteinvoice");
         }
     );
     Route::prefix("/medicine")->group(function ()
     {
-        Route::get("/add", [MedicinesController::class, "create"]);
+        Route::get("/add", [MedicinesController::class, "add"]);
         Route::get("/manage", [MedicinesController::class, "manage"]);
         Route::post("/add", [MedicinesController::class, "store"]);
         Route::post("/show", [MedicinesController::class, "show"]);
@@ -111,9 +111,9 @@ Route::middleware(['auth'])->group(function ()
     Route::prefix("/voucher")->group(function ()
     {
 
-        Route::GET("/add", [VouchersController::class, "addVoucher"]);
+        Route::GET("/add", [VouchersController::class, "add"]);
         Route::POST("/add", [VouchersController::class, "store"]);
-        Route::GET("/manage", [VouchersController::class, "manageVoucher"]);
+        Route::GET("/manage", [VouchersController::class, "manage"]);
         Route::post("/search", [VouchersController::class, "search"]);
         Route::delete("/delete", [VouchersController::class, "destroy"]);
     });

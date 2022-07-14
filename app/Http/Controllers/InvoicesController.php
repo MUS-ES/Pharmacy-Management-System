@@ -13,11 +13,12 @@ use App\Models\Payment;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Interfaces\ViewMethods;
 
-class InvoicesController extends Controller
+class InvoicesController extends Controller implements ViewMethods
 {
 
-    public function searchInvoices(Request $request)
+    public function search(Request $request)
     {
         $query = Invoice::where("user_id", Auth::user()->id)->with("customer", "payment");
         if ($request->filled("id"))
@@ -40,12 +41,12 @@ class InvoicesController extends Controller
         $invoices = $query->simplePaginate(5);;
         return view("sub.invoice_table", compact("invoices"))->render();
     }
-    public function manageInvoices()
+    public function manage()
     {
 
         return view("invoices/invoices_manage");
     }
-    public function addInvoice()
+    public function add()
     {
         $invoice_number = Invoice::max('id') + 1;
         return view("invoices/invoice_add", compact("invoice_number"));

@@ -9,6 +9,7 @@ use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Stock\StoreStockRequest;
 
+
 class StockController extends Controller
 {
     public function store(StoreStockRequest $request)

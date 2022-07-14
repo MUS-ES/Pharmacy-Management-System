@@ -8,16 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Safe;
 use App\Models\Chest;
+use App\Http\Controllers\Interfaces\ViewMethods;
 
-class VouchersController extends Controller
+class VouchersController extends Controller implements ViewMethods
 {
-    public function addVoucher()
+    public function add()
     {
         $voucher_number = Voucher::max('id') + 1;
         return view("vouchers/voucher_add", compact("voucher_number"));
     }
 
-    public function manageVoucher()
+    public function manage()
     {
         return view("vouchers/voucher_manage");
     }
@@ -43,7 +44,7 @@ class VouchersController extends Controller
             $query = $query->where("date", "<=", $request->to);
         }
         $query->orderBy("created_at", "desc")->get();
-        $vouchers = $query->simplePaginate(1);
+        $vouchers = $query->simplePaginate(5);
         return view("sub.vouchers_table", compact("vouchers"))->render();
     }
     public function store(StoreVoucherRequest $request)

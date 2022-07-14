@@ -30,6 +30,7 @@
 
                         <select oninput="searchPage()" id="sea-voucher-type" class="input-field" type="text"
                             placeholder="Voucher Type" name="voucher_type" value="{{ old('voucher_type') }}">
+                            <option value="">Both</option>
                             <option value="Payment">Payment</option>
                             <option value="Receipt">Receipt</option>
                         </select>
