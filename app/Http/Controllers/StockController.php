@@ -52,7 +52,7 @@ class StockController extends Controller
         }
 
         $query->orderBy("created_at", "desc")->get();
-        $stocks = $query->simplePaginate(5);
+        $stocks = $query->simplePaginate(8);
         return view("sub.stock_table", compact("stocks"))->render();
     }
     public function destroy(Request $request)

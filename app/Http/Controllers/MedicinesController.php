@@ -35,7 +35,7 @@ class MedicinesController extends Controller
             $query = $query->where("generic_name", "like", $request->generic . "%");
         }
         $query->orderBy("name", "asc")->get();
-        $medicines = $query->simplePaginate(5);;
+        $medicines = $query->simplePaginate(8);;
         return view("sub.medicine_table", compact("medicines"))->render();
     }
 

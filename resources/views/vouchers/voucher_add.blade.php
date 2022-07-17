@@ -13,7 +13,7 @@
     <!-- Main -->
     <main>
         <!-- Main Head -->
-        <h1 class="title">Add a New Payment Voucher</h1>
+        <h1 class="title">Add a New Voucher</h1>
 
         <div class="container">
 

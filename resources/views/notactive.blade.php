@@ -8,7 +8,7 @@
     <div class="overlay"></div>
     <div class="title">
 
-        <h3 class="not-active-title">Your Account is Not Activate Please Contact With Admin</h3>
+        <h3 class="not-active-title">Your Account Has Not Been Activated Yet ! Please Wait While We Check Your Data Or Contact With Admin</h3>
         <a href="{{ route('signout') }}">Sign out</a>
     </div>
 @endsection

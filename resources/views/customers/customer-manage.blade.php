@@ -19,7 +19,7 @@
             <div class="bill">
                 <div class="search-area bill-header">
                     <div class="bill-labelsandinputs">
-                        <div class="sub-title">Search By Customer Number:</div>
+                        <div class="sub-title">Search By Customer Name:</div>
                         <input oninput="searchPage()" id="sea-name" class="input-field" type="text"
                             placeholder="Customer Name" name="" value="">
                     </div>

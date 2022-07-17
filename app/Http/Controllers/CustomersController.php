@@ -32,7 +32,7 @@ class CustomersController extends Controller
             $query = $query->where("name", "like", $request->name . "%");
         }
         $query->orderBy("created_at", "desc")->get();
-        $customers = $query->simplePaginate(5);
+        $customers = $query->simplePaginate(8);
 
         return view("sub.customer_table", compact("customers"))->render();
     }

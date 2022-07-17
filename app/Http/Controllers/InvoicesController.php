@@ -37,7 +37,7 @@ class InvoicesController extends Controller
             $query = $query->whereRelation("customer", "name", "like", "%" . $request->customer . "%");
         }
         $query->orderBy("date", "desc")->get();
-        $invoices = $query->simplePaginate(5);;
+        $invoices = $query->simplePaginate(8);;
         return view("sub.invoice_table", compact("invoices"))->render();
     }
     public function manageInvoices()

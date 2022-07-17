@@ -31,7 +31,7 @@ class SuppliersController extends Controller
             $query = $query->where("name", "like", $request->name . "%");
         }
         $query->orderBy("name", "asc")->get();
-        $suppliers = $query->simplePaginate(5);
+        $suppliers = $query->simplePaginate(8);
 
         return view("sub.supplier_table", compact("suppliers"))->render();
     }
