@@ -13,8 +13,9 @@ use App\Models\Supplier;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Interfaces\ViewMethods;
 
-class PurchasesController extends Controller
+class PurchasesController extends Controller implements ViewMethods
 {
     public function add()
     {

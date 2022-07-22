@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Medicine\StoreMedicineRequest;
 use Faker\Provider\Medical;
+use App\Http\Controllers\Interfaces\ViewMethods;
 
-class MedicinesController extends Controller
+class MedicinesController extends Controller implements ViewMethods
 {
 
-    public function create()
+    public function add()
     {
         return view("medicines.medicine_add");
     }

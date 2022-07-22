@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Customer\StoreCustomerRequest;
+use App\Http\Controllers\Interfaces\ViewMethods;
 
-class CustomersController extends Controller
+class CustomersController extends Controller implements ViewMethods
 {
     public function store(StoreCustomerRequest $request)
     {
