@@ -17,11 +17,11 @@ promiseJax("/ajax/chart/", { "offest": offest }, "POST").then(response => {
             data: data.purchases
         }],
         chart: {
-            height: 350,
+            height: 400,
             type: 'area'
         },
         dataLabels: {
-            enabled: false
+            enabled: true
         },
         stroke: {
             curve: 'smooth'
