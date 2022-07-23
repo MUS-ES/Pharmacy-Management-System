@@ -27,6 +27,17 @@ hr {
     align-items: end;
 }
 
+#generate-pdf {
+    border: none;
+    padding: 8px 10px;
+    color: white;
+    text-decoration: none;
+    background-color: green;
+    display: block;
+    border-radius: 10px;
+    width: max-content;
+}
+
 .table-data table {
     user-select: none;
     width: 100%;

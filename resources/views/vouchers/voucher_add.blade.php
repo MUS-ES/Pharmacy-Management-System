@@ -13,7 +13,7 @@
     <!-- Main -->
     <main>
         <!-- Main Head -->
-        <h1 class="title">Add a New Payment Voucher</h1>
+        <h1 class="title">Add a New Voucher</h1>
 
         <div class="container">
 
@@ -23,7 +23,7 @@
 
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Voucher Number:</div>
-                        <div class="input-field">{{$voucher_number}}</div>
+                        <div class="input-field">{{ $voucher_number }}</div>
                     </div>
 
                     <div class="bill-labelsandinputs">
@@ -57,6 +57,7 @@
                                 value="Payment">
                                 <option value="Payment">Payment</option>
                                 <option value="Receipt">Receipt</option>
+                                <option value="Cash">Add Cash</option>
                             </Select>
 
                         </div>
@@ -94,6 +95,10 @@
                     <div class="bill-labelsandinputs">
                         <div class="sub-title">Total Receipt:</div>
                         <input id="total-receipt" disabled class="input-field" type="number" value="0">
+                    </div>
+                    <div class="bill-labelsandinputs">
+                        <div class="sub-title">Total Cash:</div>
+                        <input id="total-cash" disabled class="input-field" type="number" value="0">
                     </div>
 
                     <div class="btn-adjustment">

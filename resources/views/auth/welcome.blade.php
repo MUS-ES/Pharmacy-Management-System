@@ -83,7 +83,7 @@
                                     type="text" />
                                 <i class="fa-solid fa-circle-exclamation"></i>
                                 <span class="error" id="signup-licence-error"></span>
-                                <label for="name">Licence ID</label>
+                                <label for="name">License ID</label>
                             </div>
                             <div class="inputandlabel">
                                 <input autocomplete="off" name="fullname" id="signup-fullname"

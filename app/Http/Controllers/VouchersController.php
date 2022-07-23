@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Safe;
 use App\Models\Chest;
 use App\Http\Controllers\Interfaces\ViewMethods;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class VouchersController extends Controller implements ViewMethods
 {
@@ -44,8 +45,34 @@ class VouchersController extends Controller implements ViewMethods
             $query = $query->where("date", "<=", $request->to);
         }
         $query->orderBy("created_at", "desc")->get();
-        $vouchers = $query->simplePaginate(5);
+        $vouchers = $query->simplePaginate(8);
+
         return view("sub.vouchers_table", compact("vouchers"))->render();
+    }
+    public function generatePDF(Request $request)
+    {
+        $vouchers = Voucher::where("user_id", Auth::user()->id);
+        if ($request->filled("id"))
+        {
+            $vouchers = $vouchers->where("id", $request->id);
+        }
+        if ($request->filled("type"))
+        {
+            $type = ucfirst(strtolower($request->type));
+            $vouchers = $vouchers->where("type", "like", $type . "%");
+        }
+        if ($request->filled("from"))
+        {
+            $vouchers = $vouchers->where("date", ">=", $request->from);
+        }
+        if ($request->filled("to"))
+        {
+            $vouchers = $vouchers->where("date", "<=", $request->to);
+        }
+        $vouchers =  $vouchers->orderBy("created_at", "desc")->get();
+
+        $pdf = PDF::loadView("pdf.vouchers", compact("vouchers"));
+        return $pdf->download('vouchers.pdf');
     }
     public function store(StoreVoucherRequest $request)
     {
@@ -63,6 +90,10 @@ class VouchersController extends Controller implements ViewMethods
             {
                 $chest->increment("total", $voucher["amount"]);
                 $safe->decrement("total", $voucher["amount"]);
+            }
+            else
+            {
+                $safe->increment("total", $voucher["amount"]);
             }
 
             Voucher::create($voucher + ["user_id" => Auth::user()->id]);

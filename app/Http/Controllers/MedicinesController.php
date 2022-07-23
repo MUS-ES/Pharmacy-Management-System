@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Medicine\StoreMedicineRequest;
 use Faker\Provider\Medical;
 use App\Http\Controllers\Interfaces\ViewMethods;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MedicinesController extends Controller implements ViewMethods
 {
@@ -36,8 +37,24 @@ class MedicinesController extends Controller implements ViewMethods
             $query = $query->where("generic_name", "like", $request->generic . "%");
         }
         $query->orderBy("name", "asc")->get();
-        $medicines = $query->simplePaginate(5);;
+        $medicines = $query->simplePaginate(8);;
         return view("sub.medicine_table", compact("medicines"))->render();
+    }
+    public function generatePDF(Request $request)
+    {
+        $medicines = Medicine::where("user_id", Auth::user()->id);
+        if ($request->filled("name"))
+        {
+
+            $medicines = $medicines->where("name", "like", $request->name . "%");
+        }
+        if ($request->filled("generic"))
+        {
+            $medicines = $medicines->where("generic_name", "like", $request->generic . "%");
+        }
+        $medicines = $medicines->orderBy("name", "asc")->get();
+        $pdf = PDF::loadView("pdf.medicines", compact("medicines"));
+        return $pdf->download('medicines.pdf');
     }
 
     public function all()

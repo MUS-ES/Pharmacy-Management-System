@@ -59,8 +59,8 @@ class AjaxController extends Controller
     {
         $user = Auth::user();
         $offest = $request->offest;
-        $invoices = DB::table('invoices')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
-        $purchases  = DB::table('purchases')->selectRaw("sum(total) as y,created_at as x")->where("user_id", "=", Auth::user()->id)->groupBy("created_at")->take($offest)->get();
+        $invoices = DB::table('invoices')->selectRaw("sum(total) as y,date as x")->where("user_id", "=", Auth::user()->id)->groupBy("date")->take($offest)->get();
+        $purchases  = DB::table('purchases')->selectRaw("sum(total) as y,date as x")->where("user_id", "=", Auth::user()->id)->groupBy("date")->take($offest)->get();
         return response()->json(["invoices" => $invoices, "purchases" => $purchases], 200);
     }
     public function getSupplierSuggestions(Request $request)

@@ -16,7 +16,18 @@ hr {
     padding: 40px;
     box-shadow: 0 8px 10px 5px var(--black2);
     margin: 2rem;
-    
+
+}
+
+#generate-pdf {
+    border: none;
+    padding: 8px 10px;
+    color: white;
+    text-decoration: none;
+    background-color: green;
+    display: block;
+    border-radius: 10px;
+    width: max-content;
 }
 
 .btn-adjustment {
@@ -35,73 +46,73 @@ hr {
     align-items: end;
 }
 
-  .table-data table {
+.table-data table {
     user-select: none;
     width: 100%;
     height: 100%;
     border-radius: 1rem;
     padding: 0.5rem;
     text-align: center;
-  }
+}
 
-  .table-data table th:first-child {
-    border-top-left-radius: 0.8rem; 
-  }
+.table-data table th:first-child {
+    border-top-left-radius: 0.8rem;
+}
 
-  .table-data table th:last-child {
-    border-top-right-radius: 0.8rem; 
-  }
+.table-data table th:last-child {
+    border-top-right-radius: 0.8rem;
+}
 
-  .table-data table th {
+.table-data table th {
     font-size: 1.4rem;
     font-weight: 400;
-    font-family: "Ubuntu",sans-serif;
+    font-family: "Ubuntu", sans-serif;
     color: var(--white);
     height: 3rem;
     margin: 6rem;
     background: var(--rose);
-  }
+}
 
-  .table-data table tbody {
+.table-data table tbody {
     font-size: 1.2rem;
     font-weight: 600;
-    font-family: "Ubuntu",sans-serif;
+    font-family: "Ubuntu", sans-serif;
     color: var(--black2);
-  }
+}
 
 .table-data table tbody tr {
     height: 3.2rem;
 }
-  
-  .table-data table tbody tr td{
+
+.table-data table tbody tr td {
     border: 2px solid var(--rose);
     background-color: #FFE9E2;
     border-radius: 0.2rem;
     color: #737373;
-  }
+}
 
-  .table-data table tbody tr td:hover {
+.table-data table tbody tr td:hover {
     font-weight: bold;
     color: var(--rose);
 }
 
-  .table-data table tbody tr td:nth-child(odd) {
+.table-data table tbody tr td:nth-child(odd) {
     background-color: #C7CAFF;
-  }
+}
 
 
-  #edit-medicine-btn,
-  #delete-medicine-btn {
-      font-size: 2rem;
-      color: var(--rose);
-      cursor: pointer;
-      text-align: center;
-  }
-  
-  #edit-medicine-btn:hover,
-  #delete-medicine-btn:hover {
-      color: var(--blue);
-  }
+#edit-medicine-btn,
+#delete-medicine-btn {
+    font-size: 2rem;
+    color: var(--rose);
+    cursor: pointer;
+    text-align: center;
+}
+
+#edit-medicine-btn:hover,
+#delete-medicine-btn:hover {
+    color: var(--blue);
+}
 
 /* Main */
 main .title {

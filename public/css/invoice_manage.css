@@ -1,4 +1,7 @@
 /* Bill Body */
+
+
+
 .bill {
     background: #fff;
     border-radius: 20px;
@@ -18,53 +21,53 @@
     align-items: end;
 }
 
-  .table-data table {
+.table-data table {
     user-select: none;
     width: 100%;
     height: 100%;
     border-radius: 1rem;
     padding: 0.5rem;
     text-align: center;
-  }
+}
 
-  .table-data table th:first-child {
-    border-top-left-radius: 0.8rem; 
-  }
+.table-data table th:first-child {
+    border-top-left-radius: 0.8rem;
+}
 
-  .table-data table th:last-child {
-    border-top-right-radius: 0.8rem; 
-  }
+.table-data table th:last-child {
+    border-top-right-radius: 0.8rem;
+}
 
-  .table-data table th {
+.table-data table th {
     font-size: 1.4rem;
     font-weight: 500;
-    font-family: "Ubuntu",sans-serif;
+    font-family: "Ubuntu", sans-serif;
     color: var(--white);
     height: 3rem;
     margin: 6rem;
     background: var(--rose);
-  }
+}
 
 
-  .table-data table tbody {
+.table-data table tbody {
     font-size: 1.2rem;
     font-weight: 600;
-    font-family: "Ubuntu",sans-serif;
+    font-family: "Ubuntu", sans-serif;
     color: var(--black2);
     height: 2rem;
-  }
-  
-  .table-data table tbody tr td{
+}
+
+.table-data table tbody tr td {
     border: 2px solid var(--rose);
     background-color: #FFE9E2;
     border-radius: 0.2rem;
     color: #737373;
-  }
+}
 
 
-  .table-data table tbody tr td:nth-child(odd) {
+.table-data table tbody tr td:nth-child(odd) {
     background-color: #9FFCFD;
-  }
+}
 
 /* Main */
 main .title {
@@ -92,29 +95,15 @@ main .title {
     padding-bottom: 0.5rem;
 }
 
-.refresh-btn {
-    font-family: "Ubuntu";
-    font-weight: 500;
-    width: 80px;
-    height: 40px;
-    border-radius: 0.5rem;
-    background: green;
-    color: var(--white);
-    outline: none;
+#generate-pdf {
     border: none;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.refresh-btn:hover {
-    background: #00B800;
-}
-
-.refresh-btn span {
-    margin-top: 0.2rem;
-    font-size: 2rem;
-    text-align: center;
+    padding: 8px 10px;
+    color: white;
+    text-decoration: none;
+    background-color: green;
+    display: block;
+    border-radius: 10px;
+    width: max-content;
 }
 
 /* View Deatails Popup Window */

@@ -14,6 +14,7 @@ use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Interfaces\ViewMethods;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PurchasesController extends Controller implements ViewMethods
 {
@@ -42,8 +43,32 @@ class PurchasesController extends Controller implements ViewMethods
             $query = $query->whereRelation("supplier", "name", "like", "%" . $request->supplier . "%");
         }
         $query->orderBy("created_at", "desc")->get();
-        $purchases = $query->simplePaginate(5);
+        $purchases = $query->simplePaginate(8);
         return view("sub.purchase_table", compact("purchases"))->render();
+    }
+    public function generatePDF(Request $request)
+    {
+        $purchases = Purchase::where("user_id", Auth::user()->id)->with("supplier", "payment");
+        if ($request->filled("id"))
+        {
+            $purchases = $purchases->where("id", $request->id);
+        }
+        if ($request->filled("from"))
+        {
+            $purchases = $purchases->where("date", ">=", $request->from);
+        }
+        if ($request->filled("to"))
+        {
+            $purchases = $purchases->where("date", "<=", $request->to);
+        }
+        if ($request->filled("supplier"))
+        {
+            $purchases = $purchases->whereRelation("supplier", "name", "like", "%" . $request->supplier . "%");
+        }
+        $purchases = $purchases->orderBy("created_at", "desc")->get();
+
+        $pdf = PDF::loadView("pdf.purchases", compact("purchases"));
+        return $pdf->download('purchases.pdf');
     }
     public function getPurchaseItems($id)
     {

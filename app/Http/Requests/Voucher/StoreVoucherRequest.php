@@ -26,7 +26,7 @@ class StoreVoucherRequest extends FormRequest
     {
         return [
             "vouchers" => ["array"],
-            "vouchers.*.type" => Rule::in(["Payment", "Receipt"]),
+            "vouchers.*.type" => Rule::in(["Payment", "Receipt", "Cash"]),
             "vouchers.*.amount" => ["required", "numeric", "not_in:0"],
             "vouchers.*.description" => ["nullable", "string"],
             "vouchers.*.date" => ["required", "date"],

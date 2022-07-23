@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function ()
             Route::get("/add", [InvoicesController::class, "add"]);
             Route::get("/manage", [invoicesController::class, "manage"]);
             Route::post("/search", [invoicesController::class, "search"]);
+            Route::post("/download", [invoicesController::class, "generatePDF"]);
             Route::get("/items/{id}", [InvoicesController::class, "getInvoiceItems"]);
             Route::delete("/delete", [InvoicesController::class, "destroy"])->name("deleteinvoice");
         }
@@ -57,6 +58,7 @@ Route::middleware(['auth'])->group(function ()
         Route::post("/show", [MedicinesController::class, "show"]);
         Route::delete("/delete", [MedicinesController::class, "destroy"]);
         Route::POST("/search", [MedicinesController::class, "search"]);
+        Route::post("/download", [MedicinesController::class, "generatePDF"]);
         Route::post("/exist", [MedicinesController::class, "isExist"]);
     });
     Route::prefix("/stock")->group(
@@ -66,6 +68,7 @@ Route::middleware(['auth'])->group(function ()
             Route::post("/show", [StockController::class, "show"]);
             Route::Post("/search", [StockController::class, "search"]);
             Route::Post("/add", [StockController::class, "store"]);
+            Route::post("/download", [StockController::class, "generatePDF"]);
             Route::delete("/delete", [StockController::class, "destroy"]);
         }
     );
@@ -93,6 +96,7 @@ Route::middleware(['auth'])->group(function ()
             Route::post("/add", [CustomersController::class, "store"]);
             Route::get("/manage", [CustomersController::class, "manage"]);
             Route::post("/search", [CustomersController::class, "search"]);
+            Route::post("/download", [CustomersController::class, "generatePDF"]);
             Route::delete("/delete", [CustomersController::class, "destroy"])->name("deleteCustomers");
         }
     );
@@ -103,6 +107,7 @@ Route::middleware(['auth'])->group(function ()
             Route::POST("/add", [SuppliersController::class, "store"]);
             Route::get("/manage", [SuppliersController::class, "manage"]);
             Route::post("/search", [SuppliersController::class, "search"]);
+            Route::post("/download", [SuppliersController::class, "generatePDF"]);
             Route::delete("/delete", [SuppliersController::class, "destroy"])->name("deleteSuppliers");
         }
     );
@@ -115,6 +120,7 @@ Route::middleware(['auth'])->group(function ()
         Route::POST("/add", [VouchersController::class, "store"]);
         Route::GET("/manage", [VouchersController::class, "manage"]);
         Route::post("/search", [VouchersController::class, "search"]);
+        Route::post("/download", [VouchersController::class, "generatePDF"]);
         Route::delete("/delete", [VouchersController::class, "destroy"]);
     });
 
@@ -126,6 +132,7 @@ Route::middleware(['auth'])->group(function ()
         Route::GET("/manage", [PurchasesController::class, "manage"]);
         Route::get("/items/{id}", [PurchasesController::class, "getPurchaseItems"]);
         Route::post("/search", [PurchasesController::class, "search"]);
+        Route::post("/download", [PurchasesController::class, "generatePDF"]);
         Route::delete("/delete", [PurchasesController::class, "destroy"]);
     });
 

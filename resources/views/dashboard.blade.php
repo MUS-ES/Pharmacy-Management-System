@@ -146,10 +146,10 @@
                                 <td>{{ $order->qty }}</td>
                                 <td>{{ $order->medicine->price }}</td>
                                 <td>{{ $order->invoice->total_net }}</td>
-                                @if ($order->status == 'paid')
-                                    <td><span class="status-paid">Paid</span></td>
-                                @else
+                                @if ($order->status == 'due')
                                     <td><span class="status-due">Due</span></td>
+                                @else
+                                    <td><span class="status-paid">Paid</span></td>
                                 @endif
                             </tr>
                         @endforeach
