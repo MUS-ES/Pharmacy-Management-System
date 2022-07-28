@@ -17,28 +17,32 @@
         <!-- End Of Main Head -->
         <div class="container">
             <div class="bill">
-                <div class="search-area bill-header">
-                    <div class="bill-labelsandinputs">
-                        <div class="sub-title">Search By Customer Name:</div>
-                        <input oninput="searchPage()" id="sea-name" class="input-field" type="text"
-                            placeholder="Customer Name" name="" value="">
-                    </div>
+                <form action="{{ asset('customer/download') }}" method="POST">
+                    <div class="search-area bill-header">
+                        <div class="bill-labelsandinputs">
+                            <div class="sub-title">Search By Customer Name:</div>
+                            <input oninput="searchPage()" id="sea-name" class="input-field" type="text"
+                                placeholder="Customer Name" name="name" value="">
+                        </div>
 
-                    <div class="refresh-btn">
-                        <span id="refresh-btn" onclick="searchPage()" class="material-icons-outlined">autorenew</span>
-                    </div>
-                </div>
+                        <div class="pdf-file">
+                            {{ csrf_field() }}
+                            <button id="generate-pdf" type="submit">Generate PDF</button>
 
-                <hr>
-
-                <div id="table-area" class="table-data">
-                    @push('scripts')
-                        <script>
-                            searchPage();
-                        </script>
-                    @endpush
-                </div>
+                        </div>
+                </form>
             </div>
+
+            <hr>
+
+            <div id="table-area" class="table-data">
+                @push('scripts')
+                    <script>
+                        searchPage();
+                    </script>
+                @endpush
+            </div>
+        </div>
         </div>
         <!-- End Of Container -->
 

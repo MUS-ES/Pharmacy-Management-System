@@ -7,6 +7,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Http\Requests\Supplier\StoreSupplierRequest;
 use App\Http\Controllers\Interfaces\ViewMethods;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuppliersController extends Controller implements ViewMethods
 {
@@ -35,6 +36,19 @@ class SuppliersController extends Controller implements ViewMethods
         $suppliers = $query->simplePaginate(8);
 
         return view("sub.supplier_table", compact("suppliers"))->render();
+    }
+    public function generatePDF(Request $request)
+    {
+        $suppliers = Supplier::where("user_id", Auth::user()->id);
+        if ($request->filled("name"))
+        {
+
+            $suppliers = $suppliers->where("name", "like", $request->name . "%");
+        }
+        $suppliers = $suppliers->orderBy("name", "asc")->get();
+
+        $pdf = PDF::loadView("pdf.suppliers", compact("suppliers"));
+        return $pdf->download('suppliers.pdf');
     }
 
     public function manage()

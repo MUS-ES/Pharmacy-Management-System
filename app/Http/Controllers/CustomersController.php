@@ -7,6 +7,8 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Customer\StoreCustomerRequest;
 use App\Http\Controllers\Interfaces\ViewMethods;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class CustomersController extends Controller implements ViewMethods
 {
@@ -37,7 +39,19 @@ class CustomersController extends Controller implements ViewMethods
 
         return view("sub.customer_table", compact("customers"))->render();
     }
+    public function generatePDF(Request $request)
+    {
+        $customers = Customer::where("user_id", Auth::user()->id);
+        if ($request->filled("name"))
+        {
 
+            $customers = $customers->where("name", "like", $request->name . "%");
+        }
+        $customers = $customers->orderBy("created_at", "desc")->get();
+
+        $pdf = PDF::loadView("pdf.customers", compact("customers"));
+        return $pdf->download('customers.pdf');
+    }
     public function manage()
     {
         return view("customers.customer-manage");

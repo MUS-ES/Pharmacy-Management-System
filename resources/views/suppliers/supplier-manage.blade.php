@@ -16,29 +16,34 @@
         <h1 class="title">Manage Suppliers</h1>
         <!-- End Of Main Head -->
         <div class="container">
-            <div class="bill">
-                <div class="search-area bill-header">
-                    <div class="bill-labelsandinputs">
-                        <div class="sub-title">Search By Supplier Number:</div>
-                        <input oninput="searchPage()" id="sea-name" class="input-field" type="text"
-                            placeholder="Supplier Name" name="" value="">
+            <form action="{{ asset('supplier/download') }}" method="POST">
+
+                <div class="bill">
+                    <div class="search-area bill-header">
+                        <div class="bill-labelsandinputs">
+                            <div class="sub-title">Search By Supplier Number:</div>
+                            <input oninput="searchPage()" id="sea-name" class="input-field" type="text"
+                                placeholder="Supplier Name" name="name" value="">
+                        </div>
+
+                        <div class="pdf-file">
+                            {{ csrf_field() }}
+                            <button id="generate-pdf" type="submit">Generate PDF</button>
+
+                        </div>
                     </div>
 
-                    <div class="refresh-btn">
-                        <span id="refresh-btn" onclick="searchPage()" class="material-icons-outlined">autorenew</span>
+                    <hr>
+
+                    <div id="table-area" class="table-data">
+                        @push('scripts')
+                            <script>
+                                searchPage();
+                            </script>
+                        @endpush
                     </div>
                 </div>
-
-                <hr>
-
-                <div id="table-area" class="table-data">
-                    @push('scripts')
-                        <script>
-                            searchPage();
-                        </script>
-                    @endpush
-                </div>
-            </div>
+            </form>
         </div>
         <!-- End Of Container -->
 

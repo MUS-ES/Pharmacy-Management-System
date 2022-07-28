@@ -8,7 +8,7 @@ use App\Models\Medicine;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Stock\StoreStockRequest;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StockController extends Controller
 {
@@ -55,6 +55,35 @@ class StockController extends Controller
         $query->orderBy("created_at", "desc")->get();
         $stocks = $query->simplePaginate(8);
         return view("sub.stock_table", compact("stocks"))->render();
+    }
+    public function generatePDF(Request $request)
+    {
+        $stocks =  Stock::where("user_id", Auth::user()->id)->with("medicine", "supplier");
+        if ($request->filled("expire") && $request->expire == true)
+        {
+            $stocks = $stocks->where("exp", "<=", now());
+        }
+        if ($request->filled("outOfStock") && $request->outOfStock == 1)
+        { //focus
+            $stocks = $stocks->where("qty", "=", 0);
+        }
+        if ($request->filled("name"))
+        {
+            $stocks = $stocks->whereRelation("medicine", "name", "like", $request->name . "%");
+        }
+        if ($request->filled("generic"))
+        {
+            $stocks = $stocks->whereRelation("medicine", "generic_name", "like", $request->generic . "%");
+        }
+        if ($request->filled("supplier"))
+        {
+            $stocks = $stocks->whereRelation("supplier", "name", "like", $request->supplier . "%");
+        }
+
+        $stocks = $stocks->orderBy("created_at", "desc")->get();
+
+        $pdf = PDF::loadView("pdf.stock", compact("stocks"));
+        return $pdf->download('stock.pdf');
     }
     public function destroy(Request $request)
     {

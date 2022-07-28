@@ -14,6 +14,7 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Interfaces\ViewMethods;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class InvoicesController extends Controller implements ViewMethods
 {
@@ -40,6 +41,29 @@ class InvoicesController extends Controller implements ViewMethods
         $query->orderBy("date", "desc")->get();
         $invoices = $query->simplePaginate(8);;
         return view("sub.invoice_table", compact("invoices"))->render();
+    }
+    public function generatePDF(Request $request)
+    {
+        $invoices = Invoice::where("user_id", Auth::user()->id)->with("customer", "payment");
+        if ($request->filled("id"))
+        {
+            $invoices = $invoices->where("id", $request->id);
+        }
+        if ($request->filled("from"))
+        {
+            $invoices = $invoices->where("created_at", ">=", $request->from);
+        }
+        if ($request->filled("to"))
+        {
+            $invoices = $invoices->where("date", "<=", $request->to);
+        }
+        if ($request->filled("customer"))
+        {
+            $invoices = $invoices->whereRelation("customer", "name", "like", "%" . $request->customer . "%");
+        }
+        $invoices = $invoices->orderBy("date", "desc")->get();
+        $pdf = PDF::loadView("pdf.invoices", compact("invoices"));
+        return $pdf->download('invoices.pdf');
     }
     public function manage()
     {

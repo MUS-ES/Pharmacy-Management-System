@@ -45,9 +45,17 @@ function save() {
             openPopup('/ajax/popup/feedback', { msg: "success" });
 
         }
-    }).catch((error) => {
+    }).catch((response) => {
 
-        console.log(error);
+        let errorList = document.getElementById("invalid-feedback-list");
+        while (errorList.firstChild) {
+            errorList.removeChild(errorList.lastChild);
+        }
+        for (let item of Object.values(response.errors)) {
+            let li = document.createElement("li");
+            li.innerText = item;
+            errorList.appendChild(li);
+        }
     });
 }
 
@@ -70,15 +78,21 @@ function fillTotalFields() {
     let vouchersRow = document.getElementsByClassName("voucher-items");
     let totalPayment = document.getElementById("total-payment");
     let totalReceipt = document.getElementById("total-receipt");
+    let totalCash = document.getElementById("total-cash");
     totalPayment.value = 0;
     totalReceipt.value = 0;
+    totalCash.value = 0;
     Array.from(vouchersRow).forEach(row => {
         let type = row.querySelector("#voucher-type").value;
         let amount = row.querySelector("#amount").value;
         if (type == "Payment")
             totalPayment.value = (+totalPayment.value) + +amount;
-        else
+        else if (type == "Receipt")
             totalReceipt.value = +totalReceipt.value + +amount;
+        else {
+
+            totalCash.value = +totalCash.value + +amount;
+        }
 
     });
 
