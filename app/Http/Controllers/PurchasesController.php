@@ -91,7 +91,7 @@ class PurchasesController extends Controller implements ViewMethods
     {
         if ($request->filled("id"))
         {
-
+            
             Purchase::destroy($request->id);
         }
         return response()->json(["success" => 1]);

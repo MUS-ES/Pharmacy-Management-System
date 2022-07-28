@@ -44,11 +44,7 @@ class VouchersController extends Controller implements ViewMethods
             $query = $query->where("date", "<=", $request->to);
         }
         $query->orderBy("created_at", "desc")->get();
-<<<<<<< HEAD
         $vouchers = $query->simplePaginate(8);
-=======
-        $vouchers = $query->simplePaginate(5);
->>>>>>> 9d89b5def0841933cbc0c9e817daf6edfc5660ee
         return view("sub.vouchers_table", compact("vouchers"))->render();
     }
     public function store(StoreVoucherRequest $request)
