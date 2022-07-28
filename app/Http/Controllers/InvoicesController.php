@@ -102,11 +102,7 @@ class InvoicesController extends Controller implements ViewMethods
                 "invoice_id" => $invoice->id,
             ]);
             $query = Stock::where("user_id", Auth::user()->id)->where("medicine_id", $medicine->id)->where("exp", $item['exp'])->first();
-            if ($query->qty == $item['qty'])
-            {
-                $query->delete();
-            }
-            else
+            if ($query->qty >= $item['qty'])
             {
                 $query->decrement('qty', $item['qty']);
             }
