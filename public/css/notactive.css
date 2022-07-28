@@ -17,27 +17,26 @@ body .overlay {
   width: 100vw;
   height: 100vh;
   left: 0;
-  background-color: white;
-  opacity: 0.7;
+  background-color: #FF6D55;
 }
 
 body .title {
   position: fixed;
   padding: 50px;
-  box-shadow: 0px 0px 17px 2px #b1b1b194;
+  box-shadow: 0px 5px 17px 8px rgba(0, 0, 0, 0.4);
   border-radius: 7px;
-  background-color: var(--white);
+  background-color: #FFE9E2;
   top: 50%;
   left: 50%;
   width: 40%;
   transform: translate(-50%, -50%);
   z-index: 2;
   font-weight: bolder;
-  font-size: 20px;
-  letter-spacing: 2px;
+  font-size: 22px;
+  letter-spacing: 1px;
   line-height: 40px;
   text-align: center;
-  color: #FF6D55;
+  color: #2a2185;
 
 }
 

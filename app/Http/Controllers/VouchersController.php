@@ -46,7 +46,6 @@ class VouchersController extends Controller implements ViewMethods
         }
         $query->orderBy("created_at", "desc")->get();
         $vouchers = $query->simplePaginate(8);
-
         return view("sub.vouchers_table", compact("vouchers"))->render();
     }
     public function generatePDF(Request $request)

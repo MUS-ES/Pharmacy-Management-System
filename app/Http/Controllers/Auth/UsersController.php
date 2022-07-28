@@ -64,7 +64,13 @@ class UsersController extends Controller
     {
 
         $user = User::create(
-            $request->all()
+            [
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'fullname' => $request->fullname,
+                'ph_name' => $request->ph_name,
+                'licence' => $request->licence,
+            ]
         );
 
         $user->safe()->create(["total" => "0"]);

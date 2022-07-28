@@ -19,7 +19,7 @@ function searchPage(Page = 1) {
 async function deleteMedicine(currentElement) {
 
 
-    await openPopup('/ajax/popup/confirm', { msg: 'if you delete this all records depends in this record will also deleted ?' });
+    await openPopup('/ajax/popup/confirm', { msg: 'If you delete this all records depends on this record will also deleted ?' });
     document.getElementById("confirm-btn").onclick = function () {
         promiseJax("/medicine/delete", { id: currentElement.dataset.id }, "DELETE", false, true).then(response => {
             closePopup('.confirm');
