@@ -30,9 +30,6 @@
                     <li><a href="{{ asset('/invoice/manage') }}"><span
                                 class="material-icons-outlined">edit</span>Manage
                             Invoice</a></li>
-                    <li><a href="{{ route('returnedMedicines') }}"><span
-                                class="material-icons-outlined">assignment_return</span>Returned Medicines</a>
-                    </li>
                 </ul>
             </li>
 
@@ -94,9 +91,7 @@
                             Purchase</a></li>
                     <li><a href="{{ asset('/purchase/manage') }}"><span
                                 class="material-icons-outlined">edit</span>Manage Purchase</a></li>
-                    <li><a href="#"><span class="material-icons-outlined">assignment_returned</span>Returned
-                            Purchases</a>
-                    </li>
+
                 </ul>
             </li>
 
@@ -114,17 +109,7 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="#">
-                    <span class="icon material-icons-outlined">perm_contact_calendar</span>
-                    <h3>Reports</h3>
-                    <span class="icon-right material-icons-outlined">expand_more</span>
-                </a>
-                <ul class="side-dropdown">
-                    <li><a href="#"><span class="material-icons-outlined">summarize</span>Sales Report</a></li>
-                    <li><a href="#"><span class="material-icons-outlined">summarize</span>Purchase Report</a></li>
-                </ul>
-            </li>
+            
 
             <li>
                 <a href="#">
