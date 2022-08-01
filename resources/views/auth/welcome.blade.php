@@ -23,6 +23,9 @@
                             <h6>Not Registered Yet?</h6>
                             <a href="users/signup" class="sign">Sign up</a>
                         </div>
+                        @if (session('status'))
+                            <p class="session-status">{{ session('status') }}</p>
+                        @endif
                         <div class="actual-form">
 
                             <div class="inputandlabel">
@@ -48,8 +51,19 @@
                             @endforeach
 
                             <input autocomplete="off" class="sign-btn" type="submit" value="Sign In" />
-                            <p class="text">Forgotten your Email or Password? <a href="#"><br>Get Help </a>in
-                                Signing In</p>
+                            <a style="font-size: 0.75rem;
+                                                                                                            font-weight: 600;
+                                                                                                            color: #FF6D55;
+                                                                                                            text-decoration: none;  "
+                                href="{{ route('password.request') }}">
+                                Forget your Password ? </a>
+                            <br>
+                            <a style="font-size: 0.75rem;
+                                                                                                            font-weight: 600;
+                                                                                                            color: #FF6D55;
+                                                                                                            text-decoration: none;  "
+                                href="{{ asset('panel') }}">
+                                Admin Panel </a>
                         </div>
                     </form>
                     <!-- End Sign In -->

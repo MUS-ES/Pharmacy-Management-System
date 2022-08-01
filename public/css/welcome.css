@@ -141,6 +141,11 @@ input
   display: none;
 }*/
 
+.session-status {
+    color: #FF6D55;
+    text-align: center;
+}
+
 form {
     max-width: 300px;
     /*to adjust the form window inside its elements' parent(forms-wrap)*/

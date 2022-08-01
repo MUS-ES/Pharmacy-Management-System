@@ -1,37 +1,36 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/forget_password.css') }}">
+    <title>Forget Password</title>
+</head>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+<body>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <div class="container">
+<h2>Forget Your Password</h2>
+@if(session('status') )
+<p class="status">{{session('status')}}</p>
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
+@endif
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                    autofocus />
+        <form action="{{ route('password.email') }}" method="POST">
+            {{ csrf_field() }}
+            <div class="input-container">
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text">
+                @error("email")
+                <span class="input-error" >{{ $errors->first("email") }}</span>
+                @enderror
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
+            <input type="submit" value="Send Reset Link">
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </div>
+</body>
+
+</html>
